@@ -26,6 +26,7 @@ export const mutations: MutationTree<IState> = {
 export const actions: ActionTree<IState, IState> = {
 	async FETCH_RANKINGS ({ commit }) {
 		try {
+			console.log('fetching ladder')
 			commit('SET_RANKINGS', await this.$strapi.find('rankings/ladder'))
 		} catch (e) {console.log(e)}
 	},
@@ -37,8 +38,7 @@ export const actions: ActionTree<IState, IState> = {
 	},
 
 	async nuxtServerInit ({ dispatch }) {
-		await Promise.all([
-			dispatch('FETCH_RANKINGS'),
-		])
+		console.log('nuxtServerInit')
+		await dispatch('FETCH_RANKINGS')
 	},
 }
