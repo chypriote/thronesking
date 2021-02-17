@@ -9,7 +9,7 @@
 				<p>{{ rank.power }}</p>
 				<p>{{ rank.rank }}</p>
 			</aside>
-			<aside class="column alliance">
+			<aside v-if="alliance" class="column alliance">
 				<h2>Alliance</h2>
 				<p>{{ alliance.name }}</p>
 			</aside>

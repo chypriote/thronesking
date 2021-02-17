@@ -38,7 +38,6 @@ export const actions: ActionTree<IState, IState> = {
 	},
 
 	async nuxtServerInit ({ dispatch }) {
-		console.log('nuxtServerInit')
 		await dispatch('FETCH_RANKINGS')
 	},
 }
