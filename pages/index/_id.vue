@@ -1,5 +1,5 @@
 <template>
-	<div class="sticky content">
+	<div class="content">
 		<player-informations v-if="player" />
 	</div>
 </template>
@@ -20,10 +20,3 @@ export default Vue.extend({
 	},
 })
 </script>
-
-<style scoped>
-.sticky {
-	position: sticky;
-	top: 0;
-}
-</style>

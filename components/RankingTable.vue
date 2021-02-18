@@ -1,5 +1,5 @@
 <template>
-	<table class="table">
+	<table class="table is-striped is-hoverable is-fullwidth">
 		<thead>
 			<tr>
 				<th>Rank</th>

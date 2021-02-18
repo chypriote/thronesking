@@ -14,9 +14,6 @@
 				<p>{{ alliance.name }}</p>
 			</aside>
 		</div>
-		<blockquote>
-			{{ player }}
-		</blockquote>
 	</div>
 </template>
 

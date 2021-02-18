@@ -1,13 +1,15 @@
 import { ActionTree, MutationTree, GetterTree } from 'vuex'
-import { Player, Ranking } from '~/types/types'
+import { Alliance, Player, Ranking } from '~/types/types'
 
 interface IState {
 	player: Player | null
 	rankings: Ranking[]
+	alliances: Alliance[]
 }
 
 export const state = (): IState => ({
 	rankings: [],
+	alliances: [],
 	player: null,
 })
 
@@ -18,6 +20,9 @@ export const mutations: MutationTree<IState> = {
 	SET_RANKINGS (state: IState, rankings: Ranking[]) {
 		state.rankings = rankings
 	},
+	SET_ALLIANCES (state: IState, alliances: Alliance[]) {
+		state.alliances = alliances
+	},
 	SET_PLAYER (state: IState, player: Player|null) {
 		state.player = player
 	}
@@ -26,8 +31,13 @@ export const mutations: MutationTree<IState> = {
 export const actions: ActionTree<IState, IState> = {
 	async FETCH_RANKINGS ({ commit }) {
 		try {
-			console.log('fetching ladder')
 			commit('SET_RANKINGS', await this.$strapi.find('rankings/ladder'))
+		} catch (e) {console.log(e)}
+	},
+
+	async FETCH_ALLIANCES ({ commit }) {
+		try {
+			commit('SET_ALLIANCES', await this.$strapi.find('alliances', {_sort: 'power:desc'}))
 		} catch (e) {console.log(e)}
 	},
 
@@ -37,7 +47,4 @@ export const actions: ActionTree<IState, IState> = {
 		} catch (e) {console.log(e)}
 	},
 
-	async nuxtServerInit ({ dispatch }) {
-		await dispatch('FETCH_RANKINGS')
-	},
 }
