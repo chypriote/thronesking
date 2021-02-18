@@ -15,8 +15,5 @@ import RankingTable from '~/components/RankingTable.vue'
 
 export default Vue.extend({
 	components: { RankingTable },
-	async asyncData ({ store }): Promise<void> {
-		await store.dispatch('FETCH_RANKINGS')
-	},
 })
 </script>

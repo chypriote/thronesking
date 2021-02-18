@@ -26,5 +26,8 @@ export default Vue.extend({
 	computed: {
 		...mapState(['rankings']),
 	},
+	async created () {
+		await this.$store.dispatch('FETCH_RANKINGS')
+	},
 })
 </script>
