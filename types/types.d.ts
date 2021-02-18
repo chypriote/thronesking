@@ -1,6 +1,7 @@
 export type Ranking = {
 	id: number
 	date: string
+	rank: number
 	power: number
 	level: number
 	player: Player

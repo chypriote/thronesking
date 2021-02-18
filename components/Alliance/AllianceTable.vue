@@ -20,7 +20,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { mapState } from 'vuex'
-import AllianceRow from '~/components/AllianceRow.vue'
+import AllianceRow from '~/components/Alliance/AllianceRow.vue'
 
 export default Vue.extend({
 	name: 'AllianceTable',

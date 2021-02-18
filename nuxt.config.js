@@ -8,10 +8,11 @@ export default {
 			{ hid: 'description', name: 'description', content: '' },
 		],
 		link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+		bodyAttrs: { class: 'has-navbar-fixed-top' },
 	},
 
 	css: ['bulma/css/bulma.min.css'],
-	plugins: [],
+	plugins: ['~/plugins/chartjs'],
 	components: false,
 	telemetry: false,
 	buildModules: ['@nuxt/typescript-build', '@nuxtjs/stylelint-module'],

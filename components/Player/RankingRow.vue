@@ -1,11 +1,11 @@
 <template>
 	<tr
 		:class="{'is-selected': parseInt($route.params.id) === player.id}"
-		@click="$router.push({name: 'index-id', params: {id: player.id.toString()}})"
+		@click="$router.push({name: 'players-id', params: {id: player.id.toString()}})"
 	>
 		<td>{{ index + 1 }}</td>
 		<td class="player">
-			<nuxt-link :key="player.id" :to="{name: 'index-id', params: {id: player.id}}">
+			<nuxt-link :key="player.id" :to="{name: 'players-id', params: {id: player.id}}">
 			{{ player.name }}
 			</nuxt-link>
 		</td>
