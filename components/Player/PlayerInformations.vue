@@ -3,14 +3,14 @@
 		<header>
 			<div class="player">
 				<h2>{{ player.name }}</h2>
-				<p class="subtitle">{{ `VIP${player.vip}` }}</p>
+				<p class="subtitle">{{ `VIP${player.vip}` }} - {{ player.gid }}</p>
 			</div>
-			<div class="rank">{{ ordinal(rank.rank) }}</div>
+			<div v-if="rank" class="rank">{{ ordinal(rank.rank) }}</div>
 		</header>
 		<div class="card-content">
 			<div class="stats">
-				<div class="stat">{{ rank.power }} <span class="stat-label">KP</span></div>
-				<div class="stat"><span class="stat-label">Level</span> {{ rank.level }}</div>
+				<div v-if="rank" class="stat">{{ rank.power }} <span class="stat-label">KP</span></div>
+				<div v-if="rank" class="stat"><span class="stat-label">Level</span> {{ rank.level }}</div>
 				<div v-if="alliance" class="stat">{{ alliance.name }}</div>
 			</div>
 			<div class="stats">
@@ -20,25 +20,25 @@
 			</div>
 		</div>
 		<div class="card-content">
-			<player-rank-graph />
+			<player-rankings-graph />
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import { Alliance, Player, Ranking } from '~/types/types'
-import PlayerRankGraph from '~/components/Player/PlayerRankGraph.vue'
+import { Alliance, Player, KingdomRanking } from '~/types/types'
+import PlayerRankingsGraph from '~/components/Player/PlayerRankingsGraph.vue'
 const ordinal = require('ordinal-numbers')
 
 export default Vue.extend({
 	name: 'PlayerInformations',
-	components: { PlayerRankGraph },
+	components: { PlayerRankingsGraph },
 	data: () => ({ ordinal }),
 	computed: {
 		player (): Player { return this.$store.state.player },
 		alliance (): Alliance|null { return this.player.alliance || null },
-		rank (): Ranking|null { return this.player.rank || null },
+		rank (): KingdomRanking|null { return this.player.rank || null },
 	},
 })
 </script>

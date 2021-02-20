@@ -25,7 +25,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Alliance, Player, Ranking } from '~/types/types'
+import { Alliance, Player, KingdomRanking } from '~/types/types'
 
 export default Vue.extend({
 	name: 'RankingRow',
@@ -35,7 +35,7 @@ export default Vue.extend({
 			required: true,
 		},
 		rank: {
-			type: Object as () => Ranking,
+			type: Object as () => KingdomRanking,
 			required: true,
 		},
 	},

@@ -1,10 +1,12 @@
 import { ActionTree, MutationTree, GetterTree } from 'vuex'
-import { Alliance, Player, Ranking } from '~/types/types'
+import { Alliance, Player, KingdomRanking, TourneyRanking } from '~/types/types'
 
 interface IState {
-	players: Ranking[]
+	players: KingdomRanking[]
+
 	player: Player | null
-	player_rankings: Ranking[]
+	kingdom_rankings: KingdomRanking[]
+	tourney_rankings: TourneyRanking[]
 
 	alliances: Alliance[]
 	alliance: Alliance | null
@@ -13,7 +15,8 @@ interface IState {
 export const state = (): IState => ({
 	players: [],
 	player: null,
-	player_rankings: [],
+	kingdom_rankings: [],
+	tourney_rankings: [],
 	alliances: [],
 	alliance: null,
 })
@@ -22,14 +25,17 @@ export const getters: GetterTree<IState, IState> = {
 }
 
 export const mutations: MutationTree<IState> = {
-	SET_PLAYERS (state: IState, players: Ranking[]) {
+	SET_PLAYERS (state: IState, players: KingdomRanking[]) {
 		state.players = players
 	},
 	SET_PLAYER (state: IState, player: Player|null) {
 		state.player = player
 	},
-	SET_PLAYER_RANKINGS (state: IState, player_rankings: Ranking[]) {
-		state.player_rankings = player_rankings
+	SET_PLAYER_KINGDOM_RANKINGS (state: IState, kingdom_rankings: KingdomRanking[]) {
+		state.kingdom_rankings = kingdom_rankings
+	},
+	SET_PLAYER_TOURNEY_RANKINGS (state: IState, tourney_rankings: TourneyRanking[]) {
+		state.tourney_rankings = tourney_rankings
 	},
 	SET_ALLIANCES (state: IState, alliances: Alliance[]) {
 		state.alliances = alliances
@@ -42,7 +48,7 @@ export const mutations: MutationTree<IState> = {
 export const actions: ActionTree<IState, IState> = {
 	async FETCH_PLAYERS ({ commit }) {
 		try {
-			commit('SET_PLAYERS', await this.$strapi.find('rankings/ladder'))
+			commit('SET_PLAYERS', await this.$strapi.find('ladders/kingdom'))
 		} catch (e) { console.log(e) }
 	},
 	async FETCH_PLAYER ({ commit }, id) {
@@ -50,9 +56,14 @@ export const actions: ActionTree<IState, IState> = {
 			commit('SET_PLAYER', await this.$strapi.$http.get(`players/informations/${id}`).then(response => response.json()))
 		} catch (e) { console.log(e) }
 	},
-	async FETCH_PLAYER_RANKINGS ({ commit }, id) {
+	async FETCH_PLAYER_KINGDOM_RANKINGS ({ commit }, id) {
 		try {
-			commit('SET_PLAYER_RANKINGS', await this.$strapi.find('rankings', { player: id, _sort: 'created_at:asc' }))
+			commit('SET_PLAYER_KINGDOM_RANKINGS', await this.$strapi.find('kingdom-rankings', { player: id, _sort: 'created_at:asc' }))
+		} catch (e) { console.log(e) }
+	},
+	async FETCH_PLAYER_TOURNEY_RANKINGS ({ commit }, id) {
+		try {
+			commit('SET_PLAYER_TOURNEY_RANKINGS', await this.$strapi.find('tourney-rankings', { player: id, _sort: 'created_at:asc' }))
 		} catch (e) { console.log(e) }
 	},
 

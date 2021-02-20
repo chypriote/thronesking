@@ -1,5 +1,5 @@
 /* eslint-disable no-use-before-define */
-export type Ranking = {
+export type KingdomRanking = {
 	id: number
 	date: string
 	rank: number
@@ -7,6 +7,14 @@ export type Ranking = {
 	level: number
 	player: Player
 	alliance: Alliance
+}
+
+export type TourneyRanking = {
+	id: number
+	date: string
+	rank: number
+	points: number
+	player: Player
 }
 
 export type Player = {
@@ -25,11 +33,11 @@ export type Player = {
 	children: number
 	intimacy: number
 
-	rankings?: Ranking[]
+	rankings?: KingdomRanking[]
 	alliance_members?: AllianceMembers[]
 
 	alliance?: Alliance
-	rank?: Ranking
+	rank?: KingdomRanking
 }
 
 export type Alliance = {
