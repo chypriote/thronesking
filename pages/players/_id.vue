@@ -1,28 +1,21 @@
 <template>
 	<div class="content">
-		<div class="card">
-			<div class="card-content">
-				<player-informations v-if="player" />
-			</div>
-			<player-rank-graph v-if="player" />
-		</div>
+		<player-informations />
 	</div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import { mapState } from 'vuex'
 import PlayerInformations from '~/components/Player/PlayerInformations.vue'
-import PlayerRankGraph from '~/components/Player/PlayerRankGraph.vue'
 
 export default Vue.extend({
 	name: 'PlayersId',
-	components: { PlayerInformations, PlayerRankGraph },
+	components: { PlayerInformations },
 	async asyncData ({ store, route }): Promise<void> {
-		await store.dispatch('FETCH_PLAYER', route.params.id)
-	},
-	computed: {
-		...mapState(['player']),
+		await Promise.all([
+			store.dispatch('FETCH_PLAYER', route.params.id),
+			store.dispatch('FETCH_PLAYER_RANKINGS', route.params.id),
+		])
 	},
 })
 </script>

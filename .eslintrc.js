@@ -12,9 +12,6 @@ module.exports = {
 		'plugin:vue/strongly-recommended',
 		'plugin:nuxt/recommended',
 	],
-	globals: {
-		rgea: true,
-	},
 	rules: {
 		camelcase: 'off',
 		'comma-dangle': [

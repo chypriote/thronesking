@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 export type Ranking = {
 	id: number
 	date: string
@@ -5,6 +6,7 @@ export type Ranking = {
 	power: number
 	level: number
 	player: Player
+	alliance: Alliance
 }
 
 export type Player = {
@@ -12,6 +14,16 @@ export type Player = {
 	gid: number
 	name: string
 	vip: number
+
+	military: number
+	fortune: number
+	provisions: number
+	inspiration: number
+
+	heroes: number
+	maidens: number
+	children: number
+	intimacy: number
 
 	rankings?: Ranking[]
 	alliance_members?: AllianceMembers[]
@@ -27,6 +39,7 @@ export type Alliance = {
 	power: number
 	level: number
 	reputation: number
+	alliance_members: AllianceMembers[]
 	members: AllianceMembers[]
 }
 

@@ -1,17 +1,13 @@
 <template>
 	<div class="columns">
-		<div class="column is-three-fifths">
-			<div class="card">
-				<div class="card-content">
-					<alliance-table />
-				</div>
-			</div>
-		</div>
-		<div class="column is-two-fifths">
+		<main class="column is-two-thirds">
+			<alliance-table />
+		</main>
+		<aside v-if="$route.name === 'alliances-id'" class="column is-one-third">
 			<div class="sticky">
 				<nuxt-child />
 			</div>
-		</div>
+		</aside>
 	</div>
 </template>
 

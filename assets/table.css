@@ -1,0 +1,38 @@
+table.leaderboard {
+	width: 100%;
+	thead {
+		background-color: var(--foreground-color-low-contrast);
+		border: none;
+		height: 2rem;
+		th {
+			padding: .5rem .75rem;
+			height: 2rem;
+			font-weight: 500;
+			color: var(--text-color);
+			&:not([align]) {text-align: center;}
+			&:first-of-type {padding-left: 1rem;width: 0;}
+		}
+	}
+	tbody {
+		tr {
+			font-size: 1.125rem;
+			background-color: var(--foreground-color);
+			color: var(--text-color-muted);
+			transition: background-color 200ms ease-in-out, color 100ms ease-in-out;
+			&:nth-child(2n) {background-color: var(--foreground-color-minimum-contrast);}
+		}
+		td {
+			padding: .75rem;
+			line-height: 1.5rem;
+			text-align: left;
+			vertical-align: middle;
+			border-bottom: none;
+			&:first-of-type {text-align: center;padding-left: 1rem;width: 0;}
+			&.stat {white-space: nowrap;}
+			&.highlight {font-weight: 500;background-color: hsla(0, 0%, 100%, .03);backdrop-filter: saturate(120%);}
+			.ribbon {position: absolute;left: calc(-.5rem + 1px);top: .5rem;}
+		}
+	}
+	&.is-hoverable tbody tr:not(.is-selected):hover {background-color: var(--foreground-color-high-contrast);}
+	tbody tr.is-selected {background-color: var(--text-color-primary-high-contrast);}
+}

@@ -11,7 +11,7 @@ export default {
 		bodyAttrs: { class: 'has-navbar-fixed-top' },
 	},
 
-	css: ['bulma/css/bulma.min.css'],
+	css: ['bulma/css/bulma.min.css', '~/assets/app.css'],
 	plugins: ['~/plugins/chartjs'],
 	components: false,
 	telemetry: false,
@@ -34,9 +34,9 @@ export default {
 		postcss: {
 			parser: require('postcss-comment'),
 			plugins: {
+				'postcss-import': {},
 				'postcss-nested': {},
 				'postcss-custom-properties': {},
-				'postcss-color-mod-function': {},
 			},
 		},
 	},

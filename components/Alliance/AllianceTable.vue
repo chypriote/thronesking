@@ -1,9 +1,9 @@
 <template>
 	<div class="table-container">
-	<table class="table is-striped">
+	<table class="table leaderboard is-hoverable">
 		<thead>
 		<tr>
-			<th>Rank</th>
+			<th class="rank">Rank</th>
 			<th>Name</th>
 			<th>Power</th>
 			<th>Reputation</th>
@@ -19,21 +19,14 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { mapState } from 'vuex'
 import AllianceRow from '~/components/Alliance/AllianceRow.vue'
+import { Alliance } from '~/types/types'
 
 export default Vue.extend({
 	name: 'AllianceTable',
 	components: { AllianceRow },
 	computed: {
-		...mapState(['alliances']),
-	},
-	async created () {
-		await this.$store.dispatch('FETCH_ALLIANCES')
+		alliances (): Alliance[] { return this.$store.state.alliances },
 	},
 })
 </script>
-
-<style scoped>
-.table {width: 100%;}
-</style>

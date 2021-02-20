@@ -1,13 +1,14 @@
 <template>
 	<div class="table-container">
-	<table class="table is-striped is-hoverable is-fullwidth">
+	<table class="table leaderboard is-hoverable">
 		<thead>
 			<tr>
 				<th>Rank</th>
 				<th>Name</th>
-				<th>VIP</th>
-				<th>Alliance</th>
 				<th>Power</th>
+				<th>VIP</th>
+				<th>Level</th>
+				<th>Alliance</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -19,15 +20,15 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { mapState } from 'vuex'
 import RankingRow from '~/components/Player/RankingRow.vue'
+import { Player } from '~/types/types'
 
 export default Vue.extend({
 	name: 'RankingTable',
 	components: { RankingRow },
 	data: () => ({ loading: true }),
 	computed: {
-		...mapState(['players']),
+		players (): Player[] { return this.$store.state.players },
 	},
 })
 </script>
@@ -36,7 +37,6 @@ export default Vue.extend({
 th {
 	position: sticky;
 	top: 0;
-	background-color: #fff;
 	z-index: 10;
 }
 </style>

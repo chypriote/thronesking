@@ -1,17 +1,13 @@
 <template>
 	<div class="columns">
-		<div class="column" :class="{'is-three-fifths': $route.name === 'players-id'}">
-			<div class="card">
-				<div class="card-content">
-					<ranking-table />
-				</div>
-			</div>
-		</div>
-		<div v-if="$route.name === 'players-id'" class="column is-two-fifths">
+		<main class="column is-two-thirds">
+			<ranking-table />
+		</main>
+		<aside v-if="$route.name === 'players-id'" class="column is-one-third">
 			<div class="sticky">
 				<nuxt-child />
 			</div>
-		</div>
+		</aside>
 	</div>
 </template>
 
