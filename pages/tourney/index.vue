@@ -4,6 +4,6 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-	name: 'PlayerIndex',
+	name: 'TourneyIndex',
 })
 </script>

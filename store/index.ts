@@ -1,8 +1,9 @@
-import { ActionTree, MutationTree, GetterTree } from 'vuex'
+import { ActionTree, MutationTree } from 'vuex'
 import { Alliance, Player, KingdomRanking, TourneyRanking } from '~/types'
 
 interface IState {
-	players: KingdomRanking[]
+	kingdom_ladder: KingdomRanking[]
+	tourney_ladder: TourneyRanking[]
 
 	player: Player | null
 	kingdom_rankings: KingdomRanking[]
@@ -13,21 +14,25 @@ interface IState {
 }
 
 export const state = (): IState => ({
-	players: [],
+	kingdom_ladder: [],
+	tourney_ladder: [],
+
 	player: null,
 	kingdom_rankings: [],
 	tourney_rankings: [],
+
 	alliances: [],
 	alliance: null,
 })
 
-export const getters: GetterTree<IState, IState> = {
-}
-
 export const mutations: MutationTree<IState> = {
-	SET_PLAYERS (state: IState, players: KingdomRanking[]) {
-		state.players = players
+	SET_KINGDOM_LADDER (state: IState, players: KingdomRanking[]) {
+		state.kingdom_ladder = players
 	},
+	SET_TOURNEY_LADDER (state: IState, players: TourneyRanking[]) {
+		state.tourney_ladder = players
+	},
+
 	SET_PLAYER (state: IState, player: Player|null) {
 		state.player = player
 	},
@@ -37,6 +42,7 @@ export const mutations: MutationTree<IState> = {
 	SET_PLAYER_TOURNEY_RANKINGS (state: IState, tourney_rankings: TourneyRanking[]) {
 		state.tourney_rankings = tourney_rankings
 	},
+
 	SET_ALLIANCES (state: IState, alliances: Alliance[]) {
 		state.alliances = alliances
 	},
@@ -46,11 +52,17 @@ export const mutations: MutationTree<IState> = {
 }
 
 export const actions: ActionTree<IState, IState> = {
-	async FETCH_PLAYERS ({ commit }) {
+	async FETCH_KINGDOM_LADDER ({ commit }) {
 		try {
-			commit('SET_PLAYERS', await this.$strapi.find('ladders/kingdom'))
+			commit('SET_KINGDOM_LADDER', await this.$strapi.find('ladders/kingdom'))
 		} catch (e) { console.log(e) }
 	},
+	async FETCH_TOURNEY_LADDER ({ commit }) {
+		try {
+			commit('SET_TOURNEY_LADDER', await this.$strapi.find('ladders/tourney'))
+		} catch (e) { console.log(e) }
+	},
+
 	async FETCH_PLAYER ({ commit }, id) {
 		try {
 			commit('SET_PLAYER', await this.$strapi.$http.get(`players/informations/${id}`).then(response => response.json()))

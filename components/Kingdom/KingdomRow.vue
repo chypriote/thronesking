@@ -7,7 +7,7 @@
 			</div>
 		</td>
 		<td class="player">
-			<nuxt-link :key="player.id" :to="{name: 'players-id', params: {id: player.id}}">
+			<nuxt-link :key="player.id" :to="{name: 'kingdom-id', params: {id: player.id}}">
 				<span class="name">{{ player.name }}</span>
 			</nuxt-link>
 		</td>

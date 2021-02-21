@@ -1,16 +1,16 @@
 <template>
 	<div class="content">
-		<player-informations />
+		<player-details />
 	</div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import PlayerInformations from '~/components/Player/PlayerInformations.vue'
+import PlayerDetails from '~/components/PlayerDetails.vue'
 
 export default Vue.extend({
 	name: 'PlayersId',
-	components: { PlayerInformations },
+	components: { PlayerDetails },
 	async asyncData ({ store, route }): Promise<void> {
 		await Promise.all([
 			store.dispatch('FETCH_PLAYER', route.params.id),
