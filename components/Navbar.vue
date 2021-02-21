@@ -2,7 +2,7 @@
 	<nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
 		<div class="container">
 			<div class="navbar-brand">
-				<nuxt-link class="item" to="/">Home</nuxt-link>
+				<nuxt-link class="item home" to="/">Home</nuxt-link>
 			</div>
 			<div class="navbar-menu">
 				<div class="navbar-start">
@@ -65,6 +65,6 @@ export default Vue.extend({
 		transition: height .1s ease-in-out;
 	}
 	&:hover::before {background-color: hsla(0, 0%, 100%, .2);}
-	&.nuxt-link-active::before {background-color: var(--text-color-primary);}
+	&.nuxt-link-active:not(.home)::before, &.home.nuxt-link-exact-active::before {background-color: var(--text-color-primary);}
 }
 </style>
