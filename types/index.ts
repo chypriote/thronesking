@@ -1,4 +1,16 @@
 /* eslint-disable no-use-before-define */
+export interface Ranking {
+	id: number
+	date: string
+	rank: number
+	player: Player
+}
+
+export enum RankingTypes {
+	KINGDOM= 'kingdom',
+	TOURNEY= 'tourney',
+}
+
 export type KingdomRanking = {
 	id: number
 	date: string

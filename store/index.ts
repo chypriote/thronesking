@@ -1,5 +1,5 @@
 import { ActionTree, MutationTree, GetterTree } from 'vuex'
-import { Alliance, Player, KingdomRanking, TourneyRanking } from '~/types/types'
+import { Alliance, Player, KingdomRanking, TourneyRanking } from '~/types'
 
 interface IState {
 	players: KingdomRanking[]

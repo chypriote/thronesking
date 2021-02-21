@@ -2,7 +2,9 @@
 :root {
 	--border-radius: .25rem;
 	--text-color: #efefef;
-	--text-color-muted: #ccc;
+	--text-color-muted: #4a4a4a;
+	--text-color-lighter: #ccc;
+	--text-color-medium: #8a8e93;
 	--text-color-disabled: #606f80;
 	--text-color-label: #efefef;
 	--text-color-primary: #00d1b2;
@@ -25,6 +27,7 @@ body {
 	background-color: var(--background-color);
 	color: var(--text-color);
 	min-height: 100vh;
+	font-family: Rajdhani, Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen-Sans, Ubuntu, Cantarell, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
 }
 a {
 	text-decoration: none;
@@ -42,7 +45,6 @@ a {
 			display: flex;
 			align-items: center;
 			color: var(--text-color);
-			font-family: Rajdhani, Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen-Sans, Ubuntu, Cantarell, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
 			font-size: 1.5rem;
 			font-weight: 500;
 			line-height: 2rem;

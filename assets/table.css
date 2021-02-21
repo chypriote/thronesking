@@ -17,7 +17,7 @@ table.leaderboard {
 		tr {
 			font-size: 1.125rem;
 			background-color: var(--foreground-color);
-			color: var(--text-color-muted);
+			color: var(--text-color-lighter);
 			transition: background-color 200ms ease-in-out, color 100ms ease-in-out;
 			&:nth-child(2n) {background-color: var(--foreground-color-minimum-contrast);}
 		}

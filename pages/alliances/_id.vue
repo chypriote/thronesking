@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Alliance } from '~/types/types'
+import { Alliance } from '~/types'
 import AllianceDetails from '~/components/Alliance/AllianceDetails.vue'
 
 export default Vue.extend({

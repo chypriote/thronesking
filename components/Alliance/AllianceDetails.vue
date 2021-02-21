@@ -31,7 +31,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Alliance, AllianceMembers } from '~/types/types'
+import { Alliance, AllianceMembers } from '~/types'
 
 export default Vue.extend({
 	name: 'AllianceDetails',
@@ -61,7 +61,7 @@ header {
 	text-align: left;
 	.stat {flex: 1;}
 	.stat-label {
-		color: var(--text-color-muted);
+		color: var(--text-color-lighter);
 	}
 }
 </style>

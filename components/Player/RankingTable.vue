@@ -21,7 +21,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import RankingRow from '~/components/Player/RankingRow.vue'
-import { Player } from '~/types/types'
+import { Player } from '~/types'
 
 export default Vue.extend({
 	name: 'RankingTable',

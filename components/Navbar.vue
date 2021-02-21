@@ -44,7 +44,7 @@ export default Vue.extend({
 .item {
 	display: flex;
 	align-items: center;
-	color: var(--text-color-muted);
+	color: var(--text-color-lighter);
 	padding: .5rem .75rem;
 	position: relative;
 	cursor: pointer;

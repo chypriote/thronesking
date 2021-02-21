@@ -20,7 +20,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import AllianceRow from '~/components/Alliance/AllianceRow.vue'
-import { Alliance } from '~/types/types'
+import { Alliance } from '~/types'
 
 export default Vue.extend({
 	name: 'AllianceTable',

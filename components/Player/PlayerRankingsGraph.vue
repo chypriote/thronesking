@@ -4,27 +4,67 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { ChartData, ChartOptions } from 'chart.js'
 import { format } from 'date-fns'
-import { KingdomRanking, TourneyRanking } from '~/types/types'
+import { ChartData, ChartOptions } from 'chart.js'
+import ChartDataLabels from 'chartjs-plugin-datalabels'
+import { Color } from 'chartjs-plugin-datalabels/types/options'
+import { Ranking, RankingTypes } from '~/types'
+
+const formatDataLabel = (item: any) => {
+	return item?.power ? `${Number(item.power).toLocaleString()} KP` : `${Number(item.points).toLocaleString()} TP`
+}
 
 export default Vue.extend({
 	name: 'PlayerRankingsGraph',
+	props: {
+		type: {
+			type: String,
+			required: true,
+		},
+	},
 	computed: {
-		kingdom ():KingdomRanking[] { return this.$store.state.kingdom_rankings },
-		tourney ():TourneyRanking[] { return this.$store.state.tourney_rankings },
-		graphData (): ChartData {
+		data (): Ranking[] {
+			switch (this.type) {
+			case RankingTypes.KINGDOM:
+				return this.$store.state.kingdom_rankings
+			case RankingTypes.TOURNEY:
+				return this.$store.state.tourney_rankings
+			default:
+				return this.$store.state.kingdom_rankings
+			}
+		},
+		getLabel (): string {
+			return this.type === RankingTypes.KINGDOM ? 'Kingdom Power' : 'Tourney Points'
+		},
+		getBorderColor (): Color {
+			return this.type === RankingTypes.KINGDOM ? '#00d1b2' : '#ebfffc'
+		},
+		graphData (): ChartData & any {
 			return {
-				labels: this.kingdom.map((rank: KingdomRanking) => format(new Date(rank.date), 'dd-MM')),
+				plugins: [ChartDataLabels],
+				labels: this.data.map((rank: Ranking) => format(new Date(rank.date), 'dd-MM')),
 				datasets: [
-					{ data: this.kingdom.map((rank: KingdomRanking) => rank.rank), borderColor: '#00d1b2', label: 'Kingdom Power' },
-					{ data: this.tourney.map((rank: TourneyRanking) => rank.rank), borderColor: '#ebfffc', label: 'Tourney Points' },
+					{
+						data: this.data.map((rank: Ranking) => ({ ...rank, toString: () => rank.rank })),
+						borderColor: this.getBorderColor,
+						label: this.getLabel,
+						datalabels: {
+							clip: false,
+							backgroundColor: '#22262b',
+							borderWidth: 1,
+							align: 'top',
+							color: '#fff',
+							display: (e: any) => e.active,
+							formatter: formatDataLabel,
+						},
+					},
 				],
 			}
 		},
 		options (): ChartOptions {
 			return {
-				legend: { position: 'bottom' },
+				legend: { display: false },
+				tooltips: { enabled: false },
 				elements: {
 					line: { tension: 0, fill: false },
 				},
