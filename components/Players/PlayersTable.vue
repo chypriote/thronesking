@@ -5,6 +5,7 @@
 			<tr>
 				<th>ID</th>
 				<th>Name</th>
+				<th>Heroes</th>
 				<th>Power</th>
 				<th>VIP</th>
 				<th>Alliance</th>

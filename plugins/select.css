@@ -1,0 +1,31 @@
+
+.v-select {
+	.vs__search {
+		color: var(--text-color);
+		font-size: 1rem;
+		height: 2.5em;
+		line-height: 1.5;
+		padding: calc(.5em - 1px) 0 calc(.5em - 1px) calc(.75em - 1px);
+		margin: 0;
+	}
+	ul {
+		list-style: none;
+		margin-left: 0;
+		margin-top: 0;
+	}
+	.vs__selected {
+		color: var(--text-color);
+		margin: .25rem;
+	}
+	.vs__dropdown-menu {
+		background: var(--background-color);
+		color: var(--text-color);
+	}
+	.vs__dropdown-option {
+		color: var(--text-color);
+	}
+	.vs__dropdown-toggle {
+		color: var(--foreground-border-color);
+		padding: 0;
+	}
+}

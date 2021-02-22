@@ -9,6 +9,7 @@
 	--text-color-label: #efefef;
 	--text-color-primary: #00d1b2;
 	--text-color-primary-high-contrast: #02a990;
+	--color-accent-high-contrast-opacity-16: rgba(2, 169, 144, .16);
 	--text-color-first: #cbb765;
 	--text-color-second: #8e91a7;
 	--text-color-third: #a86243;
@@ -41,13 +42,12 @@ a {
 	color: inherit;
 	header {
 		padding: 1rem 1.5rem;
-		h2 {
+		.title {
 			display: flex;
 			align-items: center;
 			color: var(--text-color);
-			font-size: 1.5rem;
 			font-weight: 500;
-			line-height: 2rem;
+			line-height: 1.5;
 			margin: 0;
 		}
 	}
@@ -56,6 +56,7 @@ a {
 		border: 1px solid var(--foreground-border-color);
 		& > header {border-bottom: 1px solid var(--foreground-color-medium-contrast);}
 	}
+	& + .card {margin-top: 1.5rem;}
 }
 .ribbon {
 	display: flex;
@@ -82,5 +83,52 @@ a {
 		position: absolute;
 		top: 100%;
 		left: 0;
+	}
+}
+input[type="text"], input[type="number"] {
+	background: transparent;
+	border-color: var(--foreground-border-color);
+	border-radius: var(--border-radius);
+	color: var(--text-color);
+	font-size: 1rem;
+	height: 2.5em;
+	line-height: 1.5;
+	padding: calc(.5em - 1px) calc(.75em - 1px);
+}
+.label {
+	color: var(--text-color-medium);
+}
+button.button {
+	border-radius: var(--border-radius);
+	background-color: hsla(0, 0%, 100%, .15);
+	padding: .5rem 1rem;
+	height: auto;
+	border: 0;
+	font-size: 1rem;
+	line-height: 1.25rem;
+	font-weight: 500;
+	color: var(--text-color);
+	fill: var(--text-color);
+	cursor: pointer;
+	text-decoration: none;
+	white-space: nowrap;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	vertical-align: top;
+	user-select: none;
+	transition: background-color .3s ease-out, filter .3s ease-out, color .3s ease-out;
+	filter: brightness(100%);
+	backface-visibility: hidden;
+	&.--primary {
+		background: var(--text-color-primary-high-contrast);
+		color: var(--text-color-label);
+		fill: var(--text-color-label);
+		&:hover {background-color: var(--text-color-primary);color: var(--text-color-label);}
+	}
+	&:hover {
+		&:not(:disabled) {
+			filter: brightness(120%);
+		}
 	}
 }

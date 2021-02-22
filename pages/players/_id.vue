@@ -8,9 +8,11 @@
 						<player-stats :player="player" />
 					</div>
 				</div>
+				<add-hero-card />
 			</div>
 			<div class="column is-three-quarters">
-
+				<heroes-card />
+				<ranks-card />
 			</div>
 		</div>
 	</div>
@@ -19,14 +21,21 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Player } from '~/types'
-import PlayerDetailsHeader from '~/components/Players/PlayerDetailsHeader.vue'
 import PlayerStats from '~/components/PlayerStats.vue'
+import PlayerDetailsHeader from '~/components/Players/PlayerDetailsHeader.vue'
+import HeroesCard from '~/components/Players/HeroesCard.vue'
+import RanksCard from '~/components/Players/RanksCard.vue'
+import AddHeroCard from '~/components/Players/AddHeroCard.vue'
 
 export default Vue.extend({
 	name: 'PlayersId',
-	components: { PlayerStats, PlayerDetailsHeader },
+	components: { AddHeroCard, RanksCard, HeroesCard, PlayerStats, PlayerDetailsHeader },
 	async asyncData ({ store, route }): Promise<void> {
-		await store.dispatch('FETCH_PLAYER', route.params.id)
+		await Promise.all([
+			store.dispatch('FETCH_PLAYER', route.params.id),
+			store.dispatch('ladder/tourney/FETCH_PLAYER_RANKINGS', route.params.id),
+			store.dispatch('ladder/kingdom/FETCH_PLAYER_RANKINGS', route.params.id),
+		])
 	},
 	computed: {
 		player (): Player { return this.$store.state.player },

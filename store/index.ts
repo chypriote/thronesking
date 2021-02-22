@@ -1,5 +1,5 @@
 import { ActionTree, MutationTree } from 'vuex'
-import { Alliance, Player } from '~/types'
+import { Alliance, Hero, Player } from '~/types'
 
 interface IState {
 	players: Player[]
@@ -24,6 +24,10 @@ export const mutations: MutationTree<IState> = {
 	SET_PLAYER (state: IState, player: Player|null) {
 		state.player = player
 	},
+	ADD_HERO_TO_ROSTER (state: IState, hero: Hero) {
+		if (!state.player?.roster) { return }
+		state.player.roster.push(hero)
+	},
 
 	SET_ALLIANCES (state: IState, alliances: Alliance[]) {
 		state.alliances = alliances
@@ -34,9 +38,9 @@ export const mutations: MutationTree<IState> = {
 }
 
 export const actions: ActionTree<IState, IState> = {
-	async FETCH_PLAYERS ({ commit }) {
+	async FETCH_PLAYERS ({ commit }, params) {
 		try {
-			commit('SET_PLAYERS', await this.$strapi.find('players'))
+			commit('SET_PLAYERS', await this.$strapi.find('players', params))
 		} catch (e) { console.log(e) }
 	},
 	async FETCH_PLAYER ({ commit }, id) {

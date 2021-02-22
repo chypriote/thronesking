@@ -1,7 +1,7 @@
 <template>
 	<header>
 		<div class="player">
-			<h2>{{ player.name }}</h2>
+			<h2 class="title is-3">{{ player.name }}</h2>
 			<p class="subtitle">{{ `VIP${player.vip}` }} - {{ player.gid }}</p>
 		</div>
 		<div v-if="rank" class="rank">{{ ordinal(rank) }}</div>
@@ -41,5 +41,6 @@ header {
 		font-weight: bold;
 		color: var(--text-color-primary);
 	}
+	.title:not(.is-spaced) + .subtitle {margin-top: 0;}
 }
 </style>

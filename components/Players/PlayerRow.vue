@@ -6,7 +6,8 @@
 				<span class="name">{{ player.name }}</span>
 			</nuxt-link>
 		</td>
-		<td class="stat kp">{{ player.power }}</td>
+		<td class="stat heroes">{{ player.heroes }}</td>
+		<td class="stat kp highlight">{{ player.power }}</td>
 		<td class="stat vip">{{ player.vip }}</td>
 		<td v-if="alliance" class="stat alliance">
 			<nuxt-link :key="alliance.id" :to="{name: 'alliances-id', params: {id: alliance.id}}">

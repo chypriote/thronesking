@@ -1,48 +1,36 @@
 <template>
 	<div>
 		<div class="stats">
-			<div v-if="rank" class="stat">
-				<span class="stat-label">Kingdom power</span>
-				<span class="stat-value">{{ rank.power }}</span>
-			</div>
-			<div v-if="rank" class="stat">
-				<span class="stat-label">Level</span>
-				<span class="stat-value">{{ rank.level }}</span>
-			</div>
-			<div v-if="alliance" class="stat">
-				<span class="stat-label">Alliance</span>
-				<span class="stat-value">{{ alliance.name }}</span>
-			</div>
+			<player-stat v-if="rank" :label="'Kingdom Power'" :tooltip="Number(rank.power).toLocaleString()" :value="numeral(rank.power).format('0.0a').toUpperCase()" />
+			<player-stat v-if="rank" :label="'Level'" :value="rank.level" />
 		</div>
 		<div class="stats">
-			<div class="stat">
-				<span class="stat-label">Heroes</span>
-				<span class="stat-value">{{ player.heroes }}</span>
-			</div>
-			<div class="stat">
-				<span class="stat-label">Maidens</span>
-				<span class="stat-value">{{ player.maidens }}</span>
-			</div>
-			<div class="stat">
-				<span class="stat-label">Children</span>
-				<span class="stat-value">{{ player.children }}</span>
-			</div>
+			<player-stat :label="'Heroes'" :value="player.heroes" />
+			<player-stat :label="'Maidens'" :value="player.maidens" />
+			<player-stat :label="'Children'" :value="player.children" />
+		</div>
+		<div class="stats">
+			<player-stat v-if="alliance" :label="'Alliance'" :value="alliance.name" :link="{ name: 'alliances-id', params: { id: alliance.id } }" />
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import numeral from 'numeral'
 import { Alliance, Player, KingdomRanking } from '~/types'
+import PlayerStat from '~/components/PlayerStat.vue'
 
 export default Vue.extend({
 	name: 'PlayerStats',
+	components: { PlayerStat },
 	props: {
 		player: {
 			type: Object as () => Player,
 			required: true,
 		},
 	},
+	data: () => ({ numeral }),
 	computed: {
 		alliance (): Alliance|undefined { return this.player.alliance },
 		rank (): KingdomRanking|undefined { return this.player.rankings.kingdom },
@@ -56,16 +44,5 @@ export default Vue.extend({
 	text-align: left;
 	line-height: 1;
 	&:not(:last-of-type) {margin-bottom: 1rem;}
-	.stat {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-	}
-	.stat-label {
-		font-size: .6rem;
-		color: var(--text-color-medium);
-		text-transform: uppercase;
-		margin-bottom: .25rem;
-	}
 }
 </style>

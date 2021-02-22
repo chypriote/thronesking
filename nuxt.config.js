@@ -18,8 +18,8 @@ export default {
 		color: 'var(--text-color-primary)',
 	},
 
-	css: ['bulma/css/bulma.min.css', '~/assets/app.css'],
-	plugins: ['~/plugins/chartjs'],
+	css: ['bulma/css/bulma.min.css', 'hint.css/hint.min.css', '~/assets/app.css'],
+	plugins: ['~/plugins/chartjs', '~/plugins/select'],
 	components: false,
 	telemetry: false,
 	buildModules: ['@nuxt/typescript-build', '@nuxtjs/stylelint-module'],
