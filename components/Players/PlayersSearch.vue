@@ -1,7 +1,16 @@
 <template>
 	<div class="search card">
 		<div class="card-content">
-			<input id="search" v-model="query" aria-label="search" type="text" class="input" placeholder="Search" @input="debounceInput" />
+			<input
+				id="search"
+				v-model="query"
+				aria-label="search"
+				type="text"
+				class="input"
+				placeholder="Search"
+				autocomplete="off"
+				@input="debounceInput"
+			/>
 		</div>
 	</div>
 </template>

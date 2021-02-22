@@ -4,6 +4,7 @@ import { Alliance, Hero, Player } from '~/types'
 interface IState {
 	players: Player[]
 	player: Player | null
+	loading: Boolean
 
 	alliances: Alliance[]
 	alliance: Alliance | null
@@ -12,6 +13,7 @@ interface IState {
 export const state = (): IState => ({
 	players: [],
 	player: null,
+	loading: true,
 
 	alliances: [],
 	alliance: null,
@@ -23,6 +25,9 @@ export const mutations: MutationTree<IState> = {
 	},
 	SET_PLAYER (state: IState, player: Player|null) {
 		state.player = player
+	},
+	SET_LOADING (state: IState, loading: Boolean) {
+		state.loading = loading
 	},
 	ADD_HERO_TO_ROSTER (state: IState, hero: Hero) {
 		if (!state.player?.roster) { return }
@@ -40,7 +45,9 @@ export const mutations: MutationTree<IState> = {
 export const actions: ActionTree<IState, IState> = {
 	async FETCH_PLAYERS ({ commit }, params) {
 		try {
+			commit('SET_LOADING', true)
 			commit('SET_PLAYERS', await this.$strapi.find('players', params))
+			commit('SET_LOADING', false)
 		} catch (e) { console.log(e) }
 	},
 	async FETCH_PLAYER ({ commit }, id) {

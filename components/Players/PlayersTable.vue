@@ -12,7 +12,15 @@
 			</tr>
 			</thead>
 			<tbody>
-				<player-row v-for="player of players" :key="player.id" :player="player" />
+				<tr v-if="loading"><td colspan="6">
+					<div class="loader-wrapper">
+						<span class="loader" />
+					</div>
+				</td></tr>
+				<template v-else>
+					<player-row v-for="player of players" :key="player.id" :player="player" />
+					<tr v-if="!players.length"><td colspan="6">No Results</td></tr>
+				</template>
 			</tbody>
 		</table>
 	</div>
@@ -27,7 +35,22 @@ export default Vue.extend({
 	name: 'PlayersTable',
 	components: { PlayerRow },
 	computed: {
+		loading (): Boolean { return this.$store.state.loading },
 		players (): Player[] { return this.$store.state.players },
 	},
 })
 </script>
+
+<style scoped>
+table tbody td .loader-wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 8rem;
+	width: 100%;
+}
+.loader {
+	height: 5rem;
+	width: 5rem;
+}
+</style>
