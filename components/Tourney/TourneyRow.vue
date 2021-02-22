@@ -48,7 +48,7 @@ td {
 			align-items: center;
 			&:hover {color: inherit;}
 		}
-		.name {display: inline-flex;color: currentColor;white-space: nowrap;}
+		.name {white-space: nowrap;}
 	}
 	&.points {text-align: right;}
 }

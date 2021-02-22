@@ -23,11 +23,10 @@
         "./*"
       ]
     },
+    "typeRoots": ["node_modules/@types"],
     "types": [
-      "@types/node",
       "@nuxt/types",
       "@nuxtjs/axios",
-      "@types/chart.js",
       "chartjs-plugin-datalabels/types",
       "types",
     ]

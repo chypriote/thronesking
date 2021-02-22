@@ -19,7 +19,7 @@ export default Vue.extend({
 	name: 'KingdomIndex',
 	components: { KingdomTable },
 	async asyncData ({ store }): Promise<void> {
-		await store.dispatch('FETCH_KINGDOM_LADDER')
+		await store.dispatch('ladder/kingdom/FETCH_LADDER')
 	},
 })
 </script>

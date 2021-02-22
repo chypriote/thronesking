@@ -1,23 +1,17 @@
 <template>
 	<div class="card bordered">
-		<header>
-			<div class="player">
-				<h2>{{ player.name }}</h2>
-				<p class="subtitle">{{ `VIP${player.vip}` }} - {{ player.gid }}</p>
-			</div>
-			<div v-if="rank" class="rank">{{ ordinal(rank.rank) }}</div>
-		</header>
+		<player-details-header :player="player" :rank="rank.rank" />
 		<div class="card-content">
-			<player-stats />
+			<player-stats :player="player" />
 		</div>
 		<div class="card-content">
 			<div class="graph">
 				<div class="graph-legend">Kingdom Power Rank</div>
-				<player-rankings-graph :type="RankingTypes.KINGDOM" />
+				<player-rankings-graph :type="RankingTypes.KINGDOM_RANK" />
 			</div>
 			<div class="graph">
 				<div class="graph-legend">Tourney Rank</div>
-				<player-rankings-graph :type="RankingTypes.TOURNEY" />
+				<player-rankings-graph :type="RankingTypes.TOURNEY_RANK" />
 			</div>
 		</div>
 	</div>
@@ -25,34 +19,24 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Player, KingdomRanking, RankingTypes } from '~/types'
+import { Player, RankingTypes, KingdomRanking } from '~/types'
 import PlayerRankingsGraph from '~/components/PlayerRankingsGraph.vue'
 import PlayerStats from '~/components/PlayerStats.vue'
+import PlayerDetailsHeader from '~/components/Players/PlayerDetailsHeader.vue'
 const ordinal = require('ordinal-numbers')
 
 export default Vue.extend({
 	name: 'PlayerInformations',
-	components: { PlayerStats, PlayerRankingsGraph },
+	components: { PlayerDetailsHeader, PlayerStats, PlayerRankingsGraph },
 	data: () => ({ ordinal, RankingTypes }),
 	computed: {
 		player (): Player { return this.$store.state.player },
-		rank (): KingdomRanking|null { return this.player.rank || null },
+		rank (): KingdomRanking|undefined { return this.player.rankings.kingdom },
 	},
 })
 </script>
 
 <style scoped>
-header {
-	display: flex;
-	.player {
-		flex-grow: 1;
-	}
-	.rank {
-		font-size: 2rem;
-		font-weight: bold;
-		color: var(--text-color-primary);
-	}
-}
 .graph-legend {
 	font-size: .75rem;
 	text-transform: uppercase;

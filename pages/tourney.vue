@@ -19,7 +19,7 @@ export default Vue.extend({
 	name: 'TourneyIndex',
 	components: { TourneyTable },
 	async asyncData ({ store }): Promise<void> {
-		await store.dispatch('FETCH_TOURNEY_LADDER')
+		await store.dispatch('ladder/tourney/FETCH_LADDER')
 	},
 })
 </script>

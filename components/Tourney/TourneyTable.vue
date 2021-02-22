@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Player } from '~/types'
+import { TourneyRanking } from '~/types'
 import TourneyRow from '~/components/Tourney/TourneyRow.vue'
 
 export default Vue.extend({
@@ -26,7 +26,7 @@ export default Vue.extend({
 	components: { TourneyRow },
 	data: () => ({ loading: true }),
 	computed: {
-		players (): Player[] { return this.$store.state.tourney_ladder },
+		players (): TourneyRanking[] { return this.$store.state.ladder.tourney.ladder },
 	},
 })
 </script>

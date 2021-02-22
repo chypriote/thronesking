@@ -33,14 +33,19 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Alliance, KingdomRanking, Player } from '~/types'
+import { Alliance, Player, KingdomRanking } from '~/types'
 
 export default Vue.extend({
 	name: 'PlayerStats',
+	props: {
+		player: {
+			type: Object as () => Player,
+			required: true,
+		},
+	},
 	computed: {
-		player (): Player { return this.$store.state.player },
-		alliance (): Alliance|null { return this.player.alliance || null },
-		rank (): KingdomRanking|null { return this.player.rank || null },
+		alliance (): Alliance|undefined { return this.player.alliance },
+		rank (): KingdomRanking|undefined { return this.player.rankings.kingdom },
 	},
 })
 </script>

@@ -6,6 +6,7 @@
 			</div>
 			<div class="navbar-menu">
 				<div class="navbar-start">
+					<nuxt-link class="item" to="/players">Players</nuxt-link>
 					<nuxt-link class="item" to="/kingdom">Kingdom</nuxt-link>
 					<nuxt-link class="item" to="/tourney">Tourney</nuxt-link>
 					<nuxt-link class="item" to="/alliances">Alliances</nuxt-link>

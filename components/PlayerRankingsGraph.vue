@@ -10,6 +10,12 @@ import ChartDataLabels from 'chartjs-plugin-datalabels'
 import { Color } from 'chartjs-plugin-datalabels/types/options'
 import { Ranking, RankingTypes } from '~/types'
 
+interface Config {
+	property: string
+	color: Color
+	label: string
+}
+
 const formatDataLabel = (item: any) => {
 	return item?.power ? `${Number(item.power).toLocaleString()} KP` : `${Number(item.points).toLocaleString()} TP`
 }
@@ -25,19 +31,29 @@ export default Vue.extend({
 	computed: {
 		data (): Ranking[] {
 			switch (this.type) {
-			case RankingTypes.KINGDOM:
-				return this.$store.state.kingdom_rankings
-			case RankingTypes.TOURNEY:
-				return this.$store.state.tourney_rankings
+			case RankingTypes.KINGDOM_RANK:
+			case RankingTypes.KINGDOM_POWER:
+				return this.$store.state.ladder.kingdom.current
+			case RankingTypes.TOURNEY_RANK:
+			case RankingTypes.TOURNEY_POINTS:
+				return this.$store.state.ladder.tourney.current
 			default:
-				return this.$store.state.kingdom_rankings
+				return []
 			}
 		},
-		getLabel (): string {
-			return this.type === RankingTypes.KINGDOM ? 'Kingdom Power' : 'Tourney Points'
-		},
-		getBorderColor (): Color {
-			return this.type === RankingTypes.KINGDOM ? '#00d1b2' : '#ebfffc'
+		config (): Config {
+			switch (this.type) {
+			case RankingTypes.KINGDOM_RANK:
+				return { property: 'rank', color: '#00d1b2', label: 'Kingdom Power' }
+			case RankingTypes.KINGDOM_POWER:
+				return { property: 'power', color: '#ebfffc', label: 'Kingdom Power' }
+			case RankingTypes.TOURNEY_RANK:
+				return { property: 'rank', color: '#00d1b2', label: 'Tourney Points' }
+			case RankingTypes.TOURNEY_POINTS:
+				return { property: 'points', color: '#ebfffc', label: 'Tourney Points' }
+			default:
+				return { property: 'rank', color: '#00d1b2', label: 'Kingdom Power' }
+			}
 		},
 		graphData (): ChartData & any {
 			return {
@@ -45,9 +61,9 @@ export default Vue.extend({
 				labels: this.data.map((rank: Ranking) => format(new Date(rank.date), 'dd-MM')),
 				datasets: [
 					{
-						data: this.data.map((rank: Ranking) => ({ ...rank, toString: () => rank.rank })),
-						borderColor: this.getBorderColor,
-						label: this.getLabel,
+						data: this.data.map((rank: any) => ({ ...rank, toString: () => rank[this.config.property] })),
+						borderColor: this.config.color,
+						label: this.config.label,
 						datalabels: {
 							clip: false,
 							backgroundColor: '#22262b',

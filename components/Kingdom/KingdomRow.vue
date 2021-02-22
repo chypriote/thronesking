@@ -56,7 +56,7 @@ td {
 			align-items: center;
 			&:hover {color: inherit;}
 		}
-		.name {display: inline-flex;color: currentColor;white-space: nowrap;}
+		.name {white-space: nowrap;}
 	}
 	&.kp {text-align: right;}
 	&.level {margin-bottom: 0;}

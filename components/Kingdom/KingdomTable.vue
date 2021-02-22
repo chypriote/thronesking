@@ -21,14 +21,14 @@
 <script lang="ts">
 import Vue from 'vue'
 import KingdomRow from '~/components/Kingdom/KingdomRow.vue'
-import { Player } from '~/types'
+import { KingdomRanking } from '~/types'
 
 export default Vue.extend({
 	name: 'RankingTable',
 	components: { KingdomRow },
 	data: () => ({ loading: true }),
 	computed: {
-		players (): Player[] { return this.$store.state.kingdom_ladder },
+		players (): KingdomRanking[] { return this.$store.state.ladder.kingdom.ladder },
 	},
 })
 </script>
