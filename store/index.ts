@@ -37,6 +37,10 @@ export const mutations: MutationTree<IState> = {
 		if (!state.player?.roster) { return }
 		state.player.roster = roster
 	},
+	SET_NOTES (state: IState, notes: string) {
+		if (!state.player) { return }
+		state.player.notes = notes
+	},
 
 	SET_ALLIANCES (state: IState, alliances: Alliance[]) {
 		state.alliances = alliances
@@ -63,6 +67,13 @@ export const actions: ActionTree<IState, IState> = {
 		try {
 			if (!state.player) { return }
 			commit('SET_ROSTER', await this.$strapi.$http.get(`players/${state.player.id}/roster`).then(response => response.json()))
+		} catch (e) { console.log(e) }
+	},
+	async SAVE_NOTES ({ commit, state }, notes: string) {
+		try {
+			if (!state.player) { return }
+			const player = await this.$strapi.update('players', state.player.id, { notes })
+			commit('SET_NOTES', player.notes)
 		} catch (e) { console.log(e) }
 	},
 

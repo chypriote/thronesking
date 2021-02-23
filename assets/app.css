@@ -94,7 +94,7 @@ a {
 		color: var(--text-color);
 	}
 }
-input[type="text"], input[type="number"], .select select {
+input[type="text"], input[type="number"], .select select, .textarea {
 	background: transparent;
 	border-color: var(--foreground-border-color);
 	border-radius: var(--border-radius);
@@ -131,6 +131,8 @@ button.button {
 	transition: background-color .3s ease-out, filter .3s ease-out, color .3s ease-out;
 	filter: brightness(100%);
 	backface-visibility: hidden;
+	&.is-focused, &:focus {color: inherit;}
+	&.is-hovered, &:hover {color: inherit;background-color: var(--foreground-color-high-contrast);}
 	&.--primary {
 		background: var(--text-color-primary-high-contrast);
 		color: var(--text-color-label);

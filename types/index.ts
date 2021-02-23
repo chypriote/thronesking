@@ -48,6 +48,8 @@ export type Player = {
 	children: number
 	intimacy: number
 
+	notes: string
+
 	alliance_members?: AllianceMembers[]
 	player_heroes?: PlayerHeroes[]
 
