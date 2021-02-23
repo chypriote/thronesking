@@ -4,8 +4,30 @@
 			<div class="navbar-brand">
 				<nuxt-link class="item home" to="/">Home</nuxt-link>
 			</div>
+			<div class="navbar-search">
+				<v-select
+					id="player"
+					v-model="player"
+					:input-id="'hero-input'"
+					:options="players"
+					required
+					label="name"
+					:reduce="player => player.id"
+					@search="debounceInput"
+					@input="goToPlayer"
+				>
+					<template #option="option">
+						<div class="option">
+							<span class="name">{{ option.name }} - {{ option.gid }}</span>
+						</div>
+					</template>
+					<template #spinner>
+						<span v-show="loading" class="loader" />
+					</template>
+				</v-select>
+			</div>
 			<div class="navbar-menu">
-				<div class="navbar-start">
+				<div class="navbar-end">
 					<nuxt-link class="item" to="/players">Players</nuxt-link>
 					<nuxt-link class="item" to="/kingdom">Kingdom</nuxt-link>
 					<nuxt-link class="item" to="/tourney">Tourney</nuxt-link>
@@ -18,9 +40,39 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { debounce } from 'lodash-es'
+import { Player } from '~/types'
+
+interface IData {
+	players: Player[]
+	player: Player|null
+	loading: boolean
+}
 
 export default Vue.extend({
 	name: 'Navbar',
+	data: (): IData => ({
+		players: [],
+		player: null,
+		loading: false,
+	}),
+	methods: {
+		debounceInput: debounce(function (value): any {
+			// @ts-ignore
+			this.searchPlayers(value)
+		}, 400),
+		async searchPlayers (value: string|null) {
+			if (!value) { return }
+			this.loading = true
+			this.players = []
+			this.players = await this.$strapi.find('players', { name_contains: value })
+			this.loading = false
+		},
+		goToPlayer (id: number|null) {
+			if (!id) { return }
+			this.$router.push({ name: 'players-id', params: { id: id.toString() } })
+		},
+	},
 })
 </script>
 
@@ -41,8 +93,16 @@ export default Vue.extend({
 	justify-content: space-between;
 	padding: 0 .5rem;
 }
-.navbar-menu {flex: initial;}
-.navbar-brand {flex: 1;}
+.navbar-menu {flex: 2;justify-content: flex-end;}
+.navbar-brand {flex: 2;}
+.navbar-search {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	.v-select {
+		width: 100%;
+	}
+}
 .item {
 	display: flex;
 	align-items: center;
