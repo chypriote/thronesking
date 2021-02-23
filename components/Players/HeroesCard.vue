@@ -28,7 +28,7 @@ export default Vue.extend({
 	display: flex;
 	flex-wrap: wrap;
 	.hero {
-		flex: 0 0 10%;
+		flex: 0 0 15%;
 	}
 }
 </style>

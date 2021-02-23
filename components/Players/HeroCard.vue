@@ -3,7 +3,10 @@
 		<div class="image">
 			<img v-if="hero.picture" :src="hero.picture.formats.thumbnail.url" :alt="hero.name" />
 		</div>
-		{{ hero.name }}
+		<div class="card-content">
+			<p>{{ hero.name }}</p>
+		</div>
+		<div class="quality">{{ hero.quality }}</div>
 	</div>
 </template>
 
@@ -23,7 +26,22 @@ export default Vue.extend({
 </script>
 
 <style scoped>
-.card {
-	padding: .5rem;
+.card-content {
+	border-top: 1px solid inherit;
+	padding: .25rem .5rem;
+	text-align: center;
+}
+.quality {
+	position: absolute;
+	right: -.5rem;
+	bottom: -.5rem;
+	width: 2rem;
+	height: 2rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: var(--background-color);
+	border: 1px solid var(--foreground-color-high-contrast);
+	padding: .25rem;
 }
 </style>

@@ -75,7 +75,7 @@ export default Vue.extend({
 				hero: this.hero,
 				quality: this.quality,
 			})
-			this.$store.commit('ADD_HERO_TO_ROSTER', hero)
+			this.$store.commit('ADD_HERO_TO_ROSTER', { ...hero.hero, base: hero.hero.quality, quality: hero.quality })
 			this.hero = null
 			this.quality = null
 		},
