@@ -6,7 +6,7 @@
 		<div class="card-content">
 			<p class="name">{{ hero.name }}</p>
 		</div>
-		<div class="quality">{{ hero.quality }}</div>
+		<div class="quality" :class="{'hint--top': boost}" :aria-label="`+${boost}`">{{ hero.quality }}</div>
 	</div>
 </template>
 
@@ -21,6 +21,9 @@ export default Vue.extend({
 			type: Object as () => Hero,
 			required: true,
 		},
+	},
+	computed: {
+		boost (): number { return this.hero.quality - this.hero.base },
 	},
 })
 </script>
@@ -41,8 +44,9 @@ export default Vue.extend({
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	padding: .25rem;
 	background-color: var(--background-color);
 	border: 1px solid var(--foreground-color-high-contrast);
-	padding: .25rem;
+	&.hint--top {font-weight: bold;}
 }
 </style>

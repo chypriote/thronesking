@@ -48,7 +48,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { debounce } from 'lodash-es'
+import { debounce, find } from 'lodash-es'
 import { Hero, Player } from '~/types'
 
 interface IData {
@@ -88,7 +88,8 @@ export default Vue.extend({
 			if (!value) { return }
 			this.loading = true
 			this.heroes = []
-			this.heroes = await this.$strapi.find('heroes', { name_contains: value })
+			const heroes = await this.$strapi.find('heroes', { name_contains: value })
+			this.heroes = heroes.filter(h => !find(this.player.roster, it => it.id === h.id))
 			this.loading = false
 		},
 	},
