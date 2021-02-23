@@ -19,7 +19,7 @@
 						<label for="sort">Order</label>
 						<div class="select">
 							<select id="sort" v-model="sort">
-								<option value="heroes:desc">Heroes</option>
+								<option value="player.heroes:desc">Heroes</option>
 								<option value="points:desc">Points</option>
 								<option value="ratio:desc">Top Ratio </option>
 								<option value="ratio:asc">Worst Ratio</option>

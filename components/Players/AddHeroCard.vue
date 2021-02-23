@@ -38,7 +38,7 @@
 				</fieldset>
 				<fieldset class="field">
 					<div class="control">
-						<button class="button --primary" type="submit">Submit</button>
+						<button class="button --primary" :class="{'is-loading': saving}" type="submit">Submit</button>
 					</div>
 				</fieldset>
 			</form>
@@ -56,6 +56,7 @@ interface IData {
 	hero: Hero|null
 	quality: Number|null
 	loading: boolean
+	saving: boolean
 }
 
 export default Vue.extend({
@@ -65,6 +66,7 @@ export default Vue.extend({
 		hero: null,
 		quality: null,
 		loading: false,
+		saving: false,
 	}),
 	computed: {
 		player (): Player { return this.$store.state.player },
@@ -75,6 +77,7 @@ export default Vue.extend({
 			this.searchHeroes(value)
 		}, 400),
 		async saveHero () {
+			this.saving = true
 			const hero = await this.$strapi.create('player-heroes', {
 				player: this.player,
 				hero: this.hero,
@@ -83,6 +86,7 @@ export default Vue.extend({
 			this.$store.commit('ADD_HERO_TO_ROSTER', { ...hero.hero, base: hero.hero.quality, quality: hero.quality })
 			this.hero = null
 			this.quality = null
+			this.saving = false
 		},
 		async searchHeroes (value: string|null) {
 			if (!value) { return }
