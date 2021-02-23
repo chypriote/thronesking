@@ -26,6 +26,7 @@ export default Vue.extend({
 </script>
 
 <style scoped>
+.card {margin-top: 0;}
 .card-content {
 	border-top: 1px solid inherit;
 	padding: .25rem .5rem;

@@ -29,6 +29,7 @@ export default Vue.extend({
 	flex-wrap: wrap;
 	.hero {
 		flex: 0 0 15%;
+		&:not(:last-of-type) {margin-right: 2rem;}
 	}
 }
 </style>
