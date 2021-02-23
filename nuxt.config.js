@@ -19,7 +19,7 @@ export default {
 	},
 
 	css: ['bulma/css/bulma.min.css', 'hint.css/hint.min.css', '~/assets/app.css'],
-	plugins: ['~/plugins/chartjs', '~/plugins/select'],
+	plugins: ['~/plugins/chartjs', '~/plugins/select.ts'],
 	components: false,
 	telemetry: false,
 	buildModules: ['@nuxt/typescript-build', '@nuxtjs/stylelint-module'],

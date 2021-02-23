@@ -28,6 +28,7 @@ export type TourneyRanking = {
 	date: string
 	rank: number
 	points: number
+	ratio: number
 	player: Player
 }
 
@@ -95,4 +96,5 @@ export type PlayerHeroes = {
 	player: Player
 	hero: Hero
 	quality: number
+	base: number
 }

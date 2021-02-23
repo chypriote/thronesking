@@ -8,17 +8,30 @@
 		</td>
 		<td class="player">
 			<nuxt-link :key="player.id" :to="{name: 'tourney-id', params: {id: player.id}}">
+				<span v-if="player.player_heroes.length">🔍</span>
 				<span class="name">{{ player.name }}</span>
 			</nuxt-link>
 		</td>
 		<td class="stat points highlight">{{ Number(rank.points).toLocaleString() }}</td>
 		<td class="stat heroes">{{ player.heroes }}</td>
+		<td class="stat ratio">{{ Number(rank.ratio).toLocaleString() }}</td>
+		<td class="stat scout">
+			<div v-if="scout" class="scouting">
+				<div class="percent">{{ `${(scout * 100).toFixed()}%` }}</div>
+				<div class="details">
+					<div class="top">{{ top_hero.quality }}</div>
+					<div class="unevolved">{{ basics.length }}</div>
+				</div>
+			</div>
+			<span v-else>-</span>
+		</td>
 	</tr>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import { Player, TourneyRanking } from '~/types'
+import { orderBy } from 'lodash-es'
+import { Player, PlayerHeroes, TourneyRanking } from '~/types'
 
 export default Vue.extend({
 	name: 'RankingRow',
@@ -34,6 +47,18 @@ export default Vue.extend({
 	},
 	computed: {
 		player (): Player { return this.rank.player },
+		scout (): number|null {
+			if (!this.player.player_heroes) { return null }
+			return (this.player.player_heroes.length / this.player.heroes) || null
+		},
+		top_hero (): PlayerHeroes|undefined {
+			if (!this.scout) { return }
+			return orderBy(this.player.player_heroes, 'quality', 'asc').pop()
+		},
+		basics (): PlayerHeroes[]|undefined {
+			if (!this.scout || !this.player.player_heroes) { return }
+			return this.player.player_heroes.filter(h => h.quality - h.base < 4 || h.quality < 18)
+		},
 	},
 })
 </script>
@@ -50,6 +75,18 @@ td {
 		}
 		.name {white-space: nowrap;}
 	}
-	&.points {text-align: right;}
+	&.points, &.ratio, &.heroes, &.scout {text-align: right;}
+}
+.scouting {
+	display: flex;
+	flex-direction: column;
+	.details {
+		display: flex;
+		font-size: .75rem;
+		line-height: 1;
+		justify-content: flex-end;
+		color: var(--text-color-muted);
+		.top {margin-right: 1rem;}
+	}
 }
 </style>

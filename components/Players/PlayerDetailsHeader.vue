@@ -5,6 +5,7 @@
 			<p class="subtitle">{{ `VIP${player.vip}` }} - {{ player.gid }}</p>
 		</div>
 		<div v-if="rank" class="rank">{{ ordinal(rank) }}</div>
+		<nuxt-link :to="{name: 'players-id', params: {id: player.id}}" class="go-to">View</nuxt-link>
 	</header>
 </template>
 
@@ -33,6 +34,7 @@ export default Vue.extend({
 <style scoped>
 header {
 	display: flex;
+	position: relative;
 	.player {
 		flex-grow: 1;
 	}
@@ -42,5 +44,11 @@ header {
 		color: var(--text-color-primary);
 	}
 	.title:not(.is-spaced) + .subtitle {margin-top: 0;}
+	.go-to {
+		position: absolute;
+		font-size: .8rem;
+		bottom: .5rem;
+		right: 1rem;
+	}
 }
 </style>

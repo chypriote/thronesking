@@ -4,7 +4,7 @@
 			<img v-if="hero.picture" :src="hero.picture.formats.thumbnail.url" :alt="hero.name" />
 		</div>
 		<div class="card-content">
-			<p>{{ hero.name }}</p>
+			<p class="name">{{ hero.name }}</p>
 		</div>
 		<div class="quality">{{ hero.quality }}</div>
 	</div>
@@ -29,7 +29,7 @@ export default Vue.extend({
 .card {margin-top: 0;}
 .card-content {
 	border-top: 1px solid inherit;
-	padding: .25rem .5rem;
+	padding: .25rem .5rem 1.5rem;
 	text-align: center;
 }
 .quality {

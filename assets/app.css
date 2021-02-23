@@ -86,7 +86,15 @@ a {
 		left: 0;
 	}
 }
-input[type="text"], input[type="number"] {
+.select {
+	max-width: 100%;
+	width: 100%;
+	option {
+		background: var(--background-color);
+		color: var(--text-color);
+	}
+}
+input[type="text"], input[type="number"], .select select {
 	background: transparent;
 	border-color: var(--foreground-border-color);
 	border-radius: var(--border-radius);
@@ -95,6 +103,8 @@ input[type="text"], input[type="number"] {
 	height: 2.5em;
 	line-height: 1.5;
 	padding: calc(.5em - 1px) calc(.75em - 1px);
+	max-width: 100%;
+	width: 100%;
 }
 .label {
 	color: var(--text-color-medium);

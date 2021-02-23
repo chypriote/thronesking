@@ -27,6 +27,9 @@
 								<span class="name">{{ option.name }}</span>
 							</div>
 						</template>
+						<template #spinner>
+							<span v-show="loading" class="loader" />
+						</template>
 					</v-select>
 				</fieldset>
 				<fieldset class="field">
@@ -52,6 +55,7 @@ interface IData {
 	heroes: Hero[]
 	hero: Hero|null
 	quality: Number|null
+	loading: boolean
 }
 
 export default Vue.extend({
@@ -60,6 +64,7 @@ export default Vue.extend({
 		heroes: [],
 		hero: null,
 		quality: null,
+		loading: false,
 	}),
 	computed: {
 		player (): Player { return this.$store.state.player },
@@ -80,7 +85,11 @@ export default Vue.extend({
 			this.quality = null
 		},
 		async searchHeroes (value: string|null) {
+			if (!value) { return }
+			this.loading = true
+			this.heroes = []
 			this.heroes = await this.$strapi.find('heroes', { name_contains: value })
+			this.loading = false
 		},
 	},
 })

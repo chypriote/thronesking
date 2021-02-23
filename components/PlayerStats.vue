@@ -3,6 +3,7 @@
 		<div class="stats">
 			<player-stat v-if="rank" :label="'Kingdom Power'" :tooltip="Number(rank.power).toLocaleString()" :value="numeral(rank.power).format('0.0a').toUpperCase()" />
 			<player-stat v-if="rank" :label="'Level'" :value="rank.level" />
+			<player-stat :label="'Scouted'" :value="player.roster.length" />
 		</div>
 		<div class="stats">
 			<player-stat :label="'Heroes'" :value="player.heroes" />
