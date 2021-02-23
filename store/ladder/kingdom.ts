@@ -28,6 +28,7 @@ export const actions: ActionTree<IState, IState> = {
 	},
 	async FETCH_PLAYER_RANKINGS ({ commit }, id) {
 		try {
+			commit('SET_PLAYER_RANKINGS', [])
 			commit('SET_PLAYER_RANKINGS', await this.$strapi.find('kingdom-rankings', { player: id, _sort: 'created_at:asc' }))
 		} catch (e) { console.log(e) }
 	},

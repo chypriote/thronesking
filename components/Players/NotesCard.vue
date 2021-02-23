@@ -1,14 +1,14 @@
 <template>
 	<div class="card bordered">
 		<header><h4 class="title is-5">Notes</h4></header>
-		<div class="card-content">
-			<template v-if="!editing">{{ notes }}</template>
+		<form class="card-content" @submit.prevent="saveNotes">
+			<div v-if="!editing" class="note">{{ notes }}</div>
 			<textarea v-else id="notes" v-model="edited" class="textarea" aria-label="notes" rows="5" />
 			<footer class="actions" :style="{'justify-content': loading || !editing ? 'flex-end' : 'space-between'}">
-				<button v-if="!loading" class="button" @click="toggleEditing">{{ editing ? 'Cancel' : 'Edit' }}</button>
-				<button v-if="editing || loading" class="button --primary" :class="{'is-loading': loading}" @click="saveNotes">Save</button>
+				<button v-if="!loading" type="button" class="button" @click="toggleEditing">{{ editing ? 'Cancel' : 'Edit' }}</button>
+				<button v-if="editing || loading" type="submit" class="button --primary" :class="{'is-loading': loading}" @click="saveNotes">Save</button>
 			</footer>
-		</div>
+		</form>
 	</div>
 </template>
 
@@ -38,10 +38,11 @@ export default Vue.extend({
 </script>
 
 <style scoped>
-textarea {
-	margin-bottom: 1rem;
+.note {
+	white-space: pre;
 }
 .actions {
+	margin-top: 1rem;
 	display: flex;
 }
 </style>

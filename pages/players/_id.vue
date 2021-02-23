@@ -35,12 +35,16 @@ export default Vue.extend({
 	async asyncData ({ store, route }): Promise<void> {
 		await Promise.all([
 			store.dispatch('FETCH_PLAYER', route.params.id),
-			store.dispatch('ladder/tourney/FETCH_PLAYER_RANKINGS', route.params.id),
-			store.dispatch('ladder/kingdom/FETCH_PLAYER_RANKINGS', route.params.id),
 		])
 	},
 	computed: {
 		player (): Player { return this.$store.state.player },
+	},
+	async mounted () {
+		await Promise.all([
+			this.$store.dispatch('ladder/tourney/FETCH_PLAYER_RANKINGS', this.$route.params.id),
+			this.$store.dispatch('ladder/kingdom/FETCH_PLAYER_RANKINGS', this.$route.params.id),
+		])
 	},
 })
 </script>
