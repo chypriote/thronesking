@@ -1,11 +1,14 @@
 import { cloneDeep } from 'lodash-es'
-import { ChartOptions, TickOptions } from 'chart.js'
+import { ChartLegendOptions, ChartOptions, TickOptions } from 'chart.js'
 import { Context } from 'chartjs-plugin-datalabels/types/context'
 import { Options } from 'chartjs-plugin-datalabels/types/options'
 
-export const defaultOptions = (ticks: TickOptions = { stepSize: 1 }): ChartOptions => {
+export const defaultOptions = (
+	ticks: TickOptions = { stepSize: 1 },
+	legend: ChartLegendOptions = { display: false }
+): ChartOptions => {
 	return cloneDeep({
-		legend: { display: false },
+		legend,
 		tooltips: { enabled: false },
 		elements: {
 			line: { tension: 0, fill: false },
@@ -28,7 +31,7 @@ export const defaultDataLabel = (formatter: ((value: any, context: Context) => a
 		clip: false,
 		backgroundColor: '#22262b',
 		borderWidth: 1,
-		align: 'start',
+		padding: 5,
 		color: '#fff',
 		display: (e: any) => e.active,
 		formatter,

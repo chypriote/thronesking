@@ -11,19 +11,19 @@ import { TourneyRanking } from '~/types'
 import { Colors, defaultDataLabel, defaultOptions } from '~/components/Global/Graph'
 
 export default Vue.extend({
-	name: 'TourneyPowerGraph',
-	data: () => ({ options: defaultOptions() }),
+	name: 'TourneyRankGraph',
+	data: () => ({ options: defaultOptions({ stepSize: 1, suggestedMin: 1, reverse: true }) }),
 	computed: {
-		data (): TourneyRanking[] { return this.$store.state.ladder.tourney.current },
+		data (): TourneyRanking[] { return this.$store.state.player.tourney_rankings },
 		graphData (): ChartData & any {
 			return {
 				plugins: [ChartDataLabels],
 				labels: this.data.map((rank: TourneyRanking) => format(new Date(rank.date), 'dd-MM')),
 				datasets: [
 					{
-						data: this.data.map((rank: TourneyRanking) => ({ ...rank, toString: () => rank.points })),
-						borderColor: Colors.LIGHT,
-						label: 'Tourney Points',
+						data: this.data.map((rank: TourneyRanking) => ({ ...rank, toString: () => rank.rank })),
+						borderColor: Colors.PRIMARY,
+						label: 'Tourney Rank',
 						datalabels: defaultDataLabel((e: TourneyRanking) => `${Number(e.points).toLocaleString()} TP`),
 					},
 				],

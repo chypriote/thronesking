@@ -3,9 +3,9 @@
 		<main class="column is-two-thirds">
 			<kingdom-table />
 		</main>
-		<aside v-if="$route.name === 'kingdom-id'" class="column is-one-third">
+		<aside class="column is-one-third">
 			<div class="sticky">
-				<nuxt-child />
+				<player-peek />
 			</div>
 		</aside>
 	</div>
@@ -13,11 +13,12 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import PlayerPeek from '~/components/Global/PlayerPeek.vue'
 import KingdomTable from '~/components/Kingdom/KingdomTable.vue'
 
 export default Vue.extend({
 	name: 'KingdomIndex',
-	components: { KingdomTable },
+	components: { KingdomTable, PlayerPeek },
 	async asyncData ({ store }): Promise<void> {
 		await store.dispatch('ladder/kingdom/FETCH_LADDER')
 	},

@@ -20,7 +20,7 @@ export default Vue.extend({
 	name: 'NotesCard',
 	data: () => ({ editing: false, loading: false, edited: null }),
 	computed: {
-		notes () { return this.$store.state.player.notes },
+		notes () { return this.$store.state.player.player.notes },
 	},
 	methods: {
 		toggleEditing () {
@@ -29,7 +29,7 @@ export default Vue.extend({
 		},
 		async saveNotes () {
 			this.loading = true
-			await this.$store.dispatch('SAVE_NOTES', this.edited)
+			await this.$store.dispatch('player/SAVE_NOTES', this.edited)
 			this.editing = false
 			this.loading = false
 		},

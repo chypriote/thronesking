@@ -4,9 +4,9 @@
 			<tourney-filters class="tourney-filters" />
 			<tourney-table />
 		</main>
-		<aside v-if="$route.name === 'tourney-id'" class="column is-one-third">
+		<aside class="column is-one-third">
 			<div class="sticky">
-				<nuxt-child />
+				<player-peek />
 			</div>
 		</aside>
 	</div>
@@ -16,10 +16,11 @@
 import Vue from 'vue'
 import TourneyTable from '~/components/Tourney/TourneyTable.vue'
 import TourneyFilters from '~/components/Tourney/TourneyFilters.vue'
+import PlayerPeek from '~/components/Global/PlayerPeek.vue'
 
 export default Vue.extend({
 	name: 'TourneyIndex',
-	components: { TourneyTable, TourneyFilters },
+	components: { TourneyTable, TourneyFilters, PlayerPeek },
 	async asyncData ({ store }): Promise<void> {
 		await store.dispatch('ladder/tourney/FETCH_LADDER')
 	},
@@ -31,9 +32,6 @@ export default Vue.extend({
 	position: sticky;
 	top: 4.75rem;
 }
-</style>
-
-<style scoped>
 .tourney-filters {
 	margin-bottom: 1.5rem;
 }

@@ -20,7 +20,7 @@
 import Vue from 'vue'
 import numeral from 'numeral'
 import { Alliance, Player, KingdomRanking } from '~/types'
-import PlayerStat from '~/components/PlayerStat.vue'
+import PlayerStat from '~/components/Global/PlayerStat.vue'
 
 export default Vue.extend({
 	name: 'PlayerStats',

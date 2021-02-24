@@ -3,7 +3,6 @@ import { TourneyRanking } from '~/types'
 
 interface IState {
 	ladder: TourneyRanking[]
-	current: TourneyRanking[]
 	loading: boolean
 	limit: number
 	sort: string
@@ -13,7 +12,6 @@ interface IState {
 
 export const state = (): IState => ({
 	ladder: [],
-	current: [],
 	loading: true,
 	limit: 100,
 	sort: 'points:desc',
@@ -24,9 +22,6 @@ export const state = (): IState => ({
 export const mutations: MutationTree<IState> = {
 	SET_LADDER (state: IState, rankings: TourneyRanking[]) {
 		state.ladder = rankings
-	},
-	SET_PLAYER_RANKINGS (state: IState, rankings: TourneyRanking[]) {
-		state.current = rankings
 	},
 	SET_LOADING (state: IState, loading: boolean) {
 		state.loading = loading
@@ -78,12 +73,6 @@ export const actions: ActionTree<IState, IState> = {
 			if (state.heroes) { query['player.heroes_gt'] = state.heroes }
 			commit('SET_LADDER', await this.$strapi.find('ladders/tourney', query))
 			commit('SET_LOADING', false)
-		} catch (e) { console.log(e) }
-	},
-	async FETCH_PLAYER_RANKINGS ({ commit }, id) {
-		try {
-			commit('SET_PLAYER_RANKINGS', [])
-			commit('SET_PLAYER_RANKINGS', await this.$strapi.find('tourney-rankings', { player: id, _sort: 'created_at:asc' }))
 		} catch (e) { console.log(e) }
 	},
 }

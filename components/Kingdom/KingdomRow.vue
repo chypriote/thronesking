@@ -6,10 +6,8 @@
 				{{ index + 1 }}
 			</div>
 		</td>
-		<td class="player">
-			<nuxt-link :key="player.id" :to="{name: 'kingdom-id', params: {id: player.id}}">
-				<span class="name">{{ player.name }}</span>
-			</nuxt-link>
+		<td class="player" @click="selectPlayer">
+			<div class="name">{{ player.name }}</div>
 		</td>
 		<td class="stat kp highlight">{{ Number(rank.power).toLocaleString() }}</td>
 		<td class="stat vip">VIP<span style="font-weight: bold;">{{ player.vip }}</span></td>
@@ -43,6 +41,11 @@ export default Vue.extend({
 		player (): Player { return this.rank.player },
 		alliance (): Alliance|null { return this.rank.alliance },
 	},
+	methods: {
+		async selectPlayer () {
+			await this.$store.dispatch('ladder/SELECT_PLAYER', this.player.id)
+		},
+	},
 })
 </script>
 
@@ -51,12 +54,12 @@ td {
 	&.rank {padding: 0;position: relative;text-align: center;}
 	&.player {
 		width: 100%;
-		a {
+		.name {
 			display: flex;
 			align-items: center;
-			&:hover {color: inherit;}
+			white-space: nowrap;
+			cursor: pointer;
 		}
-		.name {white-space: nowrap;}
 	}
 	&.kp {text-align: right;}
 	&.level {margin-bottom: 0;}

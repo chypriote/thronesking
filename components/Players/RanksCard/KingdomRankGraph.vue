@@ -7,24 +7,25 @@ import Vue from 'vue'
 import { ChartData } from 'chart.js'
 import ChartDataLabels from 'chartjs-plugin-datalabels'
 import { format } from 'date-fns'
-import { TourneyRanking } from '~/types'
+import { KingdomRanking } from '~/types'
 import { Colors, defaultDataLabel, defaultOptions } from '~/components/Global/Graph'
+const ordinal = require('ordinal-numbers')
 
 export default Vue.extend({
-	name: 'TourneyRankGraph',
+	name: 'KingdomRankGraph',
 	data: () => ({ options: defaultOptions({ stepSize: 1, suggestedMin: 1, reverse: true }) }),
 	computed: {
-		data (): TourneyRanking[] { return this.$store.state.ladder.tourney.current },
+		data (): KingdomRanking[] { return this.$store.state.player.kingdom_rankings },
 		graphData (): ChartData & any {
 			return {
 				plugins: [ChartDataLabels],
-				labels: this.data.map((rank: TourneyRanking) => format(new Date(rank.date), 'dd-MM')),
+				labels: this.data.map((rank: KingdomRanking) => format(new Date(rank.date), 'dd-MM')),
 				datasets: [
 					{
-						data: this.data.map((rank: TourneyRanking) => ({ ...rank, toString: () => rank.rank })),
+						data: this.data.map((rank: KingdomRanking) => ({ ...rank, toString: () => rank.rank })),
 						borderColor: Colors.PRIMARY,
-						label: 'Tourney Rank',
-						datalabels: defaultDataLabel((e: TourneyRanking) => `${Number(e.points).toLocaleString()} TP`),
+						label: 'Kingdom Rank',
+						datalabels: defaultDataLabel((e: KingdomRanking) => ordinal(e.rank)),
 					},
 				],
 			}

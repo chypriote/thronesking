@@ -9,11 +9,10 @@
 						id="hero"
 						v-model="hero"
 						:input-id="'hero-input'"
-						:options="heroes"
+						:options="available_heroes"
 						required
 						label="name"
 						:reduce="hero => hero.id"
-						@search="debounceInput"
 					>
 						<template #selected-option="option">
 							<div class="option">
@@ -69,7 +68,8 @@ export default Vue.extend({
 		saving: false,
 	}),
 	computed: {
-		player (): Player { return this.$store.state.player },
+		player (): Player { return this.$store.state.player.player },
+		available_heroes (): Player { return this.$store.state.available_heroes },
 	},
 	methods: {
 		debounceInput: debounce(function (value): any {
@@ -83,7 +83,7 @@ export default Vue.extend({
 				hero: this.hero,
 				quality: this.quality,
 			})
-			this.$store.commit('ADD_HERO_TO_ROSTER', { ...hero.hero, base: hero.hero.quality, quality: hero.quality })
+			this.$store.commit('player/ADD_HERO_TO_ROSTER', { ...hero.hero, base: hero.hero.quality, quality: hero.quality })
 			this.hero = null
 			this.quality = null
 			this.saving = false

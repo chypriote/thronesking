@@ -22,29 +22,25 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Player } from '~/types'
-import PlayerStats from '~/components/PlayerStats.vue'
-import PlayerDetailsHeader from '~/components/Players/PlayerDetailsHeader.vue'
-import HeroesCard from '~/components/Players/HeroesCard.vue'
+import PlayerStats from '~/components/Global/PlayerStats.vue'
+import PlayerDetailsHeader from '~/components/Global/PlayerDetailsHeader.vue'
+import HeroesCard from '~/components/Players/HeroCard/HeroesCard.vue'
 import NotesCard from '~/components/Players/NotesCard.vue'
-import RanksCard from '~/components/Players/RanksCard.vue'
+import RanksCard from '~/components/Players/RanksCard/RanksCard.vue'
 import AddHeroCard from '~/components/Players/AddHeroCard.vue'
 
 export default Vue.extend({
 	name: 'PlayersId',
 	components: { AddHeroCard, RanksCard, HeroesCard, PlayerStats, PlayerDetailsHeader, NotesCard },
 	async asyncData ({ store, route }): Promise<void> {
-		await Promise.all([
-			store.dispatch('FETCH_PLAYER', route.params.id),
-		])
+		await store.dispatch('player/RESET')
+		await store.dispatch('player/FETCH_PLAYER', route.params.id)
 	},
 	computed: {
-		player (): Player { return this.$store.state.player },
+		player (): Player { return this.$store.state.player.player },
 	},
-	async mounted () {
-		await Promise.all([
-			this.$store.dispatch('ladder/tourney/FETCH_PLAYER_RANKINGS', this.$route.params.id),
-			this.$store.dispatch('ladder/kingdom/FETCH_PLAYER_RANKINGS', this.$route.params.id),
-		])
+	mounted () {
+		this.$store.dispatch('player/FETCH_ROSTER')
 	},
 })
 </script>
