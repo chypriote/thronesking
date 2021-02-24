@@ -6,11 +6,11 @@
 				{{ index + 1 }}
 			</div>
 		</td>
-		<td class="player">
-			<nuxt-link :key="player.id" :to="{name: 'tourney-id', params: {id: player.id}}">
+		<td class="player" @click="selectPlayer">
+			<div class="name">
 				<span v-if="player.player_heroes.length">🔍</span>
-				<span class="name">{{ player.name }}</span>
-			</nuxt-link>
+				<span>{{ player.name }}</span>
+			</div>
 		</td>
 		<td class="stat points highlight">{{ Number(rank.points).toLocaleString() }}</td>
 		<td class="stat heroes">{{ player.heroes }}</td>
@@ -60,6 +60,11 @@ export default Vue.extend({
 			return this.player.player_heroes.filter(h => h.quality - h.base < 4 || h.quality < 18)
 		},
 	},
+	methods: {
+		async selectPlayer () {
+			await this.$store.dispatch('ladder/SELECT_PLAYER', this.player.id)
+		},
+	},
 })
 </script>
 
@@ -68,12 +73,12 @@ td {
 	&.rank {padding: 0;position: relative;text-align: center;}
 	&.player {
 		width: 100%;
-		a {
+		.name {
 			display: flex;
 			align-items: center;
-			&:hover {color: inherit;}
+			white-space: nowrap;
+			cursor: pointer;
 		}
-		.name {white-space: nowrap;}
 	}
 	&.points, &.ratio, &.heroes, &.scout {text-align: right;}
 }

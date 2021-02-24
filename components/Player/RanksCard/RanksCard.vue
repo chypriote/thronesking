@@ -2,13 +2,14 @@
 	<div class="card bordered">
 		<header><h3 class="title is-5">Ranks</h3></header>
 		<div class="card-content">
+			<button class="button --primary" @click="getRankings">Load</button>
 			<div v-if="loading" class="loader-wrapper">
 				<div class="loader" />
 			</div>
 			<template v-else>
 			<div class="columns">
 				<div class="column">
-					<div class="graph">
+					<div v-if="kingdom_rankings.length" class="graph">
 						<div class="graph-legend">Kingdom Rank</div>
 						<kingdom-rank-graph />
 					</div>
@@ -22,7 +23,7 @@
 			</div>
 			<div class="columns">
 				<div class="column">
-					<div class="graph">
+					<div v-if="kingdom_rankings.length" class="graph">
 						<div class="graph-legend">Kingdom Power</div>
 						<kingdom-power-graph />
 					</div>
@@ -45,20 +46,15 @@ import KingdomRankGraph from '~/components/Player/RanksCard/KingdomRankGraph.vue
 import KingdomPowerGraph from '~/components/Player/RanksCard/KingdomPowerGraph.vue'
 import TourneyRankGraph from '~/components/Player/RanksCard/TourneyRankGraph.vue'
 import TourneyPointsGraph from '~/components/Player/RanksCard/TourneyPointsGraph.vue'
-import { TourneyRanking } from '~/types'
+import { KingdomRanking, TourneyRanking } from '~/types'
 
 export default Vue.extend({
 	name: 'RanksCard',
 	components: { KingdomRankGraph, TourneyRankGraph, KingdomPowerGraph, TourneyPointsGraph },
-	data: () => ({ loading: true }),
+	data: () => ({ loading: false }),
 	computed: {
+		kingdom_rankings (): KingdomRanking[] { return this.$store.state.player.kingdom_rankings },
 		tourney_rankings (): TourneyRanking[] { return this.$store.state.player.tourney_rankings },
-	},
-	watch: {
-		'$route.params.id' () { this.getRankings() },
-	},
-	mounted () {
-		this.getRankings()
 	},
 	methods: {
 		async getRankings () {

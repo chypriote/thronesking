@@ -9,7 +9,7 @@
 						id="hero"
 						v-model="hero"
 						:input-id="'hero-input'"
-						:options="available_heroes"
+						:options="heroes"
 						required
 						label="name"
 						:reduce="hero => hero.id"
@@ -48,11 +48,10 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { debounce, find } from 'lodash-es'
+import { find } from 'lodash-es'
 import { Hero, Player } from '~/types'
 
 interface IData {
-	heroes: Hero[]
 	hero: Hero|null
 	quality: Number|null
 	loading: boolean
@@ -62,7 +61,6 @@ interface IData {
 export default Vue.extend({
 	name: 'AddHeroCard',
 	data: (): IData => ({
-		heroes: [],
 		hero: null,
 		quality: null,
 		loading: false,
@@ -70,13 +68,11 @@ export default Vue.extend({
 	}),
 	computed: {
 		player (): Player { return this.$store.state.player.player },
-		available_heroes (): Player { return this.$store.state.available_heroes },
+		roster (): Hero[] { return this.$store.state.player.roster },
+		available_heroes (): Hero[] { return this.$store.state.available_heroes },
+		heroes (): Hero[] { return this.available_heroes.filter(h => !find(this.roster, it => it.id === h.id)) },
 	},
 	methods: {
-		debounceInput: debounce(function (value): any {
-			// @ts-ignore
-			this.searchHeroes(value)
-		}, 400),
 		async saveHero () {
 			this.saving = true
 			const hero = await this.$strapi.create('player-heroes', {
@@ -88,14 +84,6 @@ export default Vue.extend({
 			this.hero = null
 			this.quality = null
 			this.saving = false
-		},
-		async searchHeroes (value: string|null) {
-			if (!value) { return }
-			this.loading = true
-			this.heroes = []
-			const heroes = await this.$strapi.find('heroes', { name_contains: value })
-			this.heroes = heroes.filter(h => !find(this.player.roster, it => it.id === h.id))
-			this.loading = false
 		},
 	},
 })
