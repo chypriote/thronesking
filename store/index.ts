@@ -54,7 +54,7 @@ export const actions: ActionTree<IState, IState> = {
 	async FETCH_PLAYERS ({ commit }, params) {
 		try {
 			commit('SET_LOADING', true)
-			commit('SET_PLAYERS', await this.$strapi.find('players', params))
+			commit('SET_PLAYERS', await this.$strapi.find('players', { _sort: 'gid:asc', _limit: 1000, ...params }))
 			commit('SET_LOADING', false)
 		} catch (e) { console.log(e) }
 	},
