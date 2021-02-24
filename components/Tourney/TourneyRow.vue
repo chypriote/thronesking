@@ -21,6 +21,7 @@
 				<div class="details">
 					<div class="top">{{ top_hero.quality }}</div>
 					<div class="unevolved">{{ basics.length }}</div>
+					<div class="qRatio">{{ qRatio }}</div>
 				</div>
 			</div>
 			<span v-else>-</span>
@@ -30,7 +31,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { orderBy } from 'lodash-es'
+import { orderBy, reduce } from 'lodash-es'
 import { Player, PlayerHeroes, TourneyRanking } from '~/types'
 
 export default Vue.extend({
@@ -58,6 +59,15 @@ export default Vue.extend({
 		basics (): PlayerHeroes[]|undefined {
 			if (!this.scout || !this.player.player_heroes) { return }
 			return this.player.player_heroes.filter(h => h.quality - h.base < 4 || h.quality < 18)
+		},
+		qRatio (): string|number|undefined {
+			if (!this.scout || !this.player.player_heroes || !this.player.player_heroes.length) { return }
+			if (this.player.player_heroes.length < 2) { return this.player.player_heroes[0].quality }
+
+			const roster = orderBy(this.player.player_heroes, 'quality', 'desc')
+			roster.shift()
+			const totalQuality = reduce(roster, (sum: number, h: PlayerHeroes) => { return sum + h.quality }, 0)
+			return (totalQuality / roster.length).toFixed(1)
 		},
 	},
 	methods: {
@@ -89,9 +99,8 @@ td {
 		display: flex;
 		font-size: .75rem;
 		line-height: 1;
-		justify-content: flex-end;
+		justify-content: space-between;
 		color: var(--text-color-muted);
-		.top {margin-right: 1rem;}
 	}
 }
 </style>

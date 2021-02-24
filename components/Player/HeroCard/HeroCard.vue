@@ -1,12 +1,25 @@
 <template>
-	<div class="card bordered hero">
-		<img v-if="hero.picture" class="image" :src="hero.picture.formats.thumbnail.url" :alt="hero.name" />
-		<p class="name">{{ hero.name }}</p>
-		<div class="quality" :class="{'hint--top': boost}" :aria-label="`+${boost}`">{{ hero.quality }}</div>
+	<div class="card bordered">
+		<div class="hero">
+			<img v-if="hero.picture" class="image" :src="hero.picture.formats.thumbnail.url" :alt="hero.name" />
+			<p class="name">{{ hero.name }}</p>
+			<div v-show="!editing" class="quality" :class="{'hint--top': boost}" :aria-label="`+${boost}`" @click="toggleEdit">{{ hero.quality }}</div>
+		</div>
+		<form v-show="editing" class="edit" @submit.prevent="updateHero">
+			<fieldset class="field is-grouped">
+				<div class="control is-expanded">
+					<input id="quality" v-model="quality" class="input" aria-label="quality" type="text" placeholder="Quality" />
+				</div>
+				<div class="control">
+					<button type="submit" class="button --primary" :class="{'is-loading': loading}">Save</button>
+				</div>
+			</fieldset>
+		</form>
 	</div>
 </template>
 
 <script lang="ts">
+import { clone } from 'lodash-es'
 import Vue from 'vue'
 import { Hero } from '~/types'
 
@@ -18,8 +31,22 @@ export default Vue.extend({
 			required: true,
 		},
 	},
+	data: () => ({ editing: false, loading: false, quality: 0 }),
 	computed: {
 		boost (): number { return this.hero.quality - this.hero.base },
+	},
+	methods: {
+		toggleEdit () {
+			this.editing = !this.editing
+			this.loading = false
+			this.quality = clone(this.hero.quality)
+		},
+		async updateHero () {
+			if (!this.hero.id) { return }
+			this.loading = true
+			await this.$strapi.update('player-heroes', this.hero.id, { quality: this.quality })
+			this.editing = false
+		},
 	},
 })
 </script>
@@ -30,6 +57,7 @@ export default Vue.extend({
 	flex-direction: row;
 	align-items: center;
 	padding: 0 1rem;
+	width: 100%;
 	.image {max-height: 4rem;}
 	.name {
 		font-size: 1.5rem;
@@ -40,7 +68,17 @@ export default Vue.extend({
 		text-align: left;
 	}
 }
-.card {margin-top: 0;}
+.card {
+	margin-top: 0;
+	display: flex;
+	flex-direction: column;
+}
+.edit {
+	display: flex;
+	align-items: center;
+	margin-top: .5rem;
+	padding: .5rem 0 1rem;
+}
 .quality {
 	position: absolute;
 	right: -.5rem;
@@ -53,6 +91,7 @@ export default Vue.extend({
 	padding: .25rem;
 	background-color: var(--background-color);
 	border: 1px solid var(--foreground-color-high-contrast);
+	cursor: pointer;
 	&.hint--top {font-weight: bold;}
 }
 </style>
