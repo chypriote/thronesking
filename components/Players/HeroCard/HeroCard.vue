@@ -1,11 +1,7 @@
 <template>
-	<div class="card bordered">
-		<div class="image">
-			<img v-if="hero.picture" :src="hero.picture.formats.thumbnail.url" :alt="hero.name" />
-		</div>
-		<div class="card-content">
-			<p class="name">{{ hero.name }}</p>
-		</div>
+	<div class="card bordered hero">
+		<img v-if="hero.picture" class="image" :src="hero.picture.formats.thumbnail.url" :alt="hero.name" />
+		<p class="name">{{ hero.name }}</p>
 		<div class="quality" :class="{'hint--top': boost}" :aria-label="`+${boost}`">{{ hero.quality }}</div>
 	</div>
 </template>
@@ -29,12 +25,22 @@ export default Vue.extend({
 </script>
 
 <style scoped>
-.card {margin-top: 0;}
-.card-content {
-	border-top: 1px solid inherit;
-	padding: .25rem .5rem 1.5rem;
-	text-align: center;
+.hero {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 0 1rem;
+	.image {max-height: 4rem;}
+	.name {
+		font-size: 1.5rem;
+		padding: 0 1rem;
+		line-height: 1;
+		margin-bottom: 0;
+		flex: 1;
+		text-align: left;
+	}
 }
+.card {margin-top: 0;}
 .quality {
 	position: absolute;
 	right: -.5rem;

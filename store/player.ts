@@ -49,7 +49,6 @@ export const mutations: MutationTree<IState> = {
 
 export const actions: ActionTree<IState, IState> = {
 	RESET ({ commit }) {
-		commit('SET_PLAYER', null)
 		commit('SET_ALLIANCE', null)
 		commit('SET_ROSTER', [])
 		commit('SET_KINGDOM_RANKINGS', [])

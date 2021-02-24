@@ -24,6 +24,7 @@
 							<div class="option">
 								<img v-if="option.picture" :src="option.picture.formats.thumbnail.url" :alt="option.name" class="picture" />
 								<span class="name">{{ option.name }}</span>
+								<div class="quality">{{ option.quality }}</div>
 							</div>
 						</template>
 						<template #spinner>
@@ -112,6 +113,21 @@ export default Vue.extend({
 		height: 2rem;
 		border-radius: 50%;
 		margin-right: 1rem;
+	}
+	.name {
+		flex: 1;
+	}
+	.quality {
+		width: 1.5rem;
+		height: 1.5rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: .75rem;
+		line-height: 1;
+		background-color: transparent;
+		border: 1px solid var(--foreground-color-high-contrast);
+		border-radius: 50%;
 	}
 }
 </style>

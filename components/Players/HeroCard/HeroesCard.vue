@@ -10,7 +10,7 @@
 			</div>
 			<template v-else>
 			<div class="roster columns is-multiline">
-				<div v-for="hero of roster" :key="hero.id" class="column is-one-fifth">
+				<div v-for="hero of roster" :key="hero.id" class="column is-one-third">
 					<hero-card class="hero" :hero="hero" />
 				</div>
 			</div>
