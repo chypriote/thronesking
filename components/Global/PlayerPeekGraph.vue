@@ -20,8 +20,8 @@ export default Vue.extend({
 		tourneyData (): TourneyRanking[] { return this.$store.state.ladder.tourney_rankings },
 		graphData (): ChartData & any {
 			const dates = this.kingdomData.map((rank: KingdomRanking) => new Date(rank.date))
-			const kingdomSet = []
-			const tourneySet = []
+			const kingdomSet: any[] = []
+			const tourneySet: any[] = []
 
 			dates.forEach((date: Date) => {
 				const kd = find(this.kingdomData, (it: KingdomRanking) => !differenceInHours(new Date(it.date), date))

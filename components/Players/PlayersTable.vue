@@ -5,14 +5,16 @@
 			<tr>
 				<th>ID</th>
 				<th>Name</th>
-				<th>Heroes</th>
-				<th>Power</th>
 				<th>VIP</th>
-				<th>Alliance</th>
+				<th>Power</th>
+				<th>Level</th>
+				<th>Heroes</th>
+				<th>Maiden</th>
+				<th>Children</th>
 			</tr>
 			</thead>
 			<tbody>
-				<tr v-if="loading"><td colspan="6">
+				<tr v-if="loading"><td colspan="8">
 					<div class="loader-wrapper">
 						<span class="loader" />
 					</div>

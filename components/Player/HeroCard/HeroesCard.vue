@@ -23,7 +23,7 @@
 import Vue from 'vue'
 import { orderBy } from 'lodash-es'
 import { Hero } from '~/types'
-import HeroCard from '~/components/Players/HeroCard/HeroCard.vue'
+import HeroCard from '~/components/Player/HeroCard/HeroCard.vue'
 
 export default Vue.extend({
 	name: 'HeroesCard',

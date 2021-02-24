@@ -41,10 +41,10 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import KingdomRankGraph from '~/components/Players/RanksCard/KingdomRankGraph.vue'
-import KingdomPowerGraph from '~/components/Players/RanksCard/KingdomPowerGraph.vue'
-import TourneyRankGraph from '~/components/Players/RanksCard/TourneyRankGraph.vue'
-import TourneyPointsGraph from '~/components/Players/RanksCard/TourneyPointsGraph.vue'
+import KingdomRankGraph from '~/components/Player/RanksCard/KingdomRankGraph.vue'
+import KingdomPowerGraph from '~/components/Player/RanksCard/KingdomPowerGraph.vue'
+import TourneyRankGraph from '~/components/Player/RanksCard/TourneyRankGraph.vue'
+import TourneyPointsGraph from '~/components/Player/RanksCard/TourneyPointsGraph.vue'
 import { TourneyRanking } from '~/types'
 
 export default Vue.extend({

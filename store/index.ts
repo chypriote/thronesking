@@ -4,6 +4,9 @@ import { Alliance, Hero, Player } from '~/types'
 interface IState {
 	available_heroes: Hero[]
 	players: Player[]
+	players_limit: number
+	players_sort: string
+	players_vip: boolean
 	loading: Boolean
 
 	alliances: Alliance[]
@@ -13,6 +16,9 @@ interface IState {
 export const state = (): IState => ({
 	available_heroes: [],
 	players: [],
+	players_limit: 1000,
+	players_sort: 'gid:asc',
+	players_vip: false,
 	loading: true,
 
 	alliances: [],
@@ -35,13 +41,33 @@ export const mutations: MutationTree<IState> = {
 	SET_ALLIANCE (state: IState, alliance: Alliance|null) {
 		state.alliance = alliance
 	},
+	SET_SORT (state: IState, sort: string) {
+		state.players_sort = sort
+	},
+	SET_LIMIT (state: IState, limit: number) {
+		state.players_limit = limit || 1000
+	},
+	SET_VIP (state: IState, vip: boolean) {
+		state.players_vip = vip
+	},
 }
 
+interface IQuery {
+	_limit: number
+	_sort: string
+	vip_eq?: number|null
+}
 export const actions: ActionTree<IState, IState> = {
-	async FETCH_PLAYERS ({ commit }, params) {
+	async FETCH_PLAYERS ({ commit, state }, params) {
 		try {
 			commit('SET_LOADING', true)
-			commit('SET_PLAYERS', await this.$strapi.find('players', { _sort: 'gid:asc', _limit: 1000, ...params }))
+			const query: IQuery = {
+				_sort: state.players_sort,
+				_limit: state.players_limit,
+				...params,
+			}
+			if (state.players_vip) { query.vip_eq = 0 }
+			commit('SET_PLAYERS', await this.$strapi.find('players', query))
 			commit('SET_LOADING', false)
 		} catch (e) { console.log(e) }
 	},
@@ -66,5 +92,18 @@ export const actions: ActionTree<IState, IState> = {
 	},
 	async nuxtServerInit ({ dispatch }) {
 		await dispatch('LOAD_HEROES')
+	},
+
+	async SET_SORT ({ commit, dispatch }, value) {
+		commit('SET_SORT', value)
+		await dispatch('FETCH_PLAYERS')
+	},
+	async SET_LIMIT ({ commit, dispatch }, value) {
+		commit('SET_LIMIT', value)
+		await dispatch('FETCH_PLAYERS')
+	},
+	async SET_VIP ({ dispatch, commit }, vip: boolean) {
+		commit('SET_VIP', vip)
+		await dispatch('FETCH_PLAYERS')
 	},
 }

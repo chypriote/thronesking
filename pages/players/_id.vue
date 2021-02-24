@@ -24,10 +24,10 @@ import Vue from 'vue'
 import { Player } from '~/types'
 import PlayerStats from '~/components/Global/PlayerStats.vue'
 import PlayerDetailsHeader from '~/components/Global/PlayerDetailsHeader.vue'
-import HeroesCard from '~/components/Players/HeroCard/HeroesCard.vue'
-import NotesCard from '~/components/Players/NotesCard.vue'
-import RanksCard from '~/components/Players/RanksCard/RanksCard.vue'
-import AddHeroCard from '~/components/Players/AddHeroCard.vue'
+import HeroesCard from '~/components/Player/HeroCard/HeroesCard.vue'
+import NotesCard from '~/components/Player/NotesCard.vue'
+import RanksCard from '~/components/Player/RanksCard/RanksCard.vue'
+import AddHeroCard from '~/components/Player/AddHeroCard.vue'
 
 export default Vue.extend({
 	name: 'PlayersId',

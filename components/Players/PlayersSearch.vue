@@ -36,13 +36,6 @@ export default Vue.extend({
 </script>
 
 <style scoped>
-.search {
-	margin-bottom: 2rem;
-	position: sticky;
-	max-width: 30%;
-	top: 5rem;
-	z-index: 2;
-}
 .input::placeholder {
 	color: var(--text-color-lighter);
 }

@@ -6,21 +6,23 @@
 				<span class="name">{{ player.name }}</span>
 			</nuxt-link>
 		</td>
-		<td class="stat heroes">{{ player.heroes }}</td>
-		<td class="stat kp highlight">{{ player.power }}</td>
 		<td class="stat vip">{{ player.vip }}</td>
-		<td v-if="alliance" class="stat alliance">
-			<nuxt-link :key="alliance.id" :to="{name: 'alliances-id', params: {id: alliance.id}}">
-				{{ alliance.name }}
-			</nuxt-link>
+		<td class="stat kp highlight">
+			<span class="hint--top" :aria-label="Number(player.power).toLocaleString()">
+				{{ numeral(player.power).format('0.0a').toUpperCase() }}
+			</span>
 		</td>
-		<td v-else>-</td>
+		<td class="stat level-value">{{ player.level }}</td>
+		<td class="stat heroes">{{ player.heroes }}</td>
+		<td class="stat maidens">{{ player.maidens }}</td>
+		<td class="stat children">{{ player.children }}</td>
 	</tr>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import { Alliance, Player } from '~/types'
+import { Player } from '~/types'
+const numeral = require('numeral')
 
 export default Vue.extend({
 	name: 'PlayerRow',
@@ -30,9 +32,7 @@ export default Vue.extend({
 			required: true,
 		},
 	},
-	computed: {
-		alliance (): Alliance|undefined { return this.player.alliance },
-	},
+	data: () => ({ numeral }),
 })
 </script>
 
@@ -47,6 +47,7 @@ td {
 		}
 		.name {white-space: nowrap;font-weight: bold;}
 	}
-	&.kp {text-align: right;}
+	&.level-value, &.vip, &.heroes, &.maidens, &.children {text-align: right;}
+	&.kp {text-align: right;overflow: initial;}
 }
 </style>
