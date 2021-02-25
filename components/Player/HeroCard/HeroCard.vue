@@ -8,7 +8,7 @@
 		<form v-show="editing" class="edit" @submit.prevent="updateHero">
 			<fieldset class="field is-grouped">
 				<div class="control is-expanded">
-					<input id="quality" v-model="quality" class="input" aria-label="quality" type="text" placeholder="Quality" />
+					<input :id="`${hero.id}-${quality}`" v-model="quality" class="input" aria-label="quality" type="text" placeholder="Quality" />
 				</div>
 				<div class="control">
 					<button type="submit" class="button --primary" :class="{'is-loading': loading}">Save</button>

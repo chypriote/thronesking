@@ -8,7 +8,7 @@
 				<v-select
 					id="player"
 					v-model="player"
-					:input-id="'hero-input'"
+					:input-id="'player-search'"
 					:options="players"
 					required
 					label="name"

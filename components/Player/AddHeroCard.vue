@@ -1,49 +1,46 @@
 <template>
-	<div class="card bordered">
-		<header><h4 class="title is-5">Add Hero</h4></header>
-		<div class="card-content">
-			<form @submit.prevent="saveHero">
-				<fieldset class="field">
-					<label for="hero" class="label">Hero</label>
-					<v-select
-						id="hero"
-						v-model="hero"
-						:input-id="'hero-input'"
-						:options="heroes"
-						required
-						label="name"
-						:reduce="hero => hero.id"
-					>
-						<template #selected-option="option">
-							<div class="option">
-								<img v-if="option.picture" :src="option.picture.formats.thumbnail.url" :alt="option.name" class="picture" />
-								<span class="name">{{ option.name }}</span>
-							</div>
-						</template>
-						<template #option="option">
-							<div class="option">
-								<img v-if="option.picture" :src="option.picture.formats.thumbnail.url" :alt="option.name" class="picture" />
-								<span class="name">{{ option.name }}</span>
-								<div class="quality">{{ option.quality }}</div>
-							</div>
-						</template>
-						<template #spinner>
-							<span v-show="loading" class="loader" />
-						</template>
-					</v-select>
-				</fieldset>
-				<fieldset class="field">
-					<label for="quality" class="label">Quality</label>
-					<input id="quality" v-model="quality" type="number" class="input" required />
-				</fieldset>
-				<fieldset class="field">
-					<div class="control">
-						<button class="button --primary" :class="{'is-loading': saving}" type="submit">Submit</button>
+	<form class="add-hero" @submit.prevent="saveHero">
+		<fieldset class="field is-flex-grow-1">
+			<v-select
+				id="hero"
+				ref="hero"
+				v-model="hero"
+				:input-id="'hero-input'"
+				:options="heroes"
+				aria-label="hero"
+				required
+				label="name"
+				:reduce="hero => hero.id"
+				placeholder="Add hero"
+				@option:selected="selectHero"
+			>
+				<template #selected-option="option">
+					<div class="option">
+						<img v-if="option.picture" :src="option.picture.formats.thumbnail.url" :alt="option.name" class="picture" />
+						<span class="name">{{ option.name }}</span>
 					</div>
-				</fieldset>
-			</form>
-		</div>
-	</div>
+				</template>
+				<template #option="option">
+					<div class="option">
+						<img v-if="option.picture" :src="option.picture.formats.thumbnail.url" :alt="option.name" class="picture" />
+						<span class="name">{{ option.name }}</span>
+						<div class="quality">{{ option.quality }}</div>
+					</div>
+				</template>
+				<template #spinner>
+					<span v-show="loading" class="loader" />
+				</template>
+			</v-select>
+		</fieldset>
+		<fieldset class="field is-flex-grow-1">
+			<input id="hero-quality" v-model="quality" aria-label="Quality" type="number" class="input" required placeholder="Quality" />
+		</fieldset>
+		<fieldset class="field">
+			<div class="control">
+				<button class="button --primary" :class="{'is-loading': saving}" type="submit">Submit</button>
+			</div>
+		</fieldset>
+	</form>
 </template>
 
 <script lang="ts">
@@ -81,15 +78,26 @@ export default Vue.extend({
 				quality: this.quality,
 			})
 			this.$store.commit('player/ADD_HERO_TO_ROSTER', { ...hero.hero, base: hero.hero.quality, quality: hero.quality })
-			this.hero = null
+			// @ts-ignore
+			this.$refs.hero.clearSelection()
+			document.getElementById('hero-input')?.focus()
 			this.quality = null
 			this.saving = false
+		},
+		selectHero (hero: Hero) {
+			this.quality = hero.quality
 		},
 	},
 })
 </script>
 
 <style scoped>
+.add-hero {
+	display: flex;
+	align-items: center;
+	.field {margin-bottom: 0;}
+}
+.field + .field {margin-left: 1rem;}
 .control {
 	display: flex;
 	justify-content: flex-end;

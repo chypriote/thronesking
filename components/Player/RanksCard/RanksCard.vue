@@ -1,8 +1,10 @@
 <template>
 	<div class="card bordered">
-		<header><h3 class="title is-5">Ranks</h3></header>
-		<div class="card-content">
+		<header class="is-flex is-align-items-center is-justify-content-space-between">
+			<h3 class="title is-5">Ranks</h3>
 			<button class="button --primary" @click="getRankings">Load</button>
+		</header>
+		<div class="card-content">
 			<div v-if="loading" class="loader-wrapper">
 				<div class="loader" />
 			</div>

@@ -5,6 +5,7 @@
 			<button class="button --primary" :class="{'is-loading': loading}" @click="getHeroes">Refresh</button>
 		</header>
 		<div class="card-content">
+			<add-hero-card id="add-hero-card" />
 			<div v-if="loading" class="loader-wrapper">
 				<div class="loader" />
 			</div>
@@ -24,10 +25,11 @@ import Vue from 'vue'
 import { orderBy } from 'lodash-es'
 import { Hero } from '~/types'
 import HeroCard from '~/components/Player/HeroCard/HeroCard.vue'
+import AddHeroCard from '~/components/Player/AddHeroCard.vue'
 
 export default Vue.extend({
 	name: 'HeroesCard',
-	components: { HeroCard },
+	components: { AddHeroCard, HeroCard },
 	data: () => ({ loading: true }),
 	computed: {
 		roster (): Hero[] { return orderBy(this.$store.state.player.roster, 'quality', 'desc') },
@@ -49,6 +51,9 @@ export default Vue.extend({
 </script>
 
 <style scoped>
+#add-hero-card {
+	margin-bottom: 2rem;
+}
 .loader-wrapper {
 	display: flex;
 	align-items: center;

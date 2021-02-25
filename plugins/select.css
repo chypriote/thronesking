@@ -7,6 +7,9 @@
 		line-height: 1.5;
 		padding: calc(.5em - 1px) 0 calc(.5em - 1px) calc(.75em - 1px);
 		margin: 0;
+		&::placeholder {
+			color: #1e2429;
+		}
 	}
 	ul {
 		list-style: none;
