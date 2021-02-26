@@ -1,8 +1,8 @@
 <template>
 	<div>
 		<div class="stats">
-			<player-stat v-if="rank" :label="'Kingdom Power'" :tooltip="rank.power |formatted" :value="rank.power |numeral" />
-			<player-stat v-if="rank" :label="'Level'" :value="rank.level" />
+			<player-stat :label="'Kingdom Power'" :tooltip="player.power |formatted" :value="player.power |numeral" />
+			<player-stat :label="'Level'" :value="player.level" />
 			<player-stat :label="'Scouted'" :value="player.roster.length" />
 		</div>
 		<div class="stats">
@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Alliance, Player, KingdomRanking } from '~/types'
+import { Alliance, Player } from '~/types'
 import PlayerStat from '~/components/Global/PlayerStat.vue'
 
 export default Vue.extend({
@@ -32,7 +32,6 @@ export default Vue.extend({
 	},
 	computed: {
 		alliance (): Alliance|undefined { return this.player.alliance },
-		rank (): KingdomRanking|undefined { return this.player.rankings.kingdom },
 	},
 })
 </script>
