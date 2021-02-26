@@ -36,6 +36,10 @@ export const mutations: MutationTree<IState> = {
 		if (!state.player) { return }
 		state.player.notes = notes
 	},
+	SET_PLAYER_FAVORITE (state: IState, favorite: boolean) {
+		if (!state.player) { return }
+		state.player.favorite = favorite
+	},
 	SET_ALLIANCE (state: IState, alliance: Alliance|null) {
 		state.alliance = alliance
 	},
@@ -66,6 +70,13 @@ export const actions: ActionTree<IState, IState> = {
 			if (!state.player) { return }
 			const player = await this.$strapi.update('players', state.player.id, { notes })
 			commit('SET_NOTES', player.notes)
+		} catch (e) { console.log(e) }
+	},
+	async TOGGLE_FAVORITE ({ commit, state }, id) {
+		try {
+			if (!state.player) { return }
+			const player: Player = await this.$strapi.update('players', id, { favorite: !state.player.favorite })
+			commit('SET_PLAYER_FAVORITE', player.favorite)
 		} catch (e) { console.log(e) }
 	},
 

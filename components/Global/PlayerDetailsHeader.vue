@@ -1,7 +1,10 @@
 <template>
 	<header>
 		<div class="player">
-			<h2 class="title is-3">{{ player.name }}</h2>
+			<h2 class="title is-3">
+				<span v-if="player.favorite">⭐</span>
+				{{ player.name }}
+			</h2>
 			<p class="subtitle">{{ `VIP${player.vip}` }} - {{ player.gid }}</p>
 		</div>
 		<div v-if="rank" class="rank">{{ rank |ordinal }}</div>

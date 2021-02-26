@@ -2,19 +2,17 @@
 	<tr>
 		<td>{{ player.gid }}</td>
 		<td class="player" @click="selectPlayer">
-			<nuxt-link :key="player.id" :to="{name: 'players-id', params: {id: player.id}}">
+			<div class="player-name">
+				<span v-if="player.favorite">⭐</span>
 				<span class="name">{{ player.name }}</span>
-			</nuxt-link>
-		</td>
-		<td class="recommendation highlight">
-			<div class="recommendation">
-				{{ player.recommendation |formatted }}
-				<div class="details">
-					{{ `(${player.worst}/${player.even}/${player.best})` }}
-				</div>
 			</div>
 		</td>
-		<td class="heroes">{{ player.heroes }}</td>
+		<td class="heroes">
+			<div class="heroes">
+				{{ player.heroes }}
+				<div class="details">{{ `(${player.worst}/${player.even}/${player.best})` }}</div>
+			</div>
+		</td>
 		<td class="kp">
 			<span class="hint--top" :aria-label="player.power |formatted">
 				{{ player.power |numeral }}
@@ -37,10 +35,6 @@ import { Player } from '~/types'
 export default Vue.extend({
 	name: 'ScoutingRow',
 	props: {
-		quality: {
-			type: Number,
-			required: true,
-		},
 		player: {
 			type: Object as () => Player,
 			required: true,
@@ -58,22 +52,24 @@ export default Vue.extend({
 td {
 	&.player {
 		width: 100%;
-		a {
+		.player-name {
 			display: flex;
 			align-items: center;
-			&:hover {color: inherit;}
+			cursor: pointer;
 		}
-		.name {white-space: nowrap;font-weight: bold;}
+		.name {
+			white-space: nowrap;
+			font-weight: bold;
+		}
 	}
 	&.heroes, &.ratio, &.scouted, &.vip, &.kp {text-align: right;}
-	&.recommendation {text-align: right;overflow: initial;}
-	.recommendation {
+	.heroes {
 		display: flex;
-		flex-direction: column;
-		text-align: right;
+		align-items: center;
 		.details {
 			display: flex;
 			font-size: .75rem;
+			margin-left: .5rem;
 			line-height: 1;
 			justify-content: flex-end;
 			color: var(--text-color-medium);

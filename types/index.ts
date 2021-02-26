@@ -49,6 +49,7 @@ export type Player = {
 	intimacy: number
 
 	notes: string
+	favorite: boolean
 
 	alliance_members?: AllianceMembers[]
 	player_heroes?: PlayerHeroes[]

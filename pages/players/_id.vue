@@ -8,6 +8,7 @@
 						<player-stats :player="player" />
 					</div>
 				</div>
+				<toggle-favorite :player="player" />
 				<notes-card />
 			</div>
 			<div class="column is-three-quarters">
@@ -26,10 +27,11 @@ import PlayerDetailsHeader from '~/components/Global/PlayerDetailsHeader.vue'
 import HeroesCard from '~/components/Player/HeroCard/HeroesCard.vue'
 import NotesCard from '~/components/Player/NotesCard.vue'
 import RanksCard from '~/components/Player/RanksCard/RanksCard.vue'
+import ToggleFavorite from '~/components/Player/ToggleFavorite.vue'
 
 export default Vue.extend({
 	name: 'PlayersId',
-	components: { RanksCard, HeroesCard, PlayerStats, PlayerDetailsHeader, NotesCard },
+	components: { ToggleFavorite, RanksCard, HeroesCard, PlayerStats, PlayerDetailsHeader, NotesCard },
 	async asyncData ({ store, route }): Promise<void> {
 		await store.dispatch('player/RESET')
 		await store.dispatch('player/FETCH_PLAYER', route.params.id)
