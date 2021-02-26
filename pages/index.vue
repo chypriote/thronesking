@@ -7,7 +7,15 @@
 						<form @submit.prevent="getRecommendations">
 						<fieldset class="field is-grouped">
 							<div class="control is-expanded">
-								<input id="quality" v-model="quality" class="input" aria-label="Quality" type="text" placeholder="Quality" />
+								<input
+									id="quality"
+									v-model="quality"
+									class="input"
+									aria-label="Quality"
+									type="text"
+									placeholder="Quality"
+									autocomplete="off"
+								/>
 							</div>
 							<div class="control">
 								<button type="submit" class="button --primary" :class="{'is-loading': loading}">Find</button>

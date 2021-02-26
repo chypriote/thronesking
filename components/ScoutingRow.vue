@@ -4,6 +4,7 @@
 		<td class="player" @click="selectPlayer">
 			<div class="player-name">
 				<span v-if="player.favorite">⭐</span>
+				<span v-if="player.inactive">⏱</span>
 				<span class="name">{{ player.name }}</span>
 			</div>
 		</td>

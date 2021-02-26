@@ -3,6 +3,7 @@
 		<div class="player">
 			<h2 class="title is-3">
 				<span v-if="player.favorite">⭐</span>
+				<span v-if="player.inactive">⏱</span>
 				{{ player.name }}
 			</h2>
 			<p class="subtitle">{{ `VIP${player.vip}` }} - {{ player.gid }}</p>

@@ -50,6 +50,7 @@ export type Player = {
 
 	notes: string
 	favorite: boolean
+	inactive: boolean|null
 
 	alliance_members?: AllianceMembers[]
 	player_heroes?: PlayerHeroes[]
