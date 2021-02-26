@@ -80,12 +80,13 @@ export default Vue.extend({
 			this.$store.commit('player/ADD_HERO_TO_ROSTER', { ...hero.hero, base: hero.hero.quality, quality: hero.quality })
 			// @ts-ignore
 			this.$refs.hero.clearSelection()
-			document.getElementById('hero-input')?.focus()
 			this.quality = null
 			this.saving = false
 		},
-		selectHero (hero: Hero) {
+		async selectHero (hero: Hero) {
 			this.quality = hero.quality
+			await setTimeout(() => {}, 500)
+			document.getElementById('hero-quality')?.focus()
 		},
 	},
 })

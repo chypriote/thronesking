@@ -4,7 +4,7 @@
 			<h2 class="title is-3">{{ player.name }}</h2>
 			<p class="subtitle">{{ `VIP${player.vip}` }} - {{ player.gid }}</p>
 		</div>
-		<div v-if="rank" class="rank">{{ ordinal(rank) }}</div>
+		<div v-if="rank" class="rank">{{ rank |ordinal }}</div>
 		<nuxt-link :to="{name: 'players-id', params: {id: player.id}}" class="go-to">View</nuxt-link>
 	</header>
 </template>
@@ -12,7 +12,6 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Player } from '~/types'
-const ordinal = require('ordinal-numbers')
 
 export default Vue.extend({
 	name: 'PlayerDetailsHeader',
@@ -27,7 +26,6 @@ export default Vue.extend({
 			default: null,
 		},
 	},
-	data: () => ({ ordinal }),
 })
 </script>
 

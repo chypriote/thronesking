@@ -9,7 +9,7 @@
 		<td class="player" @click="selectPlayer">
 			<div class="name">{{ player.name }}</div>
 		</td>
-		<td class="stat kp highlight">{{ Number(rank.power).toLocaleString() }}</td>
+		<td class="stat kp highlight">{{ rank.power |formatted }}</td>
 		<td class="stat vip">VIP<span style="font-weight: bold;">{{ player.vip }}</span></td>
 		<td class="stat level">{{ rank.level }}</td>
 		<td v-if="alliance" class="stat alliance">

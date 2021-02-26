@@ -12,14 +12,13 @@
 				<span>{{ player.name }}</span>
 			</div>
 		</td>
-		<td class="stat points highlight">{{ Number(rank.points).toLocaleString() }}</td>
+		<td class="stat points highlight">{{ rank.points |formatted }}</td>
 		<td class="stat heroes">{{ player.heroes }}</td>
-		<td class="stat ratio">{{ Number(rank.ratio).toLocaleString() }}</td>
+		<td class="stat ratio">{{ rank.ratio |numeral }}</td>
 		<td class="stat scout">
 			<div v-if="scout" class="scouting">
 				<div class="percent">{{ `${(scout * 100).toFixed()}%` }}</div>
 				<div class="details">
-					<div class="top">{{ top_hero.quality }}</div>
 					<div class="unevolved">{{ basics.length }}</div>
 					<div class="qRatio">{{ qRatio }}</div>
 				</div>
@@ -52,10 +51,6 @@ export default Vue.extend({
 			if (!this.player.player_heroes) { return null }
 			return (this.player.player_heroes.length / this.player.heroes) || null
 		},
-		top_hero (): PlayerHeroes|undefined {
-			if (!this.scout) { return }
-			return orderBy(this.player.player_heroes, 'quality', 'asc').pop()
-		},
 		basics (): PlayerHeroes[]|undefined {
 			if (!this.scout || !this.player.player_heroes) { return }
 			return this.player.player_heroes.filter(h => h.quality - h.base < 4 || h.quality < 18)
@@ -79,6 +74,7 @@ export default Vue.extend({
 </script>
 
 <style scoped>
+table.scouting td {padding: 0;}
 td {
 	&.rank {padding: 0;position: relative;text-align: center;}
 	&.player {

@@ -9,7 +9,7 @@
 		<td class="stat vip">{{ player.vip }}</td>
 		<td class="stat kp highlight">
 			<span class="hint--top" :aria-label="Number(player.power).toLocaleString()">
-				{{ numeral(player.power).format('0.0a').toUpperCase() }}
+				{{ player.power |numeral }}
 			</span>
 		</td>
 		<td class="stat level-value">{{ player.level }}</td>
