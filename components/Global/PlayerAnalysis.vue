@@ -44,7 +44,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { orderBy, reduce } from 'lodash-es'
-import { Hero, Player, PlayerHeroes } from '~/types'
+import { Hero, Player } from '~/types'
 
 export default Vue.extend({
 	name: 'PlayerAnalysis',
@@ -55,19 +55,19 @@ export default Vue.extend({
 		},
 	},
 	computed: {
-		roster (): Hero[] { return this.player.roster },
+		roster (): Hero[] { return this.player?.roster || [] },
 		scouted (): number { return (this.roster.length / this.player.heroes) * 100 },
-		top_hero (): Hero { return orderBy(this.roster, 'quality', 'asc').pop() },
+		top_hero (): Hero|null { return orderBy(this.roster, 'quality', 'asc')?.pop() || null },
 		qRatio (): string|number|undefined {
 			if (this.roster.length < 2) { return this.roster[0].quality }
 
 			const roster = orderBy(this.roster, 'quality', 'desc')
 			roster.shift()
-			const totalQuality = reduce(roster, (sum: number, h: PlayerHeroes) => { return sum + h.quality }, 0)
+			const totalQuality = reduce(roster, (sum: number, h: Hero) => { return sum + h.quality }, 0)
 			return (totalQuality / roster.length).toFixed(1)
 		},
-		unevolved (): PlayerHeroes[] { return this.roster.filter(h => h.quality - h.base < 4 || h.quality < 18) },
-		low (): PlayerHeroes[] { return this.roster.filter(h => h.quality < 20) },
+		unevolved (): Hero[] { return this.roster.filter(h => h.quality - h.base < 4 || h.quality < 18) },
+		low (): Hero[] { return this.roster.filter(h => h.quality < 20) },
 	},
 })
 </script>

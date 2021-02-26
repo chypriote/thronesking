@@ -74,7 +74,6 @@ export default Vue.extend({
 </script>
 
 <style scoped>
-table.scouting td {padding: 0;}
 td {
 	&.rank {padding: 0;position: relative;text-align: center;}
 	&.player {
@@ -88,6 +87,7 @@ td {
 	}
 	&.points, &.ratio, &.heroes, &.scout {text-align: right;}
 }
+table.scouting td {padding: 0;}
 .scouting {
 	display: flex;
 	flex-direction: column;
