@@ -39,8 +39,5 @@ export default Vue.extend({
 	computed: {
 		player (): Player { return this.$store.state.player.player },
 	},
-	mounted () {
-		this.$store.dispatch('player/FETCH_ROSTER')
-	},
 })
 </script>
