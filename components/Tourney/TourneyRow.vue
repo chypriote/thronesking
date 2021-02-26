@@ -17,7 +17,7 @@
 		<td class="stat ratio">{{ rank.ratio |numeral }}</td>
 		<td class="stat scout">
 			<div v-if="scout" class="scouting">
-				<div class="percent">{{ `${(scout * 100).toFixed()}%` }}</div>
+				<div class="percent">{{ scout |percent }}</div>
 				<div class="details">
 					<div class="unevolved">{{ basics.length }}</div>
 					<div class="qRatio">{{ qRatio }}</div>
@@ -49,7 +49,7 @@ export default Vue.extend({
 		player (): Player { return this.rank.player },
 		scout (): number|null {
 			if (!this.player.player_heroes) { return null }
-			return (this.player.player_heroes.length / this.player.heroes) || null
+			return (this.player.player_heroes.length / this.player.heroes * 100) || null
 		},
 		basics (): PlayerHeroes[]|undefined {
 			if (!this.scout || !this.player.player_heroes) { return }

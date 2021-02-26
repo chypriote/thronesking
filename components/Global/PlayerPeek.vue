@@ -9,11 +9,13 @@
 				<div class="card-content">
 					<player-stats :player="player" />
 				</div>
+				<div v-if="player.roster.length" class="card-content analysis">
+					<header>Analysis</header>
+					<player-analysis :player="player" />
+				</div>
 				<div class="card-content">
-					<div class="graph">
-						<div class="graph-legend">Kingdom Power Rank</div>
-						<player-peek-graph />
-					</div>
+					<header>Rank</header>
+					<player-peek-graph />
 				</div>
 			</template>
 			<div v-else>Select a player</div>
@@ -27,10 +29,11 @@ import { Player } from '~/types'
 import PlayerStats from '~/components/Global/PlayerStats.vue'
 import PlayerPeekGraph from '~/components/Global/PlayerPeekGraph.vue'
 import PlayerDetailsHeader from '~/components/Global/PlayerDetailsHeader.vue'
+import PlayerAnalysis from '~/components/Global/PlayerAnalysis.vue'
 
 export default Vue.extend({
 	name: 'PlayersId',
-	components: { PlayerPeekGraph, PlayerStats, PlayerDetailsHeader },
+	components: { PlayerAnalysis, PlayerPeekGraph, PlayerStats, PlayerDetailsHeader },
 	computed: {
 		loading (): boolean { return this.$store.state.ladder.loading },
 		player (): Player { return this.$store.state.ladder.player },
@@ -49,5 +52,9 @@ export default Vue.extend({
 .loader {
 	height: 5rem;
 	width: 5rem;
+}
+.analysis {
+	border-bottom: 1px solid var(--foreground-color-medium-contrast);
+	border-top: 1px solid var(--foreground-color-medium-contrast);
 }
 </style>

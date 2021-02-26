@@ -41,7 +41,7 @@ a {
 	box-shadow: 0 6px 6px 0 rgba(0, 0, 0, .16);
 	color: inherit;
 	position: relative;
-	header {
+	& > header {
 		padding: 1rem 1.5rem;
 		.title {
 			display: flex;
@@ -52,7 +52,14 @@ a {
 			margin: 0;
 		}
 	}
-	.card-content {padding: 1rem;}
+	.card-content {
+		padding: 1rem;
+		& > header {
+			font-size: .9rem;
+			text-transform: uppercase;
+			margin-bottom: .5rem;
+		}
+	}
 	&.bordered {
 		border: 1px solid var(--foreground-border-color);
 		& > header {border-bottom: 1px solid var(--foreground-color-medium-contrast);}

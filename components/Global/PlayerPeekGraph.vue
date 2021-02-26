@@ -14,7 +14,7 @@ const ordinal = require('ordinal-numbers')
 
 export default Vue.extend({
 	name: 'PlayerPeekGraph',
-	data: () => ({ options: defaultOptions({ stepSize: 1, suggestedMin: 1, reverse: true }, { display: true }) }),
+	data: () => ({ options: defaultOptions({ stepSize: 1, suggestedMin: 1, reverse: true }, { display: true, position: 'bottom' }) }),
 	computed: {
 		kingdomData (): KingdomRanking[] { return this.$store.state.ladder.kingdom_rankings },
 		tourneyData (): TourneyRanking[] { return this.$store.state.ladder.tourney_rankings },

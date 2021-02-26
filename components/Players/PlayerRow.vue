@@ -8,7 +8,7 @@
 		</td>
 		<td class="stat vip">{{ player.vip }}</td>
 		<td class="stat kp highlight">
-			<span class="hint--top" :aria-label="Number(player.power).toLocaleString()">
+			<span class="hint--top" :aria-label="player.power |formatted">
 				{{ player.power |numeral }}
 			</span>
 		</td>
