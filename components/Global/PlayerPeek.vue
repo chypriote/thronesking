@@ -12,6 +12,7 @@
 				<div v-if="player.roster.length" class="card-content analysis">
 					<header>Analysis</header>
 					<player-analysis :player="player" />
+					{{ player.notes }}
 				</div>
 				<div class="card-content">
 					<header>Rank</header>
