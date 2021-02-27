@@ -79,7 +79,7 @@ export default Vue.extend({
 		player (): Player { return this.$store.state.player.player },
 		roster (): Hero[] { return this.$store.state.player.roster },
 		available_heroes (): Hero[] { return this.$store.state.available_heroes },
-		heroes (): Hero[] { return this.available_heroes.filter(h => !find(this.roster, it => it.id === h.id)) },
+		heroes (): Hero[] { return this.available_heroes.filter(h => !find(this.roster, it => it.hero === h.id)) },
 	},
 	methods: {
 		async saveHero () {

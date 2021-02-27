@@ -71,6 +71,7 @@ export type Hero = {
 	base: number
 	stars: number
 	focus: string
+	hero: number
 
 	players: Player
 	player_heroes: PlayerHeroes
