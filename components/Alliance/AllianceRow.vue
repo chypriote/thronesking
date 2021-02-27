@@ -11,8 +11,8 @@
 				<span class="name">{{ alliance.name }}</span>
 			</nuxt-link>
 		</td>
-		<td class="stat power highlight">{{ alliance.power }}</td>
-		<td class="stat reputation">{{ alliance.reputation }}</td>
+		<td class="stat power highlight">{{ alliance.power |numeral }}</td>
+		<td class="stat reputation">{{ alliance.reputation |numeral }}</td>
 		<td class="stat level">{{ alliance.level }}</td>
 	</tr>
 </template>

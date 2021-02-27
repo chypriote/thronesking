@@ -1,4 +1,5 @@
 import { ActionTree, MutationTree } from 'vuex'
+import { orderBy } from 'lodash-es'
 import { KingdomRanking, Player, TourneyRanking } from '~/types'
 
 interface IState {
@@ -23,10 +24,10 @@ export const mutations: MutationTree<IState> = {
 		state.player = player
 	},
 	SET_PLAYER_KINGDOM_RANKINGS (state: IState, rankings: KingdomRanking[]) {
-		state.kingdom_rankings = rankings
+		state.kingdom_rankings = orderBy(rankings, 'date', 'asc')
 	},
 	SET_PLAYER_TOURNEY_RANKINGS (state: IState, rankings: TourneyRanking[]) {
-		state.tourney_rankings = rankings
+		state.tourney_rankings = orderBy(rankings, 'date', 'asc')
 	},
 }
 
@@ -49,19 +50,19 @@ export const actions: ActionTree<IState, IState> = {
 	},
 	async FETCH_PLAYER ({ commit }, id) {
 		try {
-			commit('SET_SELECTED_PLAYER', await this.$strapi.$http.get(`players/${id}/informations`).then(response => response.json()))
+			commit('SET_SELECTED_PLAYER', await this.$strapi.$http.get(`players/${id}/details`).then(response => response.json()))
 		} catch (e) { console.log(e) }
 	},
 	async FETCH_PLAYER_KINGDOM_RANKINGS ({ commit }, id) {
 		try {
 			commit('SET_PLAYER_KINGDOM_RANKINGS', [])
-			commit('SET_PLAYER_KINGDOM_RANKINGS', await this.$strapi.find('kingdom-rankings', { player: id, _sort: 'created_at:asc', _limit: 10 }))
+			commit('SET_PLAYER_KINGDOM_RANKINGS', await this.$strapi.find('kingdom-rankings', { player: id, _sort: 'date:desc', _limit: 10 }))
 		} catch (e) { console.log(e) }
 	},
 	async FETCH_PLAYER_TOURNEY_RANKINGS ({ commit }, id) {
 		try {
 			commit('SET_PLAYER_TOURNEY_RANKINGS', [])
-			commit('SET_PLAYER_TOURNEY_RANKINGS', await this.$strapi.find('tourney-rankings', { player: id, _sort: 'created_at:asc', _limit: 10 }))
+			commit('SET_PLAYER_TOURNEY_RANKINGS', await this.$strapi.find('tourney-rankings', { player: id, _sort: 'date:desc', _limit: 10 }))
 		} catch (e) { console.log(e) }
 	},
 }

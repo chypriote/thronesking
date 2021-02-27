@@ -68,6 +68,9 @@ interface IData {
 export default Vue.extend({
 	name: 'Index',
 	components: { ScoutingRow, PlayerPeek },
+	async asyncData ({ store }) {
+		await store.dispatch('ladder/RESET')
+	},
 	data: (): IData => ({ quality: null, players: [], loading: false }),
 	methods: {
 		async getRecommendations () {
