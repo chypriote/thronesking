@@ -7,12 +7,6 @@
 						<label for="heroes">Min Heroes</label>
 						<input id="heroes" v-model="heroes" type="number" class="input" autocomplete="off" />
 					</fieldset>
-					<fieldset class="field">
-						<label class="checkbox" for="scout">
-							<input id="scout" v-model="scout" type="checkbox">
-							Scouted
-						</label>
-					</fieldset>
 				</div>
 				<div class="column">
 					<fieldset class="field">
@@ -41,6 +35,19 @@
 					</fieldset>
 				</div>
 			</div>
+			<div class="columns">
+				<div class="column">
+					<label class="checkbox" for="scout">
+						<input id="scout" v-model="scout" type="checkbox"> 🔍 Scouted
+					</label>
+					<label class="checkbox" for="favorite">
+						<input id="favorite" v-model="favorite" type="checkbox"> ⭐ Favorite
+					</label>
+					<label class="checkbox" for="inactive">
+						<input id="inactive" v-model="inactive" type="checkbox"> ⏱ Inactive
+					</label>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
@@ -67,6 +74,18 @@ export default Vue.extend({
 			get () { return this.$store.state.ladder.tourney.scout },
 			async set (value) { await this.$store.dispatch('ladder/tourney/SET_SCOUT', value) },
 		},
+		favorite: {
+			get () { return this.$store.state.ladder.tourney.favorite },
+			async set (value) { await this.$store.dispatch('ladder/tourney/SET_FAVORITE', value) },
+		},
+		inactive: {
+			get () { return this.$store.state.ladder.tourney.inactive },
+			async set (value) { await this.$store.dispatch('ladder/tourney/SET_INACTIVE', value) },
+		},
 	},
 })
 </script>
+
+<style scoped>
+.checkbox + .checkbox {margin-left: 2rem;}
+</style>

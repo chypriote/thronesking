@@ -2,7 +2,10 @@
 	<tr :class="{'is-selected': parseInt($route.params.id) === player.id}">
 		<td class="stat gid">{{ player.gid }}</td>
 		<td class="player">
-			<nuxt-link :key="player.id" :to="{name: 'players-id', params: {id: player.id}}">
+			<nuxt-link :key="player.id" :to="{name: 'players-id', params: {id: player.id}}" class="is-flex is-align-items-center">
+				<span v-if="player.player_heroes.length">🔍</span>
+				<span v-if="player.favorite">⭐</span>
+				<span v-if="player.inactive">⏱</span>
 				<span class="name">{{ player.name }}</span>
 			</nuxt-link>
 		</td>
@@ -40,11 +43,7 @@ export default Vue.extend({
 td {
 	&.player {
 		width: 100%;
-		a {
-			display: flex;
-			align-items: center;
-			&:hover {color: inherit;}
-		}
+		a:hover {color: inherit;}
 		.name {white-space: nowrap;font-weight: bold;}
 	}
 	&.level-value, &.vip, &.heroes, &.maidens, &.children {text-align: right;}

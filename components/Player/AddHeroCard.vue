@@ -32,8 +32,20 @@
 				</template>
 			</v-select>
 		</fieldset>
-		<fieldset class="field is-flex-grow-1">
-			<input id="hero-quality" v-model="quality" aria-label="Quality" type="number" class="input" required placeholder="Quality" />
+		<fieldset class="field is-flex-grow-1 has-addons">
+			<div class="control">
+				<button class="button" type="button" :disabled="!quality" @click.prevent="quality = Math.max(quality - 10, 0)"><span class="icon is-small">-10</span></button>
+			</div>
+			<div class="control">
+				<button class="button" type="button" :disabled="!quality" @click.prevent="quality = Math.max(quality - 1, 0)"><span class="icon is-small">-1</span></button>
+			</div>
+			<input id="hero-quality" v-model="quality" aria-label="Quality" type="number" class="input control" required placeholder="Quality" />
+			<div class="control">
+				<button class="button" type="button" @click.prevent="quality = quality + 1"><span class="icon is-small">+1</span></button>
+			</div>
+			<div class="control">
+				<button class="button" type="button" @click.prevent="quality = quality + 10"><span class="icon is-small">+10</span></button>
+			</div>
 		</fieldset>
 		<fieldset class="field">
 			<div class="control">
@@ -50,7 +62,7 @@ import { Hero, Player } from '~/types'
 
 interface IData {
 	hero: Hero|null
-	quality: Number|null
+	quality: number|null
 	loading: boolean
 	saving: boolean
 }

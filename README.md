@@ -1,20 +1,16 @@
 # thronesking
 
-## Build Setup
 
-```bash
-# install dependencies
-$ yarn install
+Basically there are 3 main Build;  
+**Slayer**: Requirement=30% at 2-3k ,low base.  
+**Hybrid**: Requirement=40% of roster above 2k, Your base at 500  
+**Tank**: Requirement=base is higher than 1K, Middle around 2k, top around 3K+.  
 
-# serve with hot reload at localhost:3000
-$ yarn dev
+----------------------------------------------------------------------------------------------  
 
-# build for production and launch server
-$ yarn build
-$ yarn start
-
-# generate static project
-$ yarn generate
-```
-
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+###Sub-category Builds;  
+**Decoy/Trap Build**: Its called Austwick Build too.  
+**Thumper**: Only focus top 10-12 heroes  
+**Assasin**: Top heavy, with low hero count.  
+**Wall**: Harder than Tank (?)  
+**Power Build**: Getting all heroes while getting them up to 2-3K+, This gives alot of advantage in early game but will need alot of money to support it. And Known ones  

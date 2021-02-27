@@ -4,7 +4,7 @@
 			<div class="column is-one-third">
 				<players-search />
 			</div>
-			<div class="column is-one-third">
+			<div class="column is-half">
 				<players-order />
 			</div>
 		</div>

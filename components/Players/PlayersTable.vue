@@ -21,7 +21,7 @@
 				</td></tr>
 				<template v-else>
 					<player-row v-for="player of players" :key="player.id" :player="player" />
-					<tr v-if="!players.length"><td colspan="6">No Results</td></tr>
+					<tr v-if="!players.length"><td colspan="8">No Results</td></tr>
 				</template>
 			</tbody>
 		</table>

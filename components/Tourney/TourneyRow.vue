@@ -7,9 +7,11 @@
 			</div>
 		</td>
 		<td class="player" @click="selectPlayer">
-			<div class="name">
+			<div class="is-flex is-align-items-center">
 				<span v-if="player.player_heroes.length">🔍</span>
-				<span>{{ player.name }}</span>
+				<span v-if="player.favorite">⭐</span>
+				<span v-if="player.inactive">⏱</span>
+				<span class="name">{{ player.name }}</span>
 			</div>
 		</td>
 		<td class="stat points highlight">{{ rank.points |formatted }}</td>
@@ -78,12 +80,7 @@ td {
 	&.rank {padding: 0;position: relative;text-align: center;}
 	&.player {
 		width: 100%;
-		.name {
-			display: flex;
-			align-items: center;
-			white-space: nowrap;
-			cursor: pointer;
-		}
+		.name {white-space: nowrap;cursor: pointer;}
 	}
 	&.points, &.ratio, &.heroes, &.scout {text-align: right;}
 }

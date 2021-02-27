@@ -2,7 +2,7 @@
 	<tr>
 		<td>{{ player.gid }}</td>
 		<td class="player" @click="selectPlayer">
-			<div class="player-name">
+			<div class="is-flex is-align-items-center">
 				<span v-if="player.favorite">⭐</span>
 				<span v-if="player.inactive">⏱</span>
 				<span class="name">{{ player.name }}</span>
@@ -53,15 +53,7 @@ export default Vue.extend({
 td {
 	&.player {
 		width: 100%;
-		.player-name {
-			display: flex;
-			align-items: center;
-			cursor: pointer;
-		}
-		.name {
-			white-space: nowrap;
-			font-weight: bold;
-		}
+		.name {white-space: nowrap;font-weight: bold;}
 	}
 	&.heroes, &.ratio, &.scouted, &.vip, &.kp {text-align: right;}
 	.heroes {

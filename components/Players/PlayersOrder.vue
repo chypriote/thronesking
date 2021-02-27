@@ -16,12 +16,6 @@
 							</select>
 						</div>
 					</fieldset>
-					<fieldset class="field">
-						<label class="checkbox" for="scout">
-							<input id="scout" v-model="vip" type="checkbox">
-							VIP0
-						</label>
-					</fieldset>
 				</div>
 				<div class="column">
 					<fieldset class="field">
@@ -35,6 +29,24 @@
 								<option value="10">10</option>
 							</select>
 						</div>
+					</fieldset>
+				</div>
+			</div>
+			<div class="columns">
+				<div class="column">
+					<fieldset class="field">
+						<label class="checkbox" for="vip">
+							<input id="vip" v-model="vip" type="checkbox"> VIP0
+						</label>
+						<label class="checkbox" for="scout">
+							<input id="scout" v-model="scout" type="checkbox"> 🔍 Scouted
+						</label>
+						<label class="checkbox" for="favorite">
+							<input id="favorite" v-model="favorite" type="checkbox"> ⭐ Favorite
+						</label>
+						<label class="checkbox" for="inactive">
+							<input id="inactive" v-model="inactive" type="checkbox"> ⏱ Inactive
+						</label>
 					</fieldset>
 				</div>
 			</div>
@@ -60,6 +72,22 @@ export default Vue.extend({
 			get () { return this.$store.state.players_vip },
 			async set (value) { await this.$store.dispatch('SET_VIP', value) },
 		},
+		scout: {
+			get () { return this.$store.state.players_scout },
+			async set (value) { await this.$store.dispatch('SET_SCOUT', value) },
+		},
+		favorite: {
+			get () { return this.$store.state.players_favorite },
+			async set (value) { await this.$store.dispatch('SET_FAVORITE', value) },
+		},
+		inactive: {
+			get () { return this.$store.state.players_inactive },
+			async set (value) { await this.$store.dispatch('SET_INACTIVE', value) },
+		},
 	},
 })
 </script>
+
+<style scoped>
+.checkbox + .checkbox {margin-left: 2rem;}
+</style>

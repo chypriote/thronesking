@@ -19,7 +19,7 @@
 					<player-peek-graph />
 				</div>
 			</template>
-			<div v-else class="card-contentw">Select a player</div>
+			<div v-else class="card-content">Select a player</div>
 		</template>
 	</div>
 </template>

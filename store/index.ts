@@ -7,6 +7,9 @@ interface IState {
 	players_limit: number
 	players_sort: string
 	players_vip: boolean
+	players_scout: boolean
+	players_favorite: boolean
+	players_inactive: boolean
 	loading: Boolean
 
 	alliances: Alliance[]
@@ -19,6 +22,9 @@ export const state = (): IState => ({
 	players_limit: 1000,
 	players_sort: 'gid:asc',
 	players_vip: false,
+	players_scout: false,
+	players_favorite: false,
+	players_inactive: false,
 	loading: true,
 
 	alliances: [],
@@ -50,12 +56,24 @@ export const mutations: MutationTree<IState> = {
 	SET_VIP (state: IState, vip: boolean) {
 		state.players_vip = vip
 	},
+	SET_SCOUT (state: IState, scout: boolean) {
+		state.players_scout = scout
+	},
+	SET_FAVORITE (state: IState, favorite: boolean) {
+		state.players_favorite = favorite
+	},
+	SET_INACTIVE (state: IState, inactive: boolean) {
+		state.players_inactive = inactive
+	},
 }
 
 interface IQuery {
 	_limit: number
 	_sort: string
 	vip_eq?: number|null
+	favorite?: number
+	inactive?: number
+	player_heroes_null?: number
 }
 export const actions: ActionTree<IState, IState> = {
 	async FETCH_PLAYERS ({ commit, state }, params) {
@@ -67,6 +85,9 @@ export const actions: ActionTree<IState, IState> = {
 				...params,
 			}
 			if (state.players_vip) { query.vip_eq = 0 }
+			if (state.players_favorite) { query.favorite = 1 }
+			if (state.players_inactive) { query.inactive = 1 }
+			if (state.players_scout) { query.player_heroes_null = 0 }
 			commit('SET_PLAYERS', await this.$strapi.find('players', query))
 			commit('SET_LOADING', false)
 		} catch (e) { console.log(e) }
@@ -104,6 +125,18 @@ export const actions: ActionTree<IState, IState> = {
 	},
 	async SET_VIP ({ dispatch, commit }, vip: boolean) {
 		commit('SET_VIP', vip)
+		await dispatch('FETCH_PLAYERS')
+	},
+	async SET_SCOUT ({ dispatch, commit }, scout: boolean) {
+		commit('SET_SCOUT', scout)
+		await dispatch('FETCH_PLAYERS')
+	},
+	async SET_FAVORITE ({ dispatch, commit }, favorite: boolean) {
+		commit('SET_FAVORITE', favorite)
+		await dispatch('FETCH_PLAYERS')
+	},
+	async SET_INACTIVE ({ dispatch, commit }, inactive: boolean) {
+		commit('SET_INACTIVE', inactive)
 		await dispatch('FETCH_PLAYERS')
 	},
 }

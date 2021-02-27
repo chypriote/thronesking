@@ -8,6 +8,8 @@ interface IState {
 	sort: string
 	heroes: number|null
 	scout: boolean
+	favorite: boolean
+	inactive: boolean
 }
 
 export const state = (): IState => ({
@@ -17,6 +19,8 @@ export const state = (): IState => ({
 	sort: 'points:desc',
 	heroes: null,
 	scout: false,
+	favorite: false,
+	inactive: false,
 })
 
 export const mutations: MutationTree<IState> = {
@@ -38,10 +42,18 @@ export const mutations: MutationTree<IState> = {
 	SET_SCOUT (state: IState, scout: boolean) {
 		state.scout = scout
 	},
+	SET_FAVORITE (state: IState, favorite: boolean) {
+		state.favorite = favorite
+	},
+	SET_INACTIVE (state: IState, inactive: boolean) {
+		state.inactive = inactive
+	},
 }
 interface Query {
 	_limit: number
 	_sort: string
+	'player.favorite'?: number
+	'player.inactive'?: number
 	'player.heroes_gt'?: number|null
 	'player.player_heroes_null'?: number
 }
@@ -62,6 +74,14 @@ export const actions: ActionTree<IState, IState> = {
 		commit('SET_SCOUT', scout)
 		await dispatch('FETCH_LADDER')
 	},
+	async SET_FAVORITE ({ dispatch, commit }, favorite: boolean) {
+		commit('SET_FAVORITE', favorite)
+		await dispatch('FETCH_LADDER')
+	},
+	async SET_INACTIVE ({ dispatch, commit }, inactive: boolean) {
+		commit('SET_INACTIVE', inactive)
+		await dispatch('FETCH_LADDER')
+	},
 	async FETCH_LADDER ({ commit, state }) {
 		try {
 			commit('SET_LOADING', true)
@@ -70,6 +90,8 @@ export const actions: ActionTree<IState, IState> = {
 				_sort: state.sort,
 			}
 			if (state.scout) { query['player.player_heroes_null'] = 0 }
+			if (state.favorite) { query['player.favorite'] = 1 }
+			if (state.inactive) { query['player.inactive'] = 1 }
 			if (state.heroes) { query['player.heroes_gt'] = state.heroes }
 			commit('SET_LADDER', await this.$strapi.find('ladders/tourney', query))
 			commit('SET_LOADING', false)

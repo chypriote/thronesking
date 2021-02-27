@@ -139,7 +139,7 @@ button.button {
 	filter: brightness(100%);
 	backface-visibility: hidden;
 	&.is-focused, &:focus {color: inherit;}
-	&.is-hovered, &:hover {color: inherit;background-color: var(--foreground-color-high-contrast);}
+	&.is-hovered:not(:disabled), &:hover:not(:disabled) {color: inherit;background-color: var(--foreground-color-high-contrast);}
 	&.--primary {
 		background: var(--text-color-primary-high-contrast);
 		color: var(--text-color-label);
@@ -151,4 +151,5 @@ button.button {
 			filter: brightness(120%);
 		}
 	}
+	&[disabled] {color: var(--text-color);}
 }
