@@ -54,7 +54,7 @@
     "@types/numeral": "^2.0.0",
     "@types/vue-select": "^3.11.1",
     "babel-eslint": "^10.1",
-    "eslint": "^7.20",
+    "eslint": "^7.21",
     "eslint-config-prettier": "^7.2",
     "eslint-plugin-nuxt": "^2.0",
     "eslint-plugin-prettier": "^3.3",
