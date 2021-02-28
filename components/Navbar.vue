@@ -34,9 +34,9 @@
 						<div class="dropdown-trigger">Ladders</div>
 						<div class="dropdown-menu">
 							<div class="dropdown-content" role="menu">
-								<nuxt-link class="dropdown-item" to="/kingdom">Kingdom</nuxt-link>
-								<nuxt-link class="dropdown-item" to="/tourney">Tourney</nuxt-link>
-								<nuxt-link class="dropdown-item" to="/alliances">Alliances</nuxt-link>
+								<nuxt-link class="dropdown-item" to="/ladders/kingdom">Kingdom</nuxt-link>
+								<nuxt-link class="dropdown-item" to="/ladders/tourney">Tourney</nuxt-link>
+								<nuxt-link class="dropdown-item" to="/ladders/alliances">Alliances</nuxt-link>
 							</div>
 						</div>
 					</div>

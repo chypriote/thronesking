@@ -1,11 +1,11 @@
 <template>
 	<div class="columns">
 		<main class="column is-two-thirds">
-			<alliance-table />
+			<kingdom-table />
 		</main>
-		<aside v-if="$route.name === 'alliances-id'" class="column is-one-third">
+		<aside class="column is-one-third">
 			<div class="sticky">
-				<nuxt-child />
+				<player-peek />
 			</div>
 		</aside>
 	</div>
@@ -13,13 +13,14 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import AllianceTable from '~/components/Alliance/AllianceTable.vue'
+import PlayerPeek from '~/components/Global/PlayerPeek.vue'
+import KingdomTable from '~/components/Kingdom/KingdomTable.vue'
 
 export default Vue.extend({
-	name: 'AlliancesIndex',
-	components: { AllianceTable },
+	name: 'KingdomIndex',
+	components: { KingdomTable, PlayerPeek },
 	async asyncData ({ store }): Promise<void> {
-		await store.dispatch('FETCH_ALLIANCES')
+		await store.dispatch('ladder/kingdom/FETCH_LADDER')
 	},
 })
 </script>
@@ -27,6 +28,6 @@ export default Vue.extend({
 <style scoped>
 .sticky {
 	position: sticky;
-	top: 4.75rem;
+	top: 0;
 }
 </style>

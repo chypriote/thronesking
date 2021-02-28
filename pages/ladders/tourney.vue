@@ -1,7 +1,8 @@
 <template>
 	<div class="columns">
 		<main class="column is-two-thirds">
-			<kingdom-table />
+			<tourney-filters class="tourney-filters" />
+			<tourney-table />
 		</main>
 		<aside class="column is-one-third">
 			<div class="sticky">
@@ -13,14 +14,15 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import TourneyTable from '~/components/Tourney/TourneyTable.vue'
+import TourneyFilters from '~/components/Tourney/TourneyFilters.vue'
 import PlayerPeek from '~/components/Global/PlayerPeek.vue'
-import KingdomTable from '~/components/Kingdom/KingdomTable.vue'
 
 export default Vue.extend({
-	name: 'KingdomIndex',
-	components: { KingdomTable, PlayerPeek },
+	name: 'TourneyIndex',
+	components: { TourneyTable, TourneyFilters, PlayerPeek },
 	async asyncData ({ store }): Promise<void> {
-		await store.dispatch('ladder/kingdom/FETCH_LADDER')
+		await store.dispatch('ladder/tourney/FETCH_LADDER')
 	},
 })
 </script>
@@ -28,6 +30,9 @@ export default Vue.extend({
 <style scoped>
 .sticky {
 	position: sticky;
-	top: 4.75rem;
+	top: 0;
+}
+.tourney-filters {
+	margin-bottom: 1.5rem;
 }
 </style>

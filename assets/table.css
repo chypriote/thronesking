@@ -27,6 +27,7 @@ table.leaderboard {
 			text-align: left;
 			vertical-align: middle;
 			border-bottom: none;
+			&.rank {padding: 0;position: relative;text-align: center;}
 			&:first-of-type {text-align: center;padding-left: 1rem;width: 0;}
 			&.stat {white-space: nowrap;}
 			&.highlight {font-weight: 500;background-color: hsla(0, 0%, 100%, .03);backdrop-filter: saturate(120%);}
