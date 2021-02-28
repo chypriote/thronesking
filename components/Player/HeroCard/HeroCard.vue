@@ -6,9 +6,23 @@
 			<div v-show="!editing" class="quality" :class="{'hint--top': boost}" :aria-label="`+${boost}`" @click="toggleEdit">{{ hero.quality }}</div>
 		</div>
 		<form v-show="editing" class="edit" @submit.prevent="updateHero">
-			<fieldset class="field is-grouped">
+			<fieldset class="field is-grouped has-addons">
 				<div class="control is-expanded">
-					<input :id="`${hero.id}-${quality}`" v-model="quality" class="input" aria-label="quality" type="text" placeholder="Quality" />
+					<div class="field has-addons">
+						<div class="control">
+							<button class="button" type="button" :disabled="(quality - 1) < 1" @click.prevent="quality = Math.max(quality - 1, 0)">
+								<span class="icon is-small">-1</span>
+							</button>
+						</div>
+						<div class="control">
+							<input :id="`${hero.id}-${quality}`" v-model="quality" class="input" aria-label="quality" type="text" placeholder="Quality" />
+						</div>
+						<div class="control">
+							<button class="button" type="button" @click.prevent="quality = quality + 1">
+								<span class="icon is-small">+1</span>
+							</button>
+						</div>
+					</div>
 				</div>
 				<div class="control">
 					<button type="submit" class="button --primary" :class="{'is-loading': loading}">Save</button>
@@ -44,8 +58,9 @@ export default Vue.extend({
 		async updateHero () {
 			if (!this.hero.id) { return }
 			this.loading = true
-			await this.$strapi.update('player-heroes', this.hero.id, { quality: this.quality })
+			await this.$store.dispatch('player/UPDATE_HERO', { hero: this.hero, quality: this.quality })
 			this.editing = false
+			this.loading = false
 		},
 	},
 })
@@ -79,6 +94,7 @@ export default Vue.extend({
 	margin-top: .5rem;
 	padding: .5rem 0 1rem;
 }
+.control {display: flex;}
 .quality {
 	position: absolute;
 	right: -.5rem;

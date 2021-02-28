@@ -24,17 +24,30 @@
 	--foreground-color-minimum-contrast: #18222d;
 	--main-nav-background-color: #111;
 }
+html {
+	overflow-y: auto;
+}
 body {
 	background-color: var(--background-color);
 	color: var(--text-color);
 	min-height: 100vh;
 	font-family: Rajdhani, Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen-Sans, Ubuntu, Cantarell, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
 }
+#main {
+	height: 100vh;
+	overflow-y: auto;
+	padding-top: 3.5rem;
+	&::-webkit-scrollbar {width: 7px;}
+	&::-webkit-scrollbar-track {background: var(--text-color-disabled);}
+	&::-webkit-scrollbar-thumb {background: var(--main-nav-background-color);}
+	&::-webkit-scrollbar-thumb:hover {background: var(--foreground-color-medium-contrast);}
+}
 a {
 	text-decoration: none;
 	color: inherit;
 	transition: color 200ms ease-in-out;
 }
+.subtitle {color: var(--text-color-lighter);}
 .card {
 	background-color: var(--foreground-color);
 	border-radius: var(--border-radius);
@@ -112,6 +125,7 @@ input[type="text"], input[type="number"], .select select, .textarea {
 	padding: calc(.5em - 1px) calc(.75em - 1px);
 	max-width: 100%;
 	width: 100%;
+	&[disabled] {color: var(--text-color);background-color: hsla(0, 0%, 100%, .15);border: 0;}
 }
 .label {
 	color: var(--text-color-medium);
@@ -151,5 +165,5 @@ button.button {
 			filter: brightness(120%);
 		}
 	}
-	&[disabled] {color: var(--text-color);}
+	&[disabled] {color: var(--text-color);background-color: hsla(0, 0%, 100%, .15);border: 0;}
 }

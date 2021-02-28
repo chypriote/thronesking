@@ -12,7 +12,6 @@ export default {
 			{ rel: 'preconnect', href: 'https://fonts.gstatic.com' },
 			{ rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Courier+Prime:wght@700&display=swap', text: '0123456789' },
 		],
-		bodyAttrs: { class: 'has-navbar-fixed-top' },
 	},
 	loading: {
 		color: 'var(--text-color-primary)',

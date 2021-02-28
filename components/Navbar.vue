@@ -29,9 +29,17 @@
 			<div class="navbar-menu">
 				<div class="navbar-end">
 					<nuxt-link class="item" to="/players">Players</nuxt-link>
-					<nuxt-link class="item" to="/kingdom">Kingdom</nuxt-link>
-					<nuxt-link class="item" to="/tourney">Tourney</nuxt-link>
-					<nuxt-link class="item" to="/alliances">Alliances</nuxt-link>
+					<nuxt-link class="item" to="/finder">Finder</nuxt-link>
+					<div class="item dropdown is-hoverable">
+						<div class="dropdown-trigger">Ladders</div>
+						<div class="dropdown-menu">
+							<div class="dropdown-content" role="menu">
+								<nuxt-link class="dropdown-item" to="/kingdom">Kingdom</nuxt-link>
+								<nuxt-link class="dropdown-item" to="/tourney">Tourney</nuxt-link>
+								<nuxt-link class="dropdown-item" to="/alliances">Alliances</nuxt-link>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -78,16 +86,16 @@ export default Vue.extend({
 
 <style scoped>
 .navbar {
-	background: var(--main-nav-background-color);
-	transform: translateZ(0);
 	top: 0;
 	user-select: none;
 	width: 100%;
 	min-width: 100%;
 	z-index: 100;
+	background: var(--main-nav-background-color);
 	box-shadow: 0 6px 6px 0 rgba(0, 0, 0, .16);
 	height: 3.5rem;
 	pointer-events: auto;
+	transform: translateZ(0);
 }
 .container {
 	justify-content: space-between;
@@ -115,6 +123,7 @@ export default Vue.extend({
 	font-size: 1rem;
 	white-space: nowrap;
 	font-weight: bold;
+	text-transform: uppercase;
 	&::before {
 		border-radius: .125rem .125rem 0 0;
 		content: "";
@@ -125,7 +134,17 @@ export default Vue.extend({
 		bottom: 0;
 		transition: height .1s ease-in-out;
 	}
-	&:hover::before {background-color: hsla(0, 0%, 100%, .2);}
+	&:hover:not(.dropdown)::before {background-color: hsla(0, 0%, 100%, .2);}
 	&.nuxt-link-active:not(.home)::before, &.home.nuxt-link-exact-active::before {background-color: var(--text-color-primary);}
+}
+.dropdown-content {
+	background: var(--main-nav-background-color);
+	box-shadow: 0 6px 6px 0 rgba(0, 0, 0, .16);
+	.dropdown-item {
+		color: inherit;
+		transition: background-color 200ms ease-in-out, color 200ms ease-in-out;
+		&:hover {background-color: hsla(0, 0%, 100%, .2);color: var(--text-color-primary);}
+		&.nuxt-link-active:not(.home) {background-color: hsla(0, 0%, 100%, .2);color: var(--text-color-primary);}
+	}
 }
 </style>

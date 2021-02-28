@@ -11,6 +11,7 @@
 				required
 				label="name"
 				:reduce="hero => hero.id"
+				:disabled="loading"
 				placeholder="Add hero"
 				@option:selected="selectHero"
 			>
@@ -32,19 +33,23 @@
 				</template>
 			</v-select>
 		</fieldset>
-		<fieldset class="field is-flex-grow-1 has-addons">
+		<fieldset class="field has-addons">
 			<div class="control">
-				<button class="button" type="button" :disabled="!quality" @click.prevent="quality = Math.max(quality - 10, 0)"><span class="icon is-small">-10</span></button>
+				<div class="field has-addons">
+					<div class="control"><button class="button" type="button" :disabled="loading || (quality - 100) < 1" @click.prevent="quality = Math.max(quality - 100, 0)">-100</button></div>
+					<div class="control"><button class="button" type="button" :disabled="loading || (quality - 10) < 1" @click.prevent="quality = Math.max(quality - 10, 0)">-10</button></div>
+					<div class="control"><button class="button" type="button" :disabled="loading || (quality - 1) < 1" @click.prevent="quality = Math.max(quality - 1, 0)">-1</button></div>
+				</div>
 			</div>
 			<div class="control">
-				<button class="button" type="button" :disabled="!quality" @click.prevent="quality = Math.max(quality - 1, 0)"><span class="icon is-small">-1</span></button>
-			</div>
-			<input id="hero-quality" v-model="quality" aria-label="Quality" type="number" class="input control" required placeholder="Quality" />
-			<div class="control">
-				<button class="button" type="button" @click.prevent="quality = quality + 1"><span class="icon is-small">+1</span></button>
+				<input id="hero-quality" v-model="quality" aria-label="Quality" type="number" class="input control" required placeholder="Quality" :disabled="loading || !hero" />
 			</div>
 			<div class="control">
-				<button class="button" type="button" @click.prevent="quality = quality + 10"><span class="icon is-small">+10</span></button>
+				<div class="field has-addons">
+					<div class="control"><button class="button" type="button" :disabled="loading || !hero" @click.prevent="quality = quality + 1">+1</button></div>
+					<div class="control"><button class="button" type="button" :disabled="loading || !hero" @click.prevent="quality = quality + 10">+10</button></div>
+					<div class="control"><button class="button" type="button" :disabled="loading || !hero" @click.prevent="quality = quality + 100">+100</button></div>
+				</div>
 			</div>
 		</fieldset>
 		<fieldset class="field">
@@ -97,6 +102,7 @@ export default Vue.extend({
 		},
 		async selectHero (hero: Hero) {
 			this.quality = hero.quality
+			if (!hero) { return (this.quality = null) }
 			await setTimeout(() => {}, 500)
 			document.getElementById('hero-quality')?.focus()
 		},
@@ -111,10 +117,7 @@ export default Vue.extend({
 	.field {margin-bottom: 0;}
 }
 .field + .field {margin-left: 1rem;}
-.control {
-	display: flex;
-	justify-content: flex-end;
-}
+.control {display: flex;}
 #hero .option {
 	display: flex;
 	align-items: center;

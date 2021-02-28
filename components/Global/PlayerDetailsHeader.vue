@@ -1,15 +1,15 @@
 <template>
 	<header>
 		<div class="player">
-			<h2 class="title is-3">
+			<h2 class="title is-4">
 				<span v-if="player.favorite">⭐</span>
 				<span v-if="player.inactive">⏱</span>
 				{{ player.name }}
 			</h2>
-			<p class="subtitle">{{ `VIP${player.vip}` }} - {{ player.gid }}</p>
+			<p class="subtitle is-5">{{ `VIP${player.vip}` }} - {{ player.gid }}</p>
 		</div>
 		<div v-if="rank" class="rank">{{ rank |ordinal }}</div>
-		<nuxt-link :to="{name: 'players-id', params: {id: player.id}}" class="go-to">View</nuxt-link>
+		<nuxt-link v-if="$route.name !== 'players-id'" :to="{name: 'players-id', params: {id: player.id}}" class="go-to">View</nuxt-link>
 	</header>
 </template>
 

@@ -14,7 +14,7 @@
 					<player-analysis :player="player" />
 					{{ player.notes }}
 				</div>
-				<div class="card-content">
+				<div v-if="showGraph" class="card-content graph">
 					<header>Rank</header>
 					<player-peek-graph />
 				</div>
@@ -38,6 +38,7 @@ export default Vue.extend({
 	computed: {
 		loading (): boolean { return this.$store.state.ladder.loading },
 		player (): Player { return this.$store.state.ladder.player },
+		showGraph (): boolean { return this.$store.state.ladder.kingdom_rankings.length || this.$store.state.ladder.tourney_rankings.length },
 	},
 })
 </script>
@@ -54,8 +55,5 @@ export default Vue.extend({
 	height: 5rem;
 	width: 5rem;
 }
-.analysis {
-	border-bottom: 1px solid var(--foreground-color-medium-contrast);
-	border-top: 1px solid var(--foreground-color-medium-contrast);
-}
+.analysis, .graph {border-top: 1px solid var(--foreground-color-medium-contrast);}
 </style>

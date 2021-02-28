@@ -1,5 +1,5 @@
 <template>
-	<tr>
+	<tr :class="{'is-selected': selected && selected.id === player.id}">
 		<td>{{ player.gid }}</td>
 		<td class="player" @click="selectPlayer">
 			<div class="is-flex is-align-items-center">
@@ -41,6 +41,9 @@ export default Vue.extend({
 			required: true,
 		},
 	},
+	computed: {
+		selected () { return this.$store.state.ladder.player },
+	},
 	methods: {
 		async selectPlayer () {
 			await this.$store.dispatch('ladder/SELECT_PLAYER', this.player.id)
@@ -53,6 +56,7 @@ export default Vue.extend({
 td {
 	&.player {
 		width: 100%;
+		cursor: pointer;
 		.name {white-space: nowrap;font-weight: bold;}
 	}
 	&.heroes, &.ratio, &.scouted, &.vip, &.kp {text-align: right;}

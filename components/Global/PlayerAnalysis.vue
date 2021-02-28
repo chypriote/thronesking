@@ -16,7 +16,15 @@
 		</div>
 		<div class="set">
 			<fieldset>
-				<div class="analysis-label">Top Hero</div>
+				<div class="analysis-label">
+					<span
+						v-if="roster.length !== player.heroes"
+						class="hint hint--top"
+						:aria-label="`${player.heroes - roster.length} hero${player.heroes - roster.length>1 ?'es':''} not scouted`">
+						⚠
+					</span>
+					Top Scouted Hero
+				</div>
 				<div class="top-hero">
 					<img v-if="top_hero.picture" :src="top_hero.picture.url" :alt="top_hero.name" />
 					<div class="name">{{ top_hero.name }}</div>
@@ -26,7 +34,7 @@
 		</div>
 		<div class="set">
 			<fieldset>
-				<div class="analysis-label">Average</div>
+				<div class="analysis-label">Av. Quality</div>
 				<div class="analysis-value">{{ qRatio }} <span class="precision">/{{ roster.length }}</span></div>
 			</fieldset>
 			<fieldset>
@@ -34,7 +42,8 @@
 				<div class="analysis-value">{{ unevolved.length }}</div>
 			</fieldset>
 			<fieldset>
-				<div class="analysis-label">Under 20</div>
+				<!--eslint-disable-next-line vue/no-parsing-error-->
+				<div class="analysis-label">< 20 Quality</div>
 				<div class="analysis-value">{{ low.length }}</div>
 			</fieldset>
 		</div>
@@ -90,6 +99,7 @@ fieldset {
 		color: var(--text-color-medium);
 		text-transform: uppercase;
 		margin-bottom: .25rem;
+		& > .hint {text-transform: initial;}
 	}
 	.precision {
 		font-size: .9rem;

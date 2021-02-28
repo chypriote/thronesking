@@ -14,25 +14,30 @@ const ordinal = require('ordinal-numbers')
 
 export default Vue.extend({
 	name: 'PlayerPeekGraph',
-	data: () => ({ options: defaultOptions({ stepSize: 1, suggestedMin: 1, reverse: true }, { display: true, position: 'bottom' }) }),
+	data: () => ({ options: defaultOptions({ stepSize: 1, suggestedMin: 1, max: 100, reverse: true }, { display: true, position: 'bottom' }) }),
 	computed: {
 		kingdomData (): KingdomRanking[] { return this.$store.state.ladder.kingdom_rankings },
 		tourneyData (): TourneyRanking[] { return this.$store.state.ladder.tourney_rankings },
+		dates (): Date[] {
+			console.log(this.kingdomData.length ? 'kingdom' : 'tourney')
+			return this.kingdomData.length
+				? this.kingdomData.map((rank: KingdomRanking) => new Date(rank.date))
+				: this.tourneyData.map((rank: TourneyRanking) => new Date(rank.date))
+		},
 		graphData (): ChartData & any {
-			const dates = this.kingdomData.map((rank: KingdomRanking) => new Date(rank.date))
 			const kingdomSet: any[] = []
 			const tourneySet: any[] = []
 
-			dates.forEach((date: Date) => {
+			this.dates.forEach((date: Date) => {
 				const kd = find(this.kingdomData, (it: KingdomRanking) => !differenceInHours(new Date(it.date), date))
 				const tn = find(this.tourneyData, (it: TourneyRanking) => !differenceInHours(new Date(it.date), date))
-				kingdomSet.push(kd ? { ...kd, toString: () => kd.rank } : null)
-				tourneySet.push(tn ? { ...tn, toString: () => tn.rank } : null)
+				kingdomSet.push(kd ? { ...kd, toString: () => kd.rank } : 101)
+				tourneySet.push(tn ? { ...tn, toString: () => tn.rank } : 101)
 			})
 
 			return {
 				plugins: [ChartDataLabels],
-				labels: dates.map((date: Date) => format(date, 'dd-MM')),
+				labels: this.dates.map((date: Date) => format(date, 'dd-MM')),
 				datasets: [
 					{
 						data: kingdomSet,

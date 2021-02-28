@@ -42,17 +42,3 @@ export default Vue.extend({
 	},
 })
 </script>
-
-<style scoped>
-table tbody td .loader-wrapper {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 8rem;
-	width: 100%;
-}
-.loader {
-	height: 5rem;
-	width: 5rem;
-}
-</style>

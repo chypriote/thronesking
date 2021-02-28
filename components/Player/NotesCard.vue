@@ -25,7 +25,10 @@ export default Vue.extend({
 	methods: {
 		toggleEditing () {
 			this.editing = !this.editing
-			if (this.editing) { this.edited = clone(this.notes) }
+			if (this.editing) {
+				this.edited = clone(this.notes)
+				setTimeout(() => { document.getElementById('notes')?.focus() }, 200)
+			}
 		},
 		async saveNotes () {
 			this.loading = true

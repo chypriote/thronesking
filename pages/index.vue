@@ -57,7 +57,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Player } from '~/types'
-import ScoutingRow from '~/components/ScoutingRow.vue'
+import ScoutingRow from '~/components/Finder/ScoutingRow.vue'
 import PlayerPeek from '~/components/Global/PlayerPeek.vue'
 
 interface IData {

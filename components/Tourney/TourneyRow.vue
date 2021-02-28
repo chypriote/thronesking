@@ -1,5 +1,5 @@
 <template>
-	<tr :class="{'is-selected': parseInt($route.params.id) === player.id}">
+	<tr :class="{'is-selected': selected && selected.id === player.id}">
 		<td class="rank">
 			<div :class="{'ribbon': [0, 1, 2].includes(index), 'placing-1': index === 0, 'placing-2': index===1, 'placing-3': index ===2}">
 				<svg v-if="[0, 1, 2].includes(index)" viewBox="0 0 20 13.333" class="icon"><path d="M4.868 13.333H15.13l4.444-8.889h-5.556L11.797 0h-3.6L5.975 4.444H.419zm2.484-6.667l2.222-4.444h.849l2.222 4.444h3.333l-2.222 4.444H6.242L4.02 6.666zM0 0h2.222v2.222H0zM17.778 0H20v2.222h-2.222z"></path></svg>
@@ -48,6 +48,7 @@ export default Vue.extend({
 		},
 	},
 	computed: {
+		selected () { return this.$store.state.ladder.player },
 		player (): Player { return this.rank.player },
 		scout (): number|null {
 			if (!this.player.player_heroes) { return null }

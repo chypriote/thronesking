@@ -30,6 +30,11 @@ export const mutations: MutationTree<IState> = {
 	ADD_HERO_TO_ROSTER (state: IState, hero: Hero) {
 		state.roster.push(hero)
 	},
+	UPDATE_HERO (state: IState, updated: Hero) {
+		const hero = state.roster.find(h => h.id === updated.id)
+		if (!hero) { return }
+		hero.quality = updated.quality
+	},
 	SET_ROSTER (state: IState, roster: Hero[]) {
 		state.roster = roster
 	},
@@ -63,6 +68,7 @@ export const actions: ActionTree<IState, IState> = {
 		try {
 			const player: Player = await this.$strapi.$http.get(`players/${id}/details`).then(response => response.json())
 			commit('SET_PLAYER', player)
+			commit('SET_ROSTER', player.roster)
 			commit('SET_ALLIANCE', player.alliance)
 		} catch (e) { console.log(e) }
 	},
@@ -99,6 +105,13 @@ export const actions: ActionTree<IState, IState> = {
 		try {
 			if (!state.player) { return }
 			commit('SET_ROSTER', await this.$strapi.$http.get(`players/${state.player.id}/roster`).then(response => response.json()))
+		} catch (e) { console.log(e) }
+	},
+
+	async UPDATE_HERO ({ state, commit }, { hero, quality }) {
+		try {
+			if (!state.player) { return }
+			commit('UPDATE_HERO', await this.$strapi.update('player-heroes', hero.id, { quality }))
 		} catch (e) { console.log(e) }
 	},
 }
