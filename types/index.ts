@@ -103,3 +103,23 @@ export type PlayerHeroes = {
 	quality: number
 	base: number
 }
+
+export type OwnedHero = {
+	id: number
+	level: number
+	hero: Hero
+
+	quality: number
+
+	military: number
+	fortune: number
+	provisions: number
+	inspiration: number
+
+	xp_quality: number
+	xp_tourney: number
+
+	ferocity: number
+	brutality: number
+	senior: number
+}

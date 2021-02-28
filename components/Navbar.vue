@@ -40,6 +40,7 @@
 							</div>
 						</div>
 					</div>
+					<nuxt-link class="item" to="/heroes">Heroes</nuxt-link>
 				</div>
 			</div>
 		</div>

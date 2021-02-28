@@ -1,4 +1,4 @@
-table.leaderboard {
+table.table {
 	width: 100%;
 	thead {
 		background-color: var(--foreground-color-low-contrast);
