@@ -101,6 +101,7 @@ export default Vue.extend({
 .container {
 	justify-content: space-between;
 	padding: 0 .5rem;
+	display: flex;
 }
 .navbar.is-fixed-top .navbar-menu, .navbar.is-fixed-top-touch .navbar-menu {
 	overflow: initial;
