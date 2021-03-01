@@ -35,8 +35,9 @@ body {
 }
 #main {
 	height: 100vh;
-	overflow-y: auto;
 	padding-top: 4.5rem;
+	overflow-y: auto;
+	overflow-x: hidden;
 	&::-webkit-scrollbar {width: 7px;}
 	&::-webkit-scrollbar-track {background: var(--text-color-disabled);}
 	&::-webkit-scrollbar-thumb {background: var(--main-nav-background-color);}

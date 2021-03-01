@@ -10,7 +10,7 @@
 		<div class="card-content">
 			<add-hero-card id="add-hero-card" />
 			<div class="roster columns is-multiline">
-				<div v-for="hero of roster" :key="hero.id" class="column is-one-third">
+				<div v-for="hero of roster" :key="hero.id" class="column is-one-third-desktop is-half">
 					<hero-card class="hero" :hero="hero" />
 				</div>
 			</div>

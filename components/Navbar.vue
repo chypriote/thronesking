@@ -102,12 +102,31 @@ export default Vue.extend({
 	justify-content: space-between;
 	padding: 0 .5rem;
 }
-.navbar-menu {flex: 2;justify-content: flex-end;}
-.navbar-brand {flex: 2;}
+.navbar.is-fixed-top .navbar-menu, .navbar.is-fixed-top-touch .navbar-menu {
+	overflow: initial;
+}
+.navbar-menu {
+	justify-content: flex-end;
+	align-items: stretch;
+	display: flex;
+	background-color: initial;
+	box-shadow: none;
+	@media (min-width: 992px) {flex: 2;}
+	.navbar-end {
+		justify-content: flex-end;
+		margin-left: auto;
+		align-items: stretch;
+		display: flex;
+	}
+}
+.navbar-brand {
+	@media (min-width: 992px) {flex: 2;}
+}
 .navbar-search {
-	flex: 1;
 	display: flex;
 	align-items: center;
+	width: 30%;
+	@media (min-width: 992px) {flex: 1;width: auto;}
 	.v-select {
 		width: 100%;
 	}

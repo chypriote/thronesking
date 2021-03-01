@@ -1,13 +1,13 @@
 <template>
 	<div>
-		<div class="columns">
-			<div class="column is-one-third">
+		<div class="columns is-multiline">
+			<div class="column is-full is-one-third-desktop">
 				<top-kingdom />
 			</div>
-			<div class="column is-one-third">
+			<div class="column is-full is-one-third-desktop">
 				<top-tourney />
 			</div>
-			<div class="column is-one-third">
+			<div class="column is-full is-one-third-desktop">
 				<top-alliance />
 			</div>
 		</div>

@@ -1,20 +1,24 @@
 <template>
-	<div class="content">
-		<div class="columns">
-			<div class="column is-one-quarter">
-				<div class="card bordered">
-					<player-details-header :player="player" />
-					<div class="card-content">
-						<player-stats :player="player" />
+	<div class="columns is-multiline">
+		<div class="column is-full is-one-quarter-desktop">
+			<div class="columns is-multiline">
+				<div class="column is-half is-full-desktop">
+					<div class="card bordered">
+						<player-details-header :player="player" />
+						<div class="card-content">
+							<player-stats :player="player" />
+						</div>
 					</div>
 				</div>
-				<toggle-favorite :player="player" />
-				<notes-card />
+				<div class="column is-half is-full-desktop">
+					<toggle-favorite :player="player" />
+					<notes-card />
+				</div>
 			</div>
-			<div class="column is-three-quarters">
-				<heroes-card />
-				<ranks-card />
-			</div>
+		</div>
+		<div class="column is-full is-three-quarters-desktop">
+			<heroes-card />
+			<ranks-card />
 		</div>
 	</div>
 </template>
