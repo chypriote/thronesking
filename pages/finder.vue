@@ -5,22 +5,36 @@
 				<div class="card">
 					<div class="card-content">
 						<form @submit.prevent="getRecommendations">
-							<fieldset class="field is-grouped">
-								<div class="control is-expanded">
-									<input
-										id="quality"
-										v-model="quality"
-										class="input"
-										aria-label="Quality"
-										type="text"
-										placeholder="Quality"
-										autocomplete="off"
-									/>
+							<div class="columns is-multiline">
+								<div class="column is-full">
+									<fieldset class="field is-grouped">
+										<div class="control is-expanded">
+											<input
+												id="quality"
+												v-model="quality"
+												class="input"
+												aria-label="Quality"
+												type="text"
+												placeholder="Quality"
+												autocomplete="off"
+											/>
+										</div>
+										<div class="control">
+											<button type="submit" class="button --primary" :class="{'is-loading': loading}">Find</button>
+										</div>
+									</fieldset>
 								</div>
-								<div class="control">
-									<button type="submit" class="button --primary" :class="{'is-loading': loading}">Find</button>
+								<div class="column">
+									<fieldset class="field">
+										<label class="checkbox" for="scout">
+											<input id="scout" v-model="allow_not_scouted" type="checkbox"> 🔍 Only Scouted
+										</label>
+										<label class="checkbox" for="inactive">
+											<input id="inactive" v-model="only_inactive" type="checkbox"> ⏱ Inactive
+										</label>
+									</fieldset>
 								</div>
-							</fieldset>
+							</div>
 						</form>
 					</div>
 				</div>
@@ -49,6 +63,8 @@ interface IData {
 	quality: null|number
 	players: Player[]
 	loading: boolean
+	allow_not_scouted: boolean
+	only_inactive: boolean
 }
 export default Vue.extend({
 	name: 'Finder',
@@ -56,11 +72,22 @@ export default Vue.extend({
 	async asyncData ({ store }) {
 		await store.dispatch('ladder/RESET')
 	},
-	data: (): IData => ({ quality: null, players: [], loading: false }),
+	data: (): IData => ({
+		quality: null,
+		players: [],
+		loading: false,
+		allow_not_scouted: false,
+		only_inactive: false,
+	}),
 	methods: {
 		async getRecommendations () {
 			this.loading = true
-			this.players = await this.$store.dispatch('finder/FETCH_RECOMMENDATIONS', this.quality)
+			const params: any = { }
+
+			if (!this.allow_not_scouted) { params.player_heroes_null = false }
+			if (this.only_inactive) { params.inactive = 1 }
+
+			this.players = await this.$store.dispatch('finder/FETCH_RECOMMENDATIONS', { quality: this.quality, params })
 			this.loading = false
 		},
 	},

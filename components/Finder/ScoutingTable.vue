@@ -5,6 +5,7 @@
 			<tr>
 				<th>GID</th>
 				<th>Name</th>
+				<th>Rating</th>
 				<th>Heroes</th>
 				<th>Power</th>
 				<th>Ratio</th>
@@ -20,7 +21,7 @@
 				</td></tr>
 				<template v-else>
 					<scouting-row v-for="player of players" :key="player.gid" :player="player" />
-					<tr v-if="!players.length"><td colspan="7">No Results</td></tr>
+					<tr v-if="quality && !players.length"><td colspan="8">No Results</td></tr>
 				</template>
 			</tbody>
 		</table>
@@ -38,6 +39,7 @@ export default Vue.extend({
 	computed: {
 		loading (): Boolean { return this.$store.state.finder.loading },
 		players (): Player[] { return this.$store.state.finder.players },
+		quality (): Player[] { return this.$store.state.finder.quality },
 	},
 })
 </script>

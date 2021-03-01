@@ -8,6 +8,7 @@
 				<span class="name">{{ player.name }}</span>
 			</div>
 		</td>
+		<td>{{ player.rating }}</td>
 		<td class="heroes">
 			<div class="heroes">
 				{{ player.heroes }}

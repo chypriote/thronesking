@@ -20,9 +20,9 @@ export const mutations: MutationTree<IState> = {
 }
 
 export const actions: ActionTree<IState, IState> = {
-	async FETCH_RECOMMENDATIONS ({ commit }, quality) {
+	async FETCH_RECOMMENDATIONS ({ commit }, payload) {
 		try {
-			commit('SET_RECOMMENDATIONS', await this.$strapi.$http.get(`/opponents/${quality}`).then(response => response.json()))
+			commit('SET_RECOMMENDATIONS', await this.$strapi.$http.get(`/opponents/${payload.quality}?${new URLSearchParams(payload.params).toString()}`).then(response => response.json()))
 		} catch (e) { console.log(e) }
 	},
 }
