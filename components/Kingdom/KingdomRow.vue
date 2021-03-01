@@ -46,12 +46,12 @@ export default Vue.extend({
 		},
 	},
 	computed: {
-		selected () { return this.$store.state.ladder.player },
+		selected (): Player|null { return this.$store.state.ladder.player },
 		player (): Player { return this.rank.player },
 		alliance (): Alliance|null { return this.rank.alliance },
 	},
 	methods: {
-		async selectPlayer () {
+		async selectPlayer (): Promise<void> {
 			await this.$store.dispatch('ladder/SELECT_PLAYER', this.player.id)
 		},
 	},

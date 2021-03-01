@@ -52,7 +52,7 @@ interface IData {
 
 export default Vue.extend({
 	name: 'Kingdom',
-	data: (): IData => ({ players: [], tourney: [], alliance: [], loading: false }),
+	data: (): IData => ({ players: [], loading: false }),
 	async mounted () {
 		await this.getKingdomLadder()
 	},
