@@ -67,7 +67,6 @@ export default Vue.extend({
 </script>
 
 <style scoped>
-.table-container {overflow-x: hidden;}
 .td-power {text-align: right;}
 .td-name {
 	padding: 0;
