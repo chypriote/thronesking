@@ -40,7 +40,7 @@
 							</div>
 						</div>
 					</div>
-					<nuxt-link class="item" to="/heroes">Heroes</nuxt-link>
+					<nuxt-link class="item" to="/roster">Roster</nuxt-link>
 				</div>
 			</div>
 		</div>
