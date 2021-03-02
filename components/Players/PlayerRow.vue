@@ -5,7 +5,7 @@
 			<nuxt-link :key="player.id" :to="{name: 'players-id', params: {id: player.id}}" class="is-flex is-align-items-center">
 				<span v-if="player.player_heroes.length">🔍</span>
 				<span v-if="player.favorite">⭐</span>
-				<span v-if="player.inactive">⏱</span>
+				<span v-if="player.inactive === true">⏱</span>
 				<span class="name">{{ player.name }}</span>
 			</nuxt-link>
 		</td>
