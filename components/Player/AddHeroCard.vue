@@ -1,6 +1,6 @@
 <template>
-	<form class="add-hero columns is-multiline" @submit.prevent="saveHero">
-		<fieldset class="field column is-full-mobile is-full-tablet is-flex-grow-1 is-one-quarter-desktop">
+	<form class="add-hero" @submit.prevent="saveHero">
+		<fieldset id="select-hero" class="field">
 			<v-select
 				id="hero"
 				ref="hero"
@@ -33,26 +33,26 @@
 				</template>
 			</v-select>
 		</fieldset>
-		<fieldset class="field column is-full-mobile is-three-quarters-tablet has-addons is-half-desktop">
+		<fieldset id="input-quality" class="field">
 			<div class="control">
 				<div class="field has-addons">
 					<div class="control"><button class="button" type="button" :disabled="loading || (quality - 100) < 1" @click.prevent="quality = Math.max(quality - 100, 0)">-100</button></div>
 					<div class="control"><button class="button" type="button" :disabled="loading || (quality - 10) < 1" @click.prevent="quality = Math.max(quality - 10, 0)">-10</button></div>
-					<div class="control"><button class="button" type="button" :disabled="loading || (quality - 1) < 1" @click.prevent="quality = Math.max(quality - 1, 0)">-1</button></div>
+					<div class="control"><button class="button" type="button" style="border-bottom-right-radius: 0;border-top-right-radius: 0;" :disabled="loading || (quality - 1) < 1" @click.prevent="quality = Math.max(quality - 1, 0)">-1</button></div>
 				</div>
 			</div>
-			<div class="control">
+			<div class="control quality">
 				<input id="hero-quality" v-model="quality" aria-label="Quality" type="number" class="input control" required placeholder="Quality" :disabled="loading || !hero" />
 			</div>
 			<div class="control">
 				<div class="field has-addons">
-					<div class="control"><button class="button" type="button" :disabled="loading || !hero" @click.prevent="quality = quality + 1">+1</button></div>
+					<div class="control"><button class="button" type="button" style="border-bottom-left-radius: 0;border-top-left-radius: 0;" :disabled="loading || !hero" @click.prevent="quality = quality + 1">+1</button></div>
 					<div class="control"><button class="button" type="button" :disabled="loading || !hero" @click.prevent="quality = quality + 10">+10</button></div>
 					<div class="control"><button class="button" type="button" :disabled="loading || !hero" @click.prevent="quality = quality + 100">+100</button></div>
 				</div>
 			</div>
 		</fieldset>
-		<fieldset class="field column is-full-mobile is-one-quarter-tablet is-one-quarter-desktop">
+		<fieldset id="button-submit" class="field">
 			<div class="control">
 				<button class="button --primary" :class="{'is-loading': saving}" type="submit">Submit</button>
 			</div>
@@ -115,8 +115,27 @@ export default Vue.extend({
 	display: flex;
 	align-items: center;
 	.field {margin-bottom: 0;}
+	.field + .field {margin-left: 1rem;}
+	@media (max-width: 768px) {
+		flex-direction: column;
+		.field {width: 100%;}
+		.field + .field {margin-top: 1rem;margin-left: 0;}
+		#button-submit {text-align: right;}
+	}
+	@media (min-width: 1024px) and (max-width: 1216px) {
+		flex-direction: column;
+		.field {width: 100%;}
+		.field + .field {margin-top: 1rem;margin-left: 0;}
+		#button-submit {text-align: right;}
+	}
 }
-.control {display: flex;}
+#select-hero {flex: 1;}
+#input-quality {
+	display: flex;
+	.control {display: flex;}
+	.quality {flex: 1;}
+	input {border-radius: 0;}
+}
 #hero .option {
 	display: flex;
 	align-items: center;

@@ -1,6 +1,6 @@
 <template>
 	<div class="columns is-multiline">
-		<div class="column is-full is-one-quarter-desktop">
+		<div class="column is-full is-one-third-desktop is-one-quarter-widescreen">
 			<div class="columns is-multiline">
 				<div class="column is-half is-full-desktop">
 					<div class="card bordered">
@@ -16,7 +16,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="column is-full is-three-quarters-desktop">
+		<div class="column is-full is-two-thirds-desktop is-three-quarters-widescreen">
 			<heroes-card />
 			<ranks-card />
 		</div>
