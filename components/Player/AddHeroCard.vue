@@ -1,6 +1,6 @@
 <template>
-	<form class="add-hero" @submit.prevent="saveHero">
-		<fieldset class="field is-flex-grow-1">
+	<form class="add-hero columns is-multiline" @submit.prevent="saveHero">
+		<fieldset class="field column is-full-mobile is-full-tablet is-flex-grow-1 is-one-quarter-desktop">
 			<v-select
 				id="hero"
 				ref="hero"
@@ -33,7 +33,7 @@
 				</template>
 			</v-select>
 		</fieldset>
-		<fieldset class="field has-addons">
+		<fieldset class="field column is-full-mobile is-three-quarters-tablet has-addons is-half-desktop">
 			<div class="control">
 				<div class="field has-addons">
 					<div class="control"><button class="button" type="button" :disabled="loading || (quality - 100) < 1" @click.prevent="quality = Math.max(quality - 100, 0)">-100</button></div>
@@ -52,7 +52,7 @@
 				</div>
 			</div>
 		</fieldset>
-		<fieldset class="field">
+		<fieldset class="field column is-full-mobile is-one-quarter-tablet is-one-quarter-desktop">
 			<div class="control">
 				<button class="button --primary" :class="{'is-loading': saving}" type="submit">Submit</button>
 			</div>
@@ -116,7 +116,6 @@ export default Vue.extend({
 	align-items: center;
 	.field {margin-bottom: 0;}
 }
-.field + .field {margin-left: 1rem;}
 .control {display: flex;}
 #hero .option {
 	display: flex;

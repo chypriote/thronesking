@@ -21,7 +21,7 @@ export default {
 	plugins: ['~/plugins/chartjs', '~/plugins/select.ts', '~/plugins/filters'],
 	components: false,
 	telemetry: false,
-	buildModules: ['nuxt-vite', '@nuxt/typescript-build', '@nuxtjs/stylelint-module'],
+	buildModules: ['@nuxt/typescript-build', '@nuxtjs/stylelint-module'],
 	modules: ['@nuxtjs/axios', '@nuxtjs/pwa', '@nuxtjs/strapi'],
 
 	pwa: {
