@@ -1,5 +1,5 @@
 <template>
-	<main>
+	<div>
 		<div class="columns sticky">
 			<div class="column is-one-third">
 				<players-search />
@@ -13,7 +13,7 @@
 				<players-table />
 			</div>
 		</div>
-	</main>
+	</div>
 </template>
 
 <script lang="ts">
@@ -34,7 +34,7 @@ export default Vue.extend({
 <style scoped>
 .sticky {
 	position: sticky;
-	top: 5rem;
+	top: 0;
 	z-index: 2;
 }
 </style>

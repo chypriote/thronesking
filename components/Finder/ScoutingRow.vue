@@ -3,6 +3,7 @@
 		<td>{{ player.gid }}</td>
 		<td class="player" @click="selectPlayer">
 			<div class="is-flex is-align-items-center">
+				<span v-if="player.player_heroes.length">🔍</span>
 				<span v-if="player.favorite">⭐</span>
 				<span v-if="player.inactive === true">⏱</span>
 				<span class="name">{{ player.name }}</span>

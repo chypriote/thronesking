@@ -69,7 +69,7 @@ export default Vue.extend({
 <style scoped>
 .td-power {text-align: right;}
 .td-name {
-	padding: 0;
+	padding: 0 1rem;
 	a {padding: .75rem;}
 	a:hover {color: var(--text-color-primary);}
 }

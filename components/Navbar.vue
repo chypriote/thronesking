@@ -103,9 +103,6 @@ export default Vue.extend({
 	padding: 0 .5rem;
 	display: flex;
 }
-.navbar.is-fixed-top .navbar-menu, .navbar.is-fixed-top-touch .navbar-menu {
-	overflow: initial;
-}
 .navbar-menu {
 	justify-content: flex-end;
 	align-items: stretch;
@@ -119,6 +116,9 @@ export default Vue.extend({
 		align-items: stretch;
 		display: flex;
 	}
+}
+.navbar.is-fixed-top .navbar-menu, .navbar.is-fixed-top-touch .navbar-menu {
+	overflow: initial;
 }
 .navbar-brand {
 	@media (min-width: 992px) {flex: 2;}

@@ -51,7 +51,7 @@ export default Vue.extend({
 		selected (): Player|null { return this.$store.state.ladder.player },
 		player (): Player { return this.rank.player },
 		scout (): number|null {
-			if (!this.player.player_heroes) { return null }
+			if (!this.player.player_heroes || !this.player.heroes) { return null }
 			return (this.player.player_heroes.length / this.player.heroes * 100) || null
 		},
 		basics (): PlayerHeroes[]|undefined {
