@@ -2,7 +2,7 @@
 	<table class="table">
 		<thead>
 		<tr>
-			<th style="width: 50%;">Maiden</th>
+			<th style="width: 40%;">Maiden</th>
 			<th class="field" @click="toggleField(Field.INTIMACY)">
 				<span class="field-name">Intimacy</span>
 				<span v-if="fields.includes(Field.INTIMACY)" class="ordering" :class="`order-${fields.indexOf(Field.INTIMACY)}`">
@@ -21,10 +21,13 @@
 					{{ orders[fields.indexOf(Field.EXPERIENCE)] === Order.DESC ? '🔻' : '🔺' }}
 				</span>
 			</th>
+			<th class="field">
+				<div class="field-name">Bond</div>
+			</th>
 		</tr>
 		</thead>
 		<tbody>
-		<maiden-row v-for="maiden of maidens" :key="maiden.id" :maiden="maiden" />
+		<maiden-row v-for="maiden of maidens" :key="maiden.id" :wife="maiden" />
 		</tbody>
 	</table>
 </template>
