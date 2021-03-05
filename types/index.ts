@@ -54,7 +54,7 @@ export type Player = {
 	favorite: boolean
 	inactive: boolean|null
 
-	alliance_members?: AllianceMembers[]
+	alliance_members?: AllianceMember[]
 	player_heroes?: PlayerHero[]
 
 	rankings: PlayerRankings
@@ -101,11 +101,11 @@ export type Alliance = {
 	power: number
 	level: number
 	reputation: number
-	alliance_members: AllianceMembers[]
-	members: AllianceMembers[]
+	alliance_members: AllianceMember[]
+	members: AllianceMember[]
 }
 
-export type AllianceMembers = {
+export type AllianceMember = {
 	id: number
 	player: Player
 	alliance: Alliance

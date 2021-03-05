@@ -31,15 +31,15 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Alliance, AllianceMembers } from '~/types'
+import { Alliance, AllianceMember } from '~/types'
 
 export default Vue.extend({
 	name: 'AllianceDetails',
 	computed: {
 		alliance (): Alliance { return this.$store.state.alliance },
-		members (): AllianceMembers[] { return this.alliance.members },
-		activeMembers (): AllianceMembers[] { return this.members.filter(member => member.active) },
-		previousMembers (): AllianceMembers[] { return this.members.filter(member => !member.active) },
+		members (): AllianceMember[] { return this.alliance.members },
+		activeMembers (): AllianceMember[] { return this.members.filter(member => member.active) },
+		previousMembers (): AllianceMember[] { return this.members.filter(member => !member.active) },
 	},
 })
 </script>
