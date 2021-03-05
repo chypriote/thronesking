@@ -33,7 +33,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { orderBy, reduce } from 'lodash-es'
-import { Player, PlayerHeroes, TourneyRanking } from '~/types'
+import { Player, PlayerHero, TourneyRanking } from '~/types'
 
 export default Vue.extend({
 	name: 'RankingRow',
@@ -54,7 +54,7 @@ export default Vue.extend({
 			if (!this.player.player_heroes || !this.player.heroes) { return null }
 			return (this.player.player_heroes.length / this.player.heroes * 100) || null
 		},
-		basics (): PlayerHeroes[]|undefined {
+		basics (): PlayerHero[]|undefined {
 			if (!this.scout || !this.player.player_heroes) { return }
 			return this.player.player_heroes.filter(h => h.quality - h.base < 4 || h.quality < 18)
 		},
@@ -64,7 +64,7 @@ export default Vue.extend({
 
 			const roster = orderBy(this.player.player_heroes, 'quality', 'desc')
 			roster.shift()
-			const totalQuality = reduce(roster, (sum: number, h: PlayerHeroes) => { return sum + h.quality }, 0)
+			const totalQuality = reduce(roster, (sum: number, h: PlayerHero) => { return sum + h.quality }, 0)
 			return (totalQuality / roster.length).toFixed(1)
 		},
 	},

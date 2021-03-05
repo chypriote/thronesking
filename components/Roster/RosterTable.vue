@@ -79,22 +79,22 @@
 <script lang="ts">
 import Vue from 'vue'
 import { orderBy } from 'lodash-es'
-import { OwnedHero } from '~/types'
-import { Field, Order } from '~/store/roster'
+import { AccountHero } from '~/types/account'
 import HeroRow from '~/components/Roster/HeroRow.vue'
+import { Field, Order } from '~/store/account/heroes'
 
 export default Vue.extend({
 	name: 'RosterTable',
 	components: { HeroRow },
 	data: () => ({ Field, Order }),
 	computed: {
-		orders (): Order[] { return this.$store.state.roster.orders },
-		fields (): Field[] { return this.$store.state.roster.fields },
-		roster (): OwnedHero[] { return orderBy(this.$store.state.roster.heroes, this.fields, this.orders) },
+		orders (): Order[] { return this.$store.state.account.heroes.orders },
+		fields (): Field[] { return this.$store.state.account.heroes.fields },
+		roster (): AccountHero[] { return orderBy(this.$store.state.account.heroes.heroes, this.fields, this.orders) },
 	},
 	methods: {
 		toggleField (field: Field): void {
-			this.$store.commit('roster/TOGGLE_FIELD', field)
+			this.$store.commit('account/heroes/TOGGLE_FIELD', field)
 		},
 	},
 })

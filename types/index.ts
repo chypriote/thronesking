@@ -1,4 +1,6 @@
 /* eslint-disable no-use-before-define */
+import { AccountHero, AccountMaiden } from '~/types/account'
+
 export interface Ranking {
 	id: number
 	date: string
@@ -53,11 +55,11 @@ export type Player = {
 	inactive: boolean|null
 
 	alliance_members?: AllianceMembers[]
-	player_heroes?: PlayerHeroes[]
+	player_heroes?: PlayerHero[]
 
 	rankings: PlayerRankings
 	alliance?: Alliance
-	roster?: Hero[]
+	roster?: PlayerHero[]
 }
 export type PlayerRankings = {
 	kingdom: KingdomRanking
@@ -66,6 +68,7 @@ export type PlayerRankings = {
 
 export type Hero = {
 	id?: number
+	hid: number
 	name: string
 	quality: number
 	base: number
@@ -73,8 +76,22 @@ export type Hero = {
 	focus: string
 	hero: number
 
-	players: Player
-	player_heroes: PlayerHeroes
+	maiden: Maiden
+
+	player_heroes: PlayerHero
+
+	account_heroes: AccountHero
+}
+
+export type Maiden = {
+	id?: number
+	mid: number
+	name: string
+	naughty: number
+
+	hero: Hero
+
+	account_maidens: AccountMaiden
 }
 
 export type Alliance = {
@@ -96,30 +113,10 @@ export type AllianceMembers = {
 	leftAt: string
 }
 
-export type PlayerHeroes = {
+export type PlayerHero = {
 	id?: number
 	player: Player
 	hero: Hero
 	quality: number
 	base: number
-}
-
-export type OwnedHero = {
-	id: number
-	level: number
-	hero: Hero
-
-	quality: number
-
-	military: number
-	fortune: number
-	provisions: number
-	inspiration: number
-
-	xp_quality: number
-	xp_tourney: number
-
-	ferocity: number
-	brutality: number
-	senior: number
 }

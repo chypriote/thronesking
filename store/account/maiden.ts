@@ -1,47 +1,34 @@
 import { ActionTree, MutationTree } from 'vuex'
 import { clone } from 'lodash-es'
-import { OwnedHero } from '~/types'
+import { AccountMaiden } from '~/types/account'
 
 export enum Order {
 	ASC= 'asc',
 	DESC= 'desc',
 }
 export enum Field {
-	QUALITY= 'quality',
 	NAME= 'name',
-	LEVEL= 'level',
-	MILITARY= 'military',
-	FORTUNE= 'fortune',
-	PROVISIONS= 'provisions',
-	INSPIRATION= 'inspiration',
-	BRUTALITY= 'brutality',
-	FEROCITY= 'ferocity',
-	XP_QUALITY= 'xp_quality',
-	XP_TOURNEY= 'xp_tourney',
+	INTIMACY= 'intimacy',
+	CHARM= 'charm',
+	EXPERIENCE= 'experience',
 }
 interface IState {
-	heroes: OwnedHero[]
+	maidens: AccountMaiden[]
 	loading: Boolean
 	orders: Order[]
 	fields: Field[]
 }
 
 export const state = (): IState => ({
-	heroes: [],
+	maidens: [],
 	loading: false,
 	orders: [],
 	fields: [],
 })
 
 export const mutations: MutationTree<IState> = {
-	SET_ROSTER (state: IState, heroes: OwnedHero[]) {
-		state.heroes = heroes.map(h => ({
-			...h,
-			military: parseInt(h.military.toString()),
-			fortune: parseInt(h.fortune.toString()),
-			provisions: parseInt(h.provisions.toString()),
-			inspiration: parseInt(h.inspiration.toString()),
-		}))
+	SET_MAIDENS (state: IState, maidens: AccountMaiden[]) {
+		state.maidens = maidens
 	},
 	TOGGLE_FIELD (state: IState, field: Field) {
 		const index = state.fields.indexOf(field)
@@ -63,9 +50,9 @@ export const mutations: MutationTree<IState> = {
 }
 
 export const actions: ActionTree<IState, IState> = {
-	async FETCH_ROSTER ({ commit }) {
+	async FETCH_MAIDENS ({ commit }) {
 		try {
-			commit('SET_ROSTER', await this.$strapi.find('owned-heroes', { _sort: 'quality:desc' }))
+			commit('SET_MAIDENS', await this.$strapi.find('account-maidens', { _sort: 'intimacy:desc' }))
 		} catch (e) { console.log(e) }
 	},
 }

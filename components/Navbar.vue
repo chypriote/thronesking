@@ -41,6 +41,7 @@
 						</div>
 					</div>
 					<nuxt-link class="item" to="/roster">Roster</nuxt-link>
+					<nuxt-link class="item" to="/maiden">Maiden</nuxt-link>
 				</div>
 			</div>
 		</div>

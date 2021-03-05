@@ -12,19 +12,19 @@
 <script lang="ts">
 import Vue from 'vue'
 import { format } from 'date-fns'
+import { AccountHero } from '~/types/account'
 import RosterTable from '~/components/Roster/RosterTable.vue'
-import { OwnedHero } from '~/types'
 
 export default Vue.extend({
 	name: 'Roster',
 	components: { RosterTable },
 	async asyncData ({ store }) {
-		await store.dispatch('roster/FETCH_ROSTER')
+		await store.dispatch('account/heroes/FETCH_ROSTER')
 	},
 	data: () => ({ format }),
 	computed: {
-		roster (): OwnedHero[] { return this.$store.state.roster.heroes },
-		hero (): OwnedHero|null { return this.roster.length ? this.roster[0] : null },
+		roster (): AccountHero[] { return this.$store.state.account.heroes.heroes },
+		hero (): AccountHero|null { return this.roster.length ? this.roster[0] : null },
 	},
 })
 </script>
