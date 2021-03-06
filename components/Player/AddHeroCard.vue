@@ -99,6 +99,7 @@ export default Vue.extend({
 			this.$refs.hero.clearSelection()
 			this.quality = null
 			this.saving = false
+			document.getElementById('hero-input')?.focus()
 		},
 		async selectHero (hero: Hero) {
 			this.quality = hero.quality

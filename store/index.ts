@@ -108,7 +108,7 @@ export const actions: ActionTree<IState, IState> = {
 	},
 	async LOAD_HEROES ({ commit }) {
 		try {
-			commit('SET_AVAILABLE_HEROES', await this.$strapi.find('heroes', { _sort: 'name:asc' }))
+			commit('SET_AVAILABLE_HEROES', await this.$strapi.find('heroes', { _sort: 'name:asc', _limit: 200 }))
 		} catch (e) { console.log(e) }
 	},
 	async nuxtServerInit ({ dispatch }) {
