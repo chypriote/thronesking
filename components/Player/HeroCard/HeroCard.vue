@@ -54,6 +54,7 @@ export default Vue.extend({
 			this.editing = !this.editing
 			this.loading = false
 			this.quality = clone(this.hero.quality)
+			setTimeout(() => { document.getElementById(`${this.hero.id}-quality`)?.focus() }, 200)
 		},
 		async updateHero () {
 			if (!this.hero.id) { return }
@@ -61,7 +62,6 @@ export default Vue.extend({
 			await this.$store.dispatch('player/UPDATE_HERO', { hero: this.hero, quality: this.quality })
 			this.editing = false
 			this.loading = false
-			document.getElementById(`${this.hero.id}-quality`)?.focus()
 		},
 	},
 })
