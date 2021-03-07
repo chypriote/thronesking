@@ -15,7 +15,7 @@
 							</button>
 						</div>
 						<div class="control">
-							<input :id="`${hero.id}-${quality}`" v-model="quality" class="input" aria-label="quality" type="text" placeholder="Quality" />
+							<input :id="`${hero.id}-quality`" v-model="quality" class="input" aria-label="quality" type="number" placeholder="Quality" />
 						</div>
 						<div class="control">
 							<button class="button" type="button" @click.prevent="quality = quality + 1">
@@ -61,6 +61,7 @@ export default Vue.extend({
 			await this.$store.dispatch('player/UPDATE_HERO', { hero: this.hero, quality: this.quality })
 			this.editing = false
 			this.loading = false
+			document.getElementById(`${this.hero.id}-quality`)?.focus()
 		},
 	},
 })
