@@ -1,5 +1,5 @@
 <template>
-	<div class="card bordered">
+	<div class="card bordered" :class="{'touched': touched}">
 		<div class="hero">
 			<img v-if="hero.picture" class="image" :src="hero.picture.formats.thumbnail.url" :alt="hero.name" />
 			<p class="name">{{ hero.name }}</p>
@@ -45,7 +45,7 @@ export default Vue.extend({
 			required: true,
 		},
 	},
-	data: () => ({ editing: false, loading: false, quality: 0 }),
+	data: () => ({ editing: false, loading: false, quality: 0, touched: false }),
 	computed: {
 		boost (): number { return this.hero.quality - this.hero.base },
 	},
@@ -62,6 +62,7 @@ export default Vue.extend({
 			await this.$store.dispatch('player/UPDATE_HERO', { hero: this.hero, quality: this.quality })
 			this.editing = false
 			this.loading = false
+			this.touched = true
 		},
 	},
 })
@@ -83,6 +84,7 @@ export default Vue.extend({
 		flex: 1;
 		text-align: left;
 	}
+	&.touched {opacity: .3;background-color: rgba(0, 0, 0, .8);}
 }
 .card {
 	margin-top: 0;
