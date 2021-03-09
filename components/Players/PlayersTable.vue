@@ -10,7 +10,7 @@
 				<th>Level</th>
 				<th>Heroes</th>
 				<th>Maiden</th>
-				<th>Children</th>
+				<th>Ratio</th>
 			</tr>
 			</thead>
 			<tbody>

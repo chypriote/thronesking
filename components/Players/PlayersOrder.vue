@@ -13,6 +13,8 @@
 								<option value="heroes:asc">Least Heroes</option>
 								<option value="level:desc">Level</option>
 								<option value="vip:desc">VIP</option>
+								<option value="ratio:desc">Best Ratio</option>
+								<option value="ratio:asc">Worst Ratio</option>
 							</select>
 						</div>
 					</fieldset>

@@ -12,6 +12,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { format } from 'date-fns'
+import { MetaInfo } from 'vue-meta'
 import MaidenTable from '~/components/Maiden/MaidenTable.vue'
 
 export default Vue.extend({
@@ -21,5 +22,6 @@ export default Vue.extend({
 		await store.dispatch('account/maiden/FETCH_MAIDENS')
 	},
 	data: () => ({ format }),
+	head: (): MetaInfo => ({ title: 'Maidens' }),
 })
 </script>

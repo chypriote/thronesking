@@ -18,14 +18,13 @@
 		<td class="stat level-value">{{ player.level }}</td>
 		<td class="stat heroes">{{ player.heroes }}</td>
 		<td class="stat maidens">{{ player.maidens }}</td>
-		<td class="stat children">{{ player.children }}</td>
+		<td class="stat ratio">{{ player.ratio |numeral }}</td>
 	</tr>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { Player } from '~/types'
-const numeral = require('numeral')
 
 export default Vue.extend({
 	name: 'PlayerRow',
@@ -35,7 +34,6 @@ export default Vue.extend({
 			required: true,
 		},
 	},
-	data: () => ({ numeral }),
 })
 </script>
 
@@ -46,7 +44,7 @@ td {
 		a:hover {color: inherit;}
 		.name {white-space: nowrap;font-weight: bold;}
 	}
-	&.level-value, &.vip, &.heroes, &.maidens, &.children {text-align: right;}
+	&.level-value, &.vip, &.heroes, &.maidens, &.ratio {text-align: right;}
 	&.kp {text-align: right;overflow: initial;}
 }
 </style>

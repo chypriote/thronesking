@@ -14,6 +14,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { MetaInfo } from 'vue-meta'
 import TourneyTable from '~/components/Tourney/TourneyTable.vue'
 import TourneyFilters from '~/components/Tourney/TourneyFilters.vue'
 import PlayerPeek from '~/components/Global/PlayerPeek.vue'
@@ -24,6 +25,7 @@ export default Vue.extend({
 	async asyncData ({ store }): Promise<void> {
 		await store.dispatch('ladder/tourney/FETCH_LADDER')
 	},
+	head: (): MetaInfo => ({ title: 'Tourney ladder' }),
 })
 </script>
 

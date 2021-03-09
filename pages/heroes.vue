@@ -13,6 +13,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { MetaInfo } from 'vue-meta'
 import { Hero } from '~/types'
 import HeroCard from '~/components/Heroes/HeroCard.vue'
 
@@ -29,5 +30,6 @@ export default Vue.extend({
 		return { heroes }
 	},
 	data: (): IData => ({ heroes: [] }),
+	head: (): MetaInfo => ({ title: 'Heroes' }),
 })
 </script>

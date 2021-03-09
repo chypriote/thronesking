@@ -25,6 +25,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { MetaInfo } from 'vue-meta'
 import { Player } from '~/types'
 import PlayerStats from '~/components/Global/PlayerStats.vue'
 import PlayerDetailsHeader from '~/components/Global/PlayerDetailsHeader.vue'
@@ -39,6 +40,11 @@ export default Vue.extend({
 	async asyncData ({ store, route }): Promise<void> {
 		await store.dispatch('player/RESET')
 		await store.dispatch('player/FETCH_PLAYER', route.params.id)
+	},
+	head (): MetaInfo {
+		return {
+			title: this.player.name,
+		}
 	},
 	computed: {
 		player (): Player { return this.$store.state.player.player },

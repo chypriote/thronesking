@@ -13,6 +13,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { MetaInfo } from 'vue-meta'
 import PlayerPeek from '~/components/Global/PlayerPeek.vue'
 import KingdomTable from '~/components/Kingdom/KingdomTable.vue'
 
@@ -22,6 +23,7 @@ export default Vue.extend({
 	async asyncData ({ store }): Promise<void> {
 		await store.dispatch('ladder/kingdom/FETCH_LADDER')
 	},
+	head: (): MetaInfo => ({ title: 'Kingdom power ladder' }),
 })
 </script>
 

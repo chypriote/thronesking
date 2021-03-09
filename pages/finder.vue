@@ -55,6 +55,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { MetaInfo } from 'vue-meta'
 import { Player } from '~/types'
 import PlayerPeek from '~/components/Global/PlayerPeek.vue'
 import ScoutingTable from '~/components/Finder/ScoutingTable.vue'
@@ -79,6 +80,7 @@ export default Vue.extend({
 		allow_not_scouted: false,
 		only_inactive: false,
 	}),
+	head: (): MetaInfo => ({ title: 'Finder' }),
 	methods: {
 		async getRecommendations () {
 			this.loading = true

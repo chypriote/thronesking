@@ -12,6 +12,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { format } from 'date-fns'
+import { MetaInfo } from 'vue-meta'
 import { AccountHero } from '~/types/account'
 import RosterTable from '~/components/Roster/RosterTable.vue'
 
@@ -22,6 +23,7 @@ export default Vue.extend({
 		await store.dispatch('account/heroes/FETCH_ROSTER')
 	},
 	data: () => ({ format }),
+	head: (): MetaInfo => ({ title: 'Roster' }),
 	computed: {
 		roster (): AccountHero[] { return this.$store.state.account.heroes.heroes },
 		hero (): AccountHero|null { return this.roster.length ? this.roster[0] : null },

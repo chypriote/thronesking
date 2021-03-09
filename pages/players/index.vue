@@ -18,6 +18,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { MetaInfo } from 'vue-meta'
 import PlayersTable from '~/components/Players/PlayersTable.vue'
 import PlayersSearch from '~/components/Players/PlayersSearch.vue'
 import PlayersOrder from '~/components/Players/PlayersOrder.vue'
@@ -28,6 +29,7 @@ export default Vue.extend({
 	async asyncData ({ store }): Promise<void> {
 		await store.dispatch('FETCH_PLAYERS')
 	},
+	head: (): MetaInfo => ({ title: 'Players' }),
 })
 </script>
 

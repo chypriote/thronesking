@@ -13,6 +13,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { MetaInfo } from 'vue-meta'
 import AllianceTable from '~/components/Alliance/AllianceTable.vue'
 
 export default Vue.extend({
@@ -21,6 +22,7 @@ export default Vue.extend({
 	async asyncData ({ store }): Promise<void> {
 		await store.dispatch('FETCH_ALLIANCES')
 	},
+	head: (): MetaInfo => ({ title: 'Alliances ladder' }),
 })
 </script>
 
