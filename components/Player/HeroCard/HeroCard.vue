@@ -4,6 +4,7 @@
 			<img v-if="hero.picture" class="image" :src="hero.picture.formats.thumbnail.url" :alt="hero.name" />
 			<p class="name">{{ hero.name }}</p>
 			<div v-show="!editing" class="quality" :class="{'hint--top': boost}" :aria-label="`+${boost}`" @click="toggleEdit">{{ hero.quality }}</div>
+			<div class="set-touched" @click="toggleTouched">☑</div>
 		</div>
 		<form v-show="editing" class="edit" @submit.prevent="updateHero">
 			<fieldset class="field is-grouped has-addons">
@@ -50,6 +51,9 @@ export default Vue.extend({
 		boost (): number { return this.hero.quality - this.hero.base },
 	},
 	methods: {
+		toggleTouched () {
+			this.touched = !this.touched
+		},
 		toggleEdit () {
 			this.editing = !this.editing
 			this.loading = false
@@ -112,5 +116,13 @@ export default Vue.extend({
 	border: 1px solid var(--foreground-color-high-contrast);
 	cursor: pointer;
 	&.hint--top {font-weight: bold;}
+}
+.set-touched {
+	position: absolute;
+	top: -.5rem;
+	right: -.5rem;
+	opacity: .5;
+	cursor: pointer;
+	&:hover {opacity: 1;}
 }
 </style>
