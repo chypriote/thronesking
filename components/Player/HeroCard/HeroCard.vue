@@ -106,15 +106,16 @@ export default Vue.extend({
 	position: absolute;
 	right: -.5rem;
 	bottom: -.5rem;
-	width: 2rem;
+	max-width: 2.5rem;
 	height: 2rem;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding: .25rem;
+	padding: .5rem;
 	background-color: var(--background-color);
 	border: 1px solid var(--foreground-color-high-contrast);
 	cursor: pointer;
+	&:hover {background-color: rgba(0, 0, 0, .5);}
 	&.hint--top {font-weight: bold;}
 }
 .set-touched {
