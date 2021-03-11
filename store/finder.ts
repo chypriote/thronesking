@@ -1,5 +1,6 @@
 import { ActionTree, MutationTree } from 'vuex'
 import { Player } from '~/types'
+import { RootState } from '~/store/index'
 
 interface IState {
 	players: Player[]
@@ -19,10 +20,13 @@ export const mutations: MutationTree<IState> = {
 	},
 }
 
-export const actions: ActionTree<IState, IState> = {
-	async FETCH_RECOMMENDATIONS ({ commit }, payload) {
+export const actions: ActionTree<IState, RootState> = {
+	async FETCH_RECOMMENDATIONS ({ commit, rootState }, payload) {
 		try {
-			commit('SET_RECOMMENDATIONS', await this.$strapi.$http.get(`/opponents/${payload.quality}?${new URLSearchParams(payload.params).toString()}`).then(response => response.json()))
+			commit('SET_RECOMMENDATIONS', await this.$strapi.$http.get(`/opponents/${payload.quality}?${new URLSearchParams({
+				server: rootState.server,
+				...payload.params,
+			}).toString()}`).then(response => response.json()))
 		} catch (e) { console.log(e) }
 	},
 }

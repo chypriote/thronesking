@@ -1,7 +1,14 @@
 import { ActionTree, MutationTree } from 'vuex'
 import { Alliance, Hero, Player } from '~/types'
 
-interface IState {
+export enum SERVER {
+	MAIN= 699,
+	S701= 701,
+	S775= 775,
+}
+
+export interface RootState {
+	server: number
 	available_heroes: Hero[]
 	players: Player[]
 	players_limit: number
@@ -16,7 +23,8 @@ interface IState {
 	alliance: Alliance | null
 }
 
-export const state = (): IState => ({
+export const state = (): RootState => ({
+	server: SERVER.MAIN,
 	available_heroes: [],
 	players: [],
 	players_limit: 1000,
@@ -31,38 +39,41 @@ export const state = (): IState => ({
 	alliance: null,
 })
 
-export const mutations: MutationTree<IState> = {
-	SET_AVAILABLE_HEROES (state: IState, heroes: Hero[]) {
+export const mutations: MutationTree<RootState> = {
+	SET_SERVER (state: RootState, server: SERVER) {
+		state.server = server
+	},
+	SET_AVAILABLE_HEROES (state: RootState, heroes: Hero[]) {
 		state.available_heroes = heroes
 	},
-	SET_PLAYERS (state: IState, players: Player[]) {
+	SET_PLAYERS (state: RootState, players: Player[]) {
 		state.players = players
 	},
-	SET_LOADING (state: IState, loading: Boolean) {
+	SET_LOADING (state: RootState, loading: Boolean) {
 		state.loading = loading
 	},
-	SET_ALLIANCES (state: IState, alliances: Alliance[]) {
+	SET_ALLIANCES (state: RootState, alliances: Alliance[]) {
 		state.alliances = alliances
 	},
-	SET_ALLIANCE (state: IState, alliance: Alliance|null) {
+	SET_ALLIANCE (state: RootState, alliance: Alliance|null) {
 		state.alliance = alliance
 	},
-	SET_SORT (state: IState, sort: string) {
+	SET_SORT (state: RootState, sort: string) {
 		state.players_sort = sort
 	},
-	SET_LIMIT (state: IState, limit: number) {
+	SET_LIMIT (state: RootState, limit: number) {
 		state.players_limit = limit || 1000
 	},
-	SET_VIP (state: IState, vip: boolean) {
+	SET_VIP (state: RootState, vip: boolean) {
 		state.players_vip = vip
 	},
-	SET_SCOUT (state: IState, scout: boolean) {
+	SET_SCOUT (state: RootState, scout: boolean) {
 		state.players_scout = scout
 	},
-	SET_FAVORITE (state: IState, favorite: boolean) {
+	SET_FAVORITE (state: RootState, favorite: boolean) {
 		state.players_favorite = favorite
 	},
-	SET_INACTIVE (state: IState, inactive: boolean) {
+	SET_INACTIVE (state: RootState, inactive: boolean) {
 		state.players_inactive = inactive
 	},
 }
@@ -75,13 +86,14 @@ interface IQuery {
 	inactive?: number
 	player_heroes_null?: number
 }
-export const actions: ActionTree<IState, IState> = {
+export const actions: ActionTree<RootState, RootState> = {
 	async FETCH_PLAYERS ({ commit, state }, params) {
 		try {
 			commit('SET_LOADING', true)
 			const query: IQuery = {
 				_sort: state.players_sort,
 				_limit: state.players_limit,
+				server: state.server,
 				...params,
 			}
 			if (state.players_vip) { query.vip_eq = 0 }
