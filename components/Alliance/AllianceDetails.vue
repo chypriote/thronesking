@@ -16,12 +16,16 @@
 		<div class="card-content">
 			<p>Members</p>
 			<div v-for="member of activeMembers" :key="member.id" class="member">
+				<span v-if="member.player.favorite">⭐</span>
+				<span v-if="member.player.inactive === true">⏱</span>
 				{{ member.player.name }}
 			</div>
 
 			<template v-if="previousMembers.length">
 				<p>Previous Members</p>
 				<div v-for="member of previousMembers" :key="member.id" class="member">
+					<span v-if="member.player.favorite">⭐</span>
+					<span v-if="member.player.inactive === true">⏱</span>
 					{{ member.player.name }}
 				</div>
 			</template>
@@ -55,6 +59,10 @@ header {
 		font-weight: bold;
 		color: var(--text-color-primary);
 	}
+}
+.member {
+	display: flex;
+	align-items: center;
 }
 .stats {
 	display: flex;
