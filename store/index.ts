@@ -112,7 +112,7 @@ export const actions: ActionTree<RootState, RootState> = {
 	async FETCH_ALLIANCE ({ commit }, id) {
 		const [alliance, members] = await Promise.all([
 			this.$strapi.findOne('alliances', id),
-			this.$strapi.find('alliance-members', { alliance: id }),
+			this.$strapi.find('alliance-members', { alliance: id, _sort: 'player.power:desc' }),
 		])
 		try {
 			commit('SET_ALLIANCE', { ...alliance, members })
