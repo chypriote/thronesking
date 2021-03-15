@@ -15,15 +15,15 @@ export enum Field {
 interface IState {
 	maidens: AccountMaiden[]
 	loading: Boolean
-	orders: Order[]
-	fields: Field[]
+	orders: Order[],
+	fields: Field[],
 }
 
 export const state = (): IState => ({
 	maidens: [],
 	loading: false,
-	orders: [],
-	fields: [],
+	orders: [Order.DESC],
+	fields: [Field.INTIMACY],
 })
 
 export const mutations: MutationTree<IState> = {

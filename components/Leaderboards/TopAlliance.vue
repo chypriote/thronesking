@@ -59,7 +59,7 @@ export default Vue.extend({
 	methods: {
 		async getAllianceLadder () {
 			this.loading = true
-			this.alliances = await this.$strapi.find('alliances', { _limit: 10, _sort: 'power:desc' })
+			this.alliances = await this.$strapi.find('alliances', { _limit: 10, _sort: 'power:desc', server: 699 })
 			this.loading = false
 		},
 	},

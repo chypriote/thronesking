@@ -98,6 +98,7 @@ export type Alliance = {
 	id: number
 	aid: number
 	name: string
+	battletime: string|Date|null
 	power: number
 	level: number
 	reputation: number

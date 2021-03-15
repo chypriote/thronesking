@@ -106,7 +106,7 @@ export const actions: ActionTree<RootState, RootState> = {
 	},
 	async FETCH_ALLIANCES ({ commit }) {
 		try {
-			commit('SET_ALLIANCES', await this.$strapi.find('alliances', { _sort: 'power:desc' }))
+			commit('SET_ALLIANCES', await this.$strapi.find('alliances', { _sort: 'power:desc', server: 699 }))
 		} catch (e) { console.log(e) }
 	},
 	async FETCH_ALLIANCE ({ commit }, id) {

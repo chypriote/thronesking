@@ -29,8 +29,8 @@ interface IState {
 export const state = (): IState => ({
 	heroes: [],
 	loading: false,
-	orders: [],
-	fields: [],
+	orders: [Order.DESC],
+	fields: [Field.QUALITY],
 })
 
 export const mutations: MutationTree<IState> = {
@@ -41,6 +41,7 @@ export const mutations: MutationTree<IState> = {
 			fortune: parseInt(h.fortune.toString()),
 			provisions: parseInt(h.provisions.toString()),
 			inspiration: parseInt(h.inspiration.toString()),
+			mpower: 5000 * h.level * h.military_quality,
 		}))
 	},
 	TOGGLE_FIELD (state: IState, field: Field) {
