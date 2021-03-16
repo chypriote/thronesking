@@ -21,6 +21,12 @@
 					{{ orders[fields.indexOf(Field.POWER)] === Order.DESC ? '🔻' : '🔺' }}
 				</span>
 			</th>
+			<th class="field highlight" @click="toggleField(Field.WINS)">
+				<span class="field-name">Wins</span>
+				<span v-if="fields.includes(Field.WINS)" class="ordering" :class="`order-${fields.indexOf(Field.WINS)}`">
+					{{ orders[fields.indexOf(Field.WINS)] === Order.DESC ? '🔻' : '🔺' }}
+				</span>
+			</th>
 			<th class="field highlight">
 				<span class="field-name" @click="toggleField(Field.BATTLETIME)">Battle</span>
 				<span v-if="fields.includes(Field.BATTLETIME)" class="ordering" :class="`order-${fields.indexOf(Field.BATTLETIME)}`" @click="toggleField(Field.BATTLETIME)">

@@ -101,6 +101,7 @@ export type Alliance = {
 	battletime: string|Date|null
 	power: number
 	level: number
+	wins: number
 	reputation: number
 	alliance_members: AllianceMember[]
 	members: AllianceMember[]

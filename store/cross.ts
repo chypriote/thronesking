@@ -10,6 +10,7 @@ export enum Field {
 	POWER= 'power',
 	NAME= 'name',
 	SERVER= 'server',
+	WINS= 'wins',
 	BATTLETIME= 'battletime',
 }
 

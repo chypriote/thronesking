@@ -4,6 +4,7 @@
 		<td class="">{{ alliance.name }}</td>
 		<td class="has-text-right">{{ alliance.server }}</td>
 		<td class="has-text-right highlight">{{ alliance.power |numeral }}</td>
+		<td class="has-text-right">{{ alliance.wins }}</td>
 		<td v-if="alliance.battletime" class="has-text-right">{{ format(alliance.battletime, 'dd/MM HH:ii') }}</td>
 		<td v-else class="has-text-right">-</td>
 		<td>
