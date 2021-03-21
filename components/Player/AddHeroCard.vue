@@ -88,6 +88,7 @@ export default Vue.extend({
 	},
 	methods: {
 		async saveHero () {
+			if (this.saving) { return }
 			this.saving = true
 			const hero = await this.$strapi.create('player-heroes', {
 				player: this.player,
