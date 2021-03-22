@@ -33,6 +33,19 @@
 						</div>
 					</fieldset>
 				</div>
+				<div class="column">
+					<fieldset class="field">
+						<label for="heroes">Min Heroes</label>
+						<div class="select">
+							<select id="heroes" v-model="min_heroes">
+								<option value="0">0</option>
+								<option value="20">20</option>
+								<option value="25">25</option>
+								<option value="30">30</option>
+							</select>
+						</div>
+					</fieldset>
+				</div>
 			</div>
 			<div class="columns">
 				<div class="column">
@@ -85,6 +98,10 @@ export default Vue.extend({
 		inactive: {
 			get () { return this.$store.state.players_inactive },
 			async set (value) { await this.$store.dispatch('SET_INACTIVE', value) },
+		},
+		min_heroes: {
+			get () { return this.$store.state.min_heroes },
+			async set (value) { await this.$store.dispatch('SET_MIN_HEROES', value) },
 		},
 	},
 })

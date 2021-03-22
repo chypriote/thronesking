@@ -17,6 +17,7 @@ export interface RootState {
 	players_scout: boolean
 	players_favorite: boolean
 	players_inactive: boolean
+	min_heroes: number
 	loading: Boolean
 
 	alliances: Alliance[]
@@ -33,6 +34,7 @@ export const state = (): RootState => ({
 	players_scout: false,
 	players_favorite: false,
 	players_inactive: false,
+	min_heroes: 0,
 	loading: true,
 
 	alliances: [],
@@ -76,6 +78,9 @@ export const mutations: MutationTree<RootState> = {
 	SET_INACTIVE (state: RootState, inactive: boolean) {
 		state.players_inactive = inactive
 	},
+	SET_MIN_HEROES (state: RootState, heroes: number) {
+		state.min_heroes = heroes
+	},
 }
 
 interface IQuery {
@@ -85,6 +90,7 @@ interface IQuery {
 	favorite?: number
 	inactive?: number
 	player_heroes_null?: number
+	heroes_gte?: number
 }
 export const actions: ActionTree<RootState, RootState> = {
 	async FETCH_PLAYERS ({ commit, state }, params) {
@@ -100,6 +106,7 @@ export const actions: ActionTree<RootState, RootState> = {
 			if (state.players_favorite) { query.favorite = 1 }
 			if (state.players_inactive) { query.inactive = 1 }
 			if (state.players_scout) { query.player_heroes_null = 0 }
+			if (state.min_heroes) { query.heroes_gte = state.min_heroes }
 			commit('SET_PLAYERS', await this.$strapi.find('players', query))
 			commit('SET_LOADING', false)
 		} catch (e) { console.log(e) }
@@ -149,6 +156,14 @@ export const actions: ActionTree<RootState, RootState> = {
 	},
 	async SET_INACTIVE ({ dispatch, commit }, inactive: boolean) {
 		commit('SET_INACTIVE', inactive)
+		await dispatch('FETCH_PLAYERS')
+	},
+	async SET_SERVER ({ dispatch, commit }, server: number) {
+		commit('SET_SERVER', server)
+		await dispatch('FETCH_PLAYERS')
+	},
+	async SET_MIN_HEROES ({ dispatch, commit }, heroes: number) {
+		commit('SET_MIN_HEROES', heroes)
 		await dispatch('FETCH_PLAYERS')
 	},
 }

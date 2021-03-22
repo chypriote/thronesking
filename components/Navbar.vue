@@ -16,6 +16,11 @@
 					@search="debounceInput"
 					@input="goToPlayer"
 				>
+					<template #selected-option="option">
+						<div class="option">
+							<span class="name">{{ option.name }} - {{ option.gid }}</span>
+						</div>
+					</template>
 					<template #option="option">
 						<div class="option">
 							<span class="name">{{ option.name }} - {{ option.gid }}</span>
@@ -41,8 +46,15 @@
 							</div>
 						</div>
 					</div>
-					<nuxt-link class="item" to="/roster">Roster</nuxt-link>
-					<nuxt-link class="item" to="/maiden">Maiden</nuxt-link>
+					<div class="item dropdown is-hoverable">
+						<div class="dropdown-trigger">Account</div>
+						<div class="dropdown-menu">
+							<div class="dropdown-content" role="menu">
+								<nuxt-link class="dropdown-item" to="/roster">Roster</nuxt-link>
+								<nuxt-link class="dropdown-item" to="/maiden">Maiden</nuxt-link>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -1,7 +1,8 @@
 <template>
 	<div class="search card">
 		<div class="card-content">
-			<input
+			<fieldset class="field">
+				<input
 				id="search"
 				v-model="query"
 				aria-label="search"
@@ -11,6 +12,16 @@
 				autocomplete="off"
 				@input="debounceInput"
 			/>
+			</fieldset>
+			<fieldset class="field">
+				<div class="select">
+					<select id="server" v-model="server" aria-label="Server">
+						<option value="699" selected>699</option>
+						<option value="775">775</option>
+						<option value="701">701</option>
+					</select>
+				</div>
+			</fieldset>
 		</div>
 	</div>
 </template>
@@ -22,6 +33,12 @@ import { debounce } from 'lodash-es'
 export default Vue.extend({
 	name: 'PlayersSearch',
 	data: () => ({ query: null }),
+	computed: {
+		server: {
+			get (): number { return this.$store.state.server },
+			set (server): void { this.$store.dispatch('SET_SERVER', server) },
+		},
+	},
 	methods: {
 		debounceInput: debounce(function (): any {
 			// @ts-ignore
