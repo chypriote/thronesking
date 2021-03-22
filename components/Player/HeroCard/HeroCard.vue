@@ -79,6 +79,7 @@ export default Vue.extend({
 	align-items: center;
 	padding: 0 1rem;
 	width: 100%;
+	min-height: 4rem;
 	.image {max-height: 4rem;}
 	.name {
 		font-size: 1.5rem;

@@ -141,6 +141,7 @@ export default Vue.extend({
 #hero .option {
 	display: flex;
 	align-items: center;
+	min-height: 2rem;
 	.picture {
 		height: 2rem;
 		border-radius: 50%;

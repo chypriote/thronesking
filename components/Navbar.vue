@@ -17,18 +17,17 @@
 					@input="goToPlayer"
 				>
 					<template #selected-option="option">
-						<div class="option">
-							<span class="name">{{ option.name }} - {{ option.gid }}</span>
+						<div class="option selected">
+							<span class="name">{{ option.name }}</span> - <span class="uid">{{ option.gid }}</span>
 						</div>
 					</template>
 					<template #option="option">
 						<div class="option">
-							<span class="name">{{ option.name }} - {{ option.gid }}</span>
+							<span class="name">{{ option.name }}</span> - <span class="uid">{{ option.gid }}</span>
 						</div>
 					</template>
-					<template #spinner>
-						<span v-show="loading" class="loader" />
-					</template>
+					<template #spinner><span v-show="loading" class="loader" /></template>
+					<template #open-indicator />
 				</v-select>
 			</div>
 			<div class="navbar-menu">
@@ -141,9 +140,16 @@ export default Vue.extend({
 	display: flex;
 	align-items: center;
 	width: 30%;
-	@media (min-width: 992px) {flex: 1;width: auto;}
+	@media (min-width: 992px) {flex: 1;width: auto;padding: 0 1rem;}
 	.v-select {
 		width: 100%;
+	}
+	.option.selected {
+		word-break: break-all;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		max-width: 100%;
 	}
 }
 .item {

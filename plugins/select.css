@@ -18,7 +18,10 @@
 	}
 	.vs__selected {
 		color: var(--text-color);
-		margin: .25rem;
+		position: absolute;
+		max-width: 100%;
+		top: 0;
+		bottom: 0;
 	}
 	.vs__dropdown-menu {
 		background: var(--background-color);
