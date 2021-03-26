@@ -66,7 +66,7 @@ import { find } from 'lodash-es'
 import { Hero, Player } from '~/types'
 
 interface IData {
-	hero: Hero|null
+	hero: number|null
 	quality: number
 	loading: boolean
 	saving: boolean
@@ -92,7 +92,7 @@ export default Vue.extend({
 			this.saving = true
 			const hero = await this.$strapi.create('player-heroes', {
 				player: this.player.id,
-				hero: this.hero.id,
+				hero: this.hero,
 				quality: this.quality,
 			})
 			this.$store.commit('player/ADD_HERO_TO_ROSTER', { ...hero.hero, base: hero.hero.quality, quality: hero.quality })
