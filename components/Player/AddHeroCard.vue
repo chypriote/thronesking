@@ -67,6 +67,7 @@ import { Hero, Player } from '~/types'
 
 interface IData {
 	hero: Hero|null
+	quality: number|null
 	loading: boolean
 	saving: boolean
 }
@@ -75,14 +76,11 @@ export default Vue.extend({
 	name: 'AddHeroCard',
 	data: (): IData => ({
 		hero: null,
+		quality: null,
 		loading: false,
 		saving: false,
 	}),
 	computed: {
-		quality: {
-			get (): number { return parseInt(this.quality) },
-			set (value: any) { this.quality = parseInt(value) },
-		},
 		player (): Player { return this.$store.state.player.player },
 		roster (): Hero[] { return this.$store.state.player.roster },
 		available_heroes (): Hero[] { return this.$store.state.available_heroes },
