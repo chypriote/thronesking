@@ -31,7 +31,7 @@ export default Vue.extend({
 		},
 	},
 	computed: {
-		alliance (): Alliance|undefined { return this.player.alliance },
+		alliance (): Alliance|null { return this.player.alliance },
 	},
 })
 </script>

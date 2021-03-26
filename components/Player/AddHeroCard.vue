@@ -88,11 +88,11 @@ export default Vue.extend({
 	},
 	methods: {
 		async saveHero () {
-			if (this.saving) { return }
+			if (this.saving || !this.hero) { return }
 			this.saving = true
 			const hero = await this.$strapi.create('player-heroes', {
-				player: this.player,
-				hero: this.hero,
+				player: this.player.id,
+				hero: this.hero.id,
 				quality: this.quality,
 			})
 			this.$store.commit('player/ADD_HERO_TO_ROSTER', { ...hero.hero, base: hero.hero.quality, quality: hero.quality })

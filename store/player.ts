@@ -75,7 +75,7 @@ export const actions: ActionTree<IState, IState> = {
 	async SAVE_NOTES ({ commit, state }, notes: string) {
 		try {
 			if (!state.player) { return }
-			const player = await this.$strapi.update('players', state.player.id, { notes })
+			const player = await this.$strapi.update('players', state.player.id.toString(), { notes })
 			commit('SET_NOTES', player.notes)
 		} catch (e) { console.log(e) }
 	},

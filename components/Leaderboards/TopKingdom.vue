@@ -25,7 +25,7 @@
 						</div>
 					</td>
 					<td class="td-name">
-						<nuxt-link :to="{name: 'players-id', params: {id: player.player.id}}">{{ player.player.name }}</nuxt-link>
+						<nuxt-link :to="{name: 'players-id', params: {id: player.id}}">{{ player.name }}</nuxt-link>
 					</td>
 					<td class="td-power">
 						<span class="hint--top" :aria-label="player.power |formatted">
@@ -43,23 +43,26 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { KingdomRanking } from '~/types'
+import { Player } from '~/types'
 
 interface IData {
-	players: KingdomRanking[]
+	players: Player[]
 	loading: boolean
 }
 
 export default Vue.extend({
 	name: 'Kingdom',
 	data: (): IData => ({ players: [], loading: false }),
+	computed: {
+		server (): number { return this.$store.state.server },
+	},
 	async mounted () {
 		await this.getKingdomLadder()
 	},
 	methods: {
 		async getKingdomLadder () {
 			this.loading = true
-			this.players = await this.$strapi.find('ladders/kingdom', { _limit: 10 })
+			this.players = await this.$strapi.find('players', { _limit: 10, _sort: 'power:desc', server: this.server })
 			this.loading = false
 		},
 	},

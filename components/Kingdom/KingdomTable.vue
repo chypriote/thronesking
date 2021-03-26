@@ -12,7 +12,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<kingdom-row v-for="(rank, index) of players" :key="rank.id" :rank="rank" :index="index" />
+			<kingdom-row v-for="(player, index) of players" :key="player.id" :player="player" :index="index" />
 		</tbody>
 	</table>
 	</div>
@@ -21,14 +21,14 @@
 <script lang="ts">
 import Vue from 'vue'
 import KingdomRow from '~/components/Kingdom/KingdomRow.vue'
-import { KingdomRanking } from '~/types'
+import { Player } from '~/types'
 
 export default Vue.extend({
 	name: 'RankingTable',
 	components: { KingdomRow },
 	data: () => ({ loading: true }),
 	computed: {
-		players (): KingdomRanking[] { return this.$store.state.ladder.kingdom.ladder },
+		players (): Player[] { return this.$store.state.ladder.kingdom.ladder },
 	},
 })
 </script>

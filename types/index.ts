@@ -58,7 +58,7 @@ export type Player = {
 	player_heroes?: PlayerHero[]
 
 	rankings: PlayerRankings
-	alliance?: Alliance
+	alliance: Alliance|null
 	roster?: PlayerHero[]
 }
 export type PlayerRankings = {
@@ -67,7 +67,7 @@ export type PlayerRankings = {
 }
 
 export type Hero = {
-	id?: number
+	id: number
 	hid: number
 	name: string
 	quality: number

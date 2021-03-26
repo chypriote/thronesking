@@ -14,12 +14,12 @@
 			</div>
 		</td>
 		<td class="stat kp highlight">
-			<span class="hint--top" :aria-label="rank.power |formatted">
-				{{ rank.power |numeral }}
+			<span class="hint--top" :aria-label="player.power |formatted">
+				{{ player.power |numeral }}
 			</span>
 		</td>
 		<td class="stat vip">VIP<span style="font-weight: bold;">{{ player.vip }}</span></td>
-		<td class="stat level">{{ rank.level }}</td>
+		<td class="stat level">{{ player.level }}</td>
 		<td v-if="alliance" class="stat alliance">
 			<nuxt-link :key="alliance.id" :to="{name: 'alliances-id', params: {id: alliance.id}}">
 				{{ alliance.name }}
@@ -31,7 +31,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Alliance, Player, KingdomRanking } from '~/types'
+import { Alliance, Player } from '~/types'
 
 export default Vue.extend({
 	name: 'RankingRow',
@@ -40,15 +40,14 @@ export default Vue.extend({
 			type: Number,
 			required: true,
 		},
-		rank: {
-			type: Object as () => KingdomRanking,
+		player: {
+			type: Object as () => Player,
 			required: true,
 		},
 	},
 	computed: {
 		selected (): Player|null { return this.$store.state.ladder.player },
-		player (): Player { return this.rank.player },
-		alliance (): Alliance|null { return this.rank.alliance },
+		alliance (): Alliance|null { return this.player.alliance },
 	},
 	methods: {
 		async selectPlayer (): Promise<void> {
