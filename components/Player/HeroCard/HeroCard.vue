@@ -46,9 +46,13 @@ export default Vue.extend({
 			required: true,
 		},
 	},
-	data: () => ({ editing: false, loading: false, quality: 0, touched: false }),
+	data: () => ({ editing: false, loading: false, touched: false }),
 	computed: {
 		boost (): number { return this.hero.quality - this.hero.base },
+		quality: {
+			get (): number { return parseInt(this.quality) },
+			set (value: any) { this.quality = parseInt(value) },
+		},
 	},
 	methods: {
 		toggleTouched () {
