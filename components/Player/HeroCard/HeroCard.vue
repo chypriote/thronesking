@@ -19,7 +19,7 @@
 							<input :id="`${hero.id}-quality`" v-model="quality" class="input" aria-label="quality" type="number" placeholder="Quality" />
 						</div>
 						<div class="control">
-							<button class="button" type="button" @click.prevent="quality = quality + 1">
+							<button class="button" type="button" @click.prevent="quality = parseInt(quality.toString()) + 1">
 								<span class="icon is-small">+1</span>
 							</button>
 						</div>

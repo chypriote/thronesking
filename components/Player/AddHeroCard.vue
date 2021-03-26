@@ -36,9 +36,9 @@
 		<fieldset id="input-quality" class="field">
 			<div class="control">
 				<div class="field has-addons">
-					<div class="control"><button class="button" type="button" :disabled="loading || (quality - 100) < 1" @click.prevent="quality = Math.max(quality - 100, 0)">-100</button></div>
-					<div class="control"><button class="button" type="button" :disabled="loading || (quality - 10) < 1" @click.prevent="quality = Math.max(quality - 10, 0)">-10</button></div>
-					<div class="control"><button class="button" type="button" style="border-bottom-right-radius: 0;border-top-right-radius: 0;" :disabled="loading || (quality - 1) < 1" @click.prevent="quality = Math.max(quality - 1, 0)">-1</button></div>
+					<div class="control"><button class="button" type="button" :disabled="loading || (quality - 100) < 1" @click.prevent="quality = Math.max(parseInt(quality.toString()) - 100, 0)">-100</button></div>
+					<div class="control"><button class="button" type="button" :disabled="loading || (quality - 10) < 1" @click.prevent="quality = Math.max(parseInt(quality.toString()) - 10, 0)">-10</button></div>
+					<div class="control"><button class="button" type="button" style="border-bottom-right-radius: 0;border-top-right-radius: 0;" :disabled="loading || (quality - 1) < 1" @click.prevent="quality = Math.max(parseInt(quality.toString()) - 1, 0)">-1</button></div>
 				</div>
 			</div>
 			<div class="control quality">
@@ -46,9 +46,9 @@
 			</div>
 			<div class="control">
 				<div class="field has-addons">
-					<div class="control"><button class="button" type="button" style="border-bottom-left-radius: 0;border-top-left-radius: 0;" :disabled="loading || !hero" @click.prevent="quality = quality + 1">+1</button></div>
-					<div class="control"><button class="button" type="button" :disabled="loading || !hero" @click.prevent="quality = quality + 10">+10</button></div>
-					<div class="control"><button class="button" type="button" :disabled="loading || !hero" @click.prevent="quality = quality + 100">+100</button></div>
+					<div class="control"><button class="button" type="button" style="border-bottom-left-radius: 0;border-top-left-radius: 0;" :disabled="loading || !hero" @click.prevent="quality = parseInt(quality.toString()) + 1">+1</button></div>
+					<div class="control"><button class="button" type="button" :disabled="loading || !hero" @click.prevent="quality = parseInt(quality.toString()) + 10">+10</button></div>
+					<div class="control"><button class="button" type="button" :disabled="loading || !hero" @click.prevent="quality = parseInt(quality.toString()) + 100">+100</button></div>
 				</div>
 			</div>
 		</fieldset>
@@ -67,7 +67,7 @@ import { Hero, Player } from '~/types'
 
 interface IData {
 	hero: Hero|null
-	quality: number|null
+	quality: number
 	loading: boolean
 	saving: boolean
 }
@@ -76,7 +76,7 @@ export default Vue.extend({
 	name: 'AddHeroCard',
 	data: (): IData => ({
 		hero: null,
-		quality: null,
+		quality: 0,
 		loading: false,
 		saving: false,
 	}),
@@ -98,13 +98,13 @@ export default Vue.extend({
 			this.$store.commit('player/ADD_HERO_TO_ROSTER', { ...hero.hero, base: hero.hero.quality, quality: hero.quality })
 			// @ts-ignore
 			this.$refs.hero.clearSelection()
-			this.quality = null
+			this.quality = 0
 			this.saving = false
 			document.getElementById('hero-input')?.focus()
 		},
 		async selectHero (hero: Hero) {
 			this.quality = hero.quality
-			if (!hero) { return (this.quality = null) }
+			if (!hero) { return (this.quality = 0) }
 			await setTimeout(() => {}, 500)
 			document.getElementById('hero-quality')?.focus()
 		},
