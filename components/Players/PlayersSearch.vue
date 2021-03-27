@@ -14,6 +14,7 @@
 			/>
 			</fieldset>
 			<fieldset class="field">
+				<label for="server">Server</label>
 				<div class="select">
 					<select id="server" v-model="server" aria-label="Server">
 						<option value="699" selected>699</option>

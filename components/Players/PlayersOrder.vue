@@ -8,7 +8,8 @@
 						<div class="select">
 							<select id="sort" v-model="sort">
 								<option value="gid:asc">GID</option>
-								<option value="power:desc">Power</option>
+								<option value="power:desc">Most Power</option>
+								<option value="power:asc">Least Power</option>
 								<option value="heroes:desc">Most Heroes</option>
 								<option value="heroes:asc">Least Heroes</option>
 								<option value="level:desc">Level</option>
@@ -42,6 +43,10 @@
 								<option value="20">20</option>
 								<option value="25">25</option>
 								<option value="30">30</option>
+								<option value="40">40</option>
+								<option value="50">50</option>
+								<option value="60">60</option>
+								<option value="70">70</option>
 							</select>
 						</div>
 					</fieldset>
