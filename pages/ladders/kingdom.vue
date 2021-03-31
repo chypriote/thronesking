@@ -21,7 +21,7 @@ export default Vue.extend({
 	name: 'KingdomIndex',
 	components: { KingdomTable, PlayerPeek },
 	async asyncData ({ store }): Promise<void> {
-		await store.dispatch('ladder/kingdom/FETCH_LADDER')
+		await store.dispatch('ladder/FETCH_LADDER')
 	},
 	head: (): MetaInfo => ({ title: 'Kingdom power ladder' }),
 })

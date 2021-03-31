@@ -14,10 +14,6 @@
 					<player-analysis :player="player" />
 					{{ player.notes }}
 				</div>
-				<div v-if="showGraph" class="card-content graph">
-					<header>Rank</header>
-					<player-peek-graph />
-				</div>
 			</template>
 			<div v-else class="card-content">Select a player</div>
 		</template>
@@ -28,17 +24,15 @@
 import Vue from 'vue'
 import { Player } from '~/types'
 import PlayerStats from '~/components/Global/PlayerStats.vue'
-import PlayerPeekGraph from '~/components/Global/PlayerPeekGraph.vue'
 import PlayerDetailsHeader from '~/components/Global/PlayerDetailsHeader.vue'
 import PlayerAnalysis from '~/components/Global/PlayerAnalysis.vue'
 
 export default Vue.extend({
 	name: 'PlayersId',
-	components: { PlayerAnalysis, PlayerPeekGraph, PlayerStats, PlayerDetailsHeader },
+	components: { PlayerAnalysis, PlayerStats, PlayerDetailsHeader },
 	computed: {
 		loading (): boolean { return this.$store.state.ladder.loading },
 		player (): Player { return this.$store.state.ladder.player },
-		showGraph (): boolean { return this.$store.state.ladder.kingdom_rankings.length || this.$store.state.ladder.tourney_rankings.length },
 	},
 })
 </script>

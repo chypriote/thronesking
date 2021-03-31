@@ -8,32 +8,6 @@ export interface Ranking {
 	player: Player
 }
 
-export enum RankingTypes {
-	KINGDOM_RANK= 'kingdom-rank',
-	KINGDOM_POWER= 'kingdom-power',
-	TOURNEY_RANK= 'tourney-rank',
-	TOURNEY_POINTS= 'tourney-power',
-}
-
-export type KingdomRanking = {
-	id: number
-	date: string
-	rank: number
-	power: number
-	level: number
-	player: Player
-	alliance: Alliance
-}
-
-export type TourneyRanking = {
-	id: number
-	date: string
-	rank: number
-	points: number
-	ratio: number
-	player: Player
-}
-
 export type Player = {
 	id: number
 	gid: number
@@ -57,13 +31,8 @@ export type Player = {
 	alliance_members?: AllianceMember[]
 	player_heroes?: PlayerHero[]
 
-	rankings: PlayerRankings
 	alliance: Alliance|null
 	roster?: PlayerHero[]
-}
-export type PlayerRankings = {
-	kingdom: KingdomRanking
-	tourney: TourneyRanking
 }
 
 export type Hero = {

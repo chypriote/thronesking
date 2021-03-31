@@ -28,7 +28,7 @@ export default Vue.extend({
 	components: { KingdomRow },
 	data: () => ({ loading: true }),
 	computed: {
-		players (): Player[] { return this.$store.state.ladder.kingdom.ladder },
+		players (): Player[] { return this.$store.state.ladder.ladder },
 	},
 })
 </script>
