@@ -118,7 +118,7 @@ export default Vue.extend({
 	align-items: center;
 	.field {margin-bottom: 0;}
 	.field + .field {margin-left: 1rem;}
-	@media (max-width: 768px) {
+	@media (max-width: 992px) {
 		flex-direction: column;
 		.field {width: 100%;}
 		.field + .field {margin-top: 1rem;margin-left: 0;}

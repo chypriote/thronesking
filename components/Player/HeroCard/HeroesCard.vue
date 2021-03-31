@@ -10,8 +10,8 @@
 		<div class="card-content">
 			<add-hero-card id="add-hero-card" />
 			<div class="roster columns is-multiline">
-				<div v-for="hero of roster" :key="hero.id" class="column is-one-third-fullhd is-half">
-					<hero-card class="hero" :hero="hero" />
+				<div v-for="hero of roster" :key="hero.id" class="column is-one-third-tablet is-half-desktop is-one-third-fullhd is-half">
+					<hero-card class="hero-card" :hero="hero" />
 				</div>
 			</div>
 		</div>
@@ -54,7 +54,7 @@ header {
 	display: flex;
 	justify-content: space-between;
 }
-.hero {
+.hero-card {
 	margin-bottom: 1rem;
 }
 </style>

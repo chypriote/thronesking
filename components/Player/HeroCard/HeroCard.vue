@@ -1,10 +1,8 @@
 <template>
-	<div class="card bordered" :class="{'touched': touched}">
-		<div class="hero">
+	<div class="card bordered" :class="{'touched': touched, 'editing': editing}">
+		<div class="hero" @click="toggleTouched">
 			<img v-if="hero.picture" class="image" :src="hero.picture.formats.thumbnail.url" :alt="hero.name" />
-			<p class="name">{{ hero.name }}</p>
-			<div v-show="!editing" class="quality" :class="{'hint--top': boost}" :aria-label="`+${boost}`" @click="toggleEdit">{{ hero.quality }}</div>
-			<div class="set-touched" @click="toggleTouched">☑</div>
+			<span class="name">{{ hero.name }}</span>
 		</div>
 		<form v-show="editing" class="edit" @submit.prevent="updateHero">
 			<fieldset class="field is-grouped has-addons">
@@ -26,10 +24,11 @@
 					</div>
 				</div>
 				<div class="control">
-					<button type="submit" class="button --primary" :class="{'is-loading': loading}">Save</button>
+					<button type="submit" class="button --primary --submit" :class="{'is-loading': loading}">💾</button>
 				</div>
 			</fieldset>
 		</form>
+		<div v-show="!editing" class="quality" :class="{'hint--top': boost}" :aria-label="`+${boost}`" @click="toggleEdit">{{ hero.quality }}</div>
 	</div>
 </template>
 
@@ -52,12 +51,14 @@ export default Vue.extend({
 	},
 	methods: {
 		toggleTouched () {
+			if (this.editing) { return }
 			this.touched = !this.touched
 		},
 		toggleEdit () {
 			this.editing = !this.editing
 			this.loading = false
 			this.quality = clone(this.hero.quality)
+			this.touched = false
 			setTimeout(() => { document.getElementById(`${this.hero.id}-quality`)?.focus() }, 200)
 		},
 		async updateHero () {
@@ -76,33 +77,47 @@ export default Vue.extend({
 .hero {
 	display: flex;
 	flex-direction: row;
-	align-items: center;
 	padding: 0 1rem;
 	width: 100%;
 	min-height: 4rem;
+	transition: all 200ms ease-in-out;
 	.image {max-height: 4rem;}
 	.name {
-		font-size: 1.5rem;
-		padding: 0 1rem;
-		line-height: 1;
-		margin-bottom: 0;
 		flex: 1;
+		padding: 1rem 1rem;
+		margin-bottom: 0;
+		font-size: 1.5rem;
+		line-height: 1;
 		text-align: left;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		word-break: break-all;
+		overflow: hidden;
 	}
-	&.touched {opacity: .3;background-color: rgba(0, 0, 0, .8);}
 }
 .card {
 	margin-top: 0;
 	display: flex;
 	flex-direction: column;
+	transition: all 200ms ease-in-out;
+	&:hover:not(.editing) {
+		cursor: pointer;
+		transform: translate(0, -.25rem);
+	}
+	&.touched {
+		background-color: rgba(0, 0, 0, .3);
+		.hero {opacity: .3;}
+	}
 }
 .edit {
 	display: flex;
 	align-items: center;
 	margin-top: .5rem;
-	padding: .5rem 0 1rem;
+	padding: .5rem .5rem 1rem;
+	.--submit {padding: .5rem .5rem;}
 }
 .control {display: flex;}
+.field.is-grouped > .control:not(:last-child) {margin-right: 0;}
 .quality {
 	position: absolute;
 	right: -.5rem;
@@ -116,6 +131,7 @@ export default Vue.extend({
 	background-color: var(--background-color);
 	border: 1px solid var(--foreground-color-high-contrast);
 	cursor: pointer;
+	z-index: 10;
 	&:hover {background-color: rgba(0, 0, 0, .5);}
 	&.hint--top {font-weight: bold;}
 }
