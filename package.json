@@ -28,7 +28,7 @@
     "bulma": "^0.9",
     "chart.js": "^2.9",
     "chartjs-plugin-datalabels": "^0.7",
-    "core-js": "^3.9",
+    "core-js": "^3.10",
     "date-fns": "^2.19",
     "hint.css": "^2.6",
     "lodash-es": "^4.17",
