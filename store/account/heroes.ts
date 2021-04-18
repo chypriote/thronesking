@@ -29,8 +29,8 @@ interface IState {
 export const state = (): IState => ({
 	heroes: [],
 	loading: false,
-	orders: [Order.DESC],
-	fields: [Field.QUALITY],
+	orders: [],
+	fields: [],
 })
 
 export const mutations: MutationTree<IState> = {
