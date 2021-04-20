@@ -36,7 +36,7 @@
     "nuxt": "^2.15",
     "ordinal-numbers": "^1.0",
     "postcss-comment": "^2.0",
-    "postcss-custom-properties": "^9.1",
+    "postcss-custom-properties": "^10.0",
     "postcss-import": "^14.0",
     "postcss-nested": "^4.2",
     "vue-chartjs": "^3.5",
