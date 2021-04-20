@@ -1,6 +1,9 @@
 export default {
 	target: 'static',
 	ssr: false,
+	generate: {
+		fallback: true,
+	},
 	head: {
 		titleTemplate: template => `${template} - thronesking` || 'thronesking',
 		meta: [
