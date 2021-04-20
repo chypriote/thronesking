@@ -11,17 +11,18 @@
 				<th>Heroes</th>
 				<th>Maiden</th>
 				<th>Ratio</th>
+				<th>Alliance</th>
 			</tr>
 			</thead>
 			<tbody>
-				<tr v-if="loading"><td colspan="8">
+				<tr v-if="loading"><td colspan="9">
 					<div class="loader-wrapper">
 						<span class="loader" />
 					</div>
 				</td></tr>
 				<template v-else>
 					<player-row v-for="player of players" :key="player.id" :player="player" />
-					<tr v-if="!players.length"><td colspan="8">No Results</td></tr>
+					<tr v-if="!players.length"><td colspan="9">No Results</td></tr>
 				</template>
 			</tbody>
 		</table>

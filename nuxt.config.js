@@ -1,5 +1,6 @@
 export default {
-	target: 'server',
+	target: 'static',
+	ssr: false,
 	head: {
 		titleTemplate: template => `${template} - thronesking` || 'thronesking',
 		meta: [

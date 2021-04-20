@@ -5,35 +5,11 @@
 				<nuxt-link class="item home" to="/">Home</nuxt-link>
 			</div>
 			<div class="navbar-search">
-				<v-select
-					id="player"
-					v-model="player"
-					:input-id="'player-search'"
-					:options="players"
-					required
-					label="name"
-					:reduce="player => player.id"
-					@search="debounceInput"
-					@input="goToPlayer"
-				>
-					<template #selected-option="option">
-						<div class="option selected">
-							<span class="name">{{ option.name }}</span> - <span class="uid">{{ option.gid }}</span>
-						</div>
-					</template>
-					<template #option="option">
-						<div class="option">
-							<span class="name">{{ option.name }}</span> - <span class="uid">{{ option.gid }}</span>
-						</div>
-					</template>
-					<template #spinner><span v-show="loading" class="loader" /></template>
-					<template #open-indicator />
-				</v-select>
+				<player-select />
 			</div>
 			<div class="navbar-menu">
 				<div class="navbar-end">
 					<nuxt-link class="item" to="/players">Players</nuxt-link>
-					<nuxt-link class="item" to="/finder">Finder</nuxt-link>
 <!--					<nuxt-link class="item" to="/cross">Cross Server</nuxt-link>-->
 					<div class="item dropdown is-hoverable">
 						<div class="dropdown-trigger">Ladders</div>
@@ -63,6 +39,7 @@
 import Vue from 'vue'
 import { debounce } from 'lodash-es'
 import { Player } from '~/types'
+import PlayerSelect from '~/components/Global/PlayerSelect.vue'
 
 interface IData {
 	players: Player[]
@@ -72,6 +49,7 @@ interface IData {
 
 export default Vue.extend({
 	name: 'Navbar',
+	components: { PlayerSelect },
 	data: (): IData => ({
 		players: [],
 		player: null,

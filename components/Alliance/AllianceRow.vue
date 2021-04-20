@@ -14,6 +14,7 @@
 		<td class="stat power highlight">{{ alliance.power |numeral }}</td>
 		<td class="stat reputation">{{ alliance.reputation |numeral }}</td>
 		<td class="stat level">{{ alliance.level }}</td>
+		<td class="stat server">{{ alliance.server }}</td>
 	</tr>
 </template>
 

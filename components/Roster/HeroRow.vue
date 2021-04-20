@@ -54,7 +54,7 @@ export default Vue.extend({
 	}
 }
 .quality {
-	width: 2rem;
+	width: 4rem;
 	height: 2rem;
 	margin: 0 auto;
 	display: flex;

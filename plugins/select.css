@@ -23,6 +23,13 @@
 		top: 0;
 		bottom: 0;
 	}
+	&:not(.vs--single) {
+		.vs__selected {
+			background: var(--background-color);
+			margin: auto;
+			height: 2em;
+		}
+	}
 	.vs__dropdown-menu {
 		background: var(--background-color);
 		color: var(--text-color);

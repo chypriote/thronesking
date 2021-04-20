@@ -19,6 +19,7 @@
 		<td class="stat heroes">{{ player.heroes }}</td>
 		<td class="stat maidens">{{ player.maidens }}</td>
 		<td class="stat ratio">{{ player.ratio |numeral }}</td>
+		<td class="stat alliance">{{ player.alliance ? player.alliance.name : '-' }}</td>
 	</tr>
 </template>
 

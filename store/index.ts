@@ -2,10 +2,19 @@ import { ActionTree, MutationTree } from 'vuex'
 import { NuxtStrapiQueryParams } from '@nuxtjs/strapi/types/types'
 import { Alliance, Hero, Player } from '~/types'
 
-export enum SERVER {
-	MAIN= 699,
+export const servs = [699, 701, 775, 691, 692, 693, 694, 695, 696, 697, 698]
+export enum SERVERS {
+	S699= 699,
 	S701= 701,
 	S775= 775,
+	S691= 691,
+	S692= 692,
+	S693= 693,
+	S694= 694,
+	S695= 695,
+	S696= 696,
+	S697= 697,
+	S698= 698
 }
 
 export interface RootState {
@@ -26,10 +35,10 @@ export interface RootState {
 }
 
 export const state = (): RootState => ({
-	server: SERVER.MAIN,
+	server: SERVERS.S699,
 	available_heroes: [],
 	players: [],
-	players_limit: 1000,
+	players_limit: 100,
 	players_sort: 'gid:asc',
 	players_vip: false,
 	players_scout: false,
@@ -43,7 +52,7 @@ export const state = (): RootState => ({
 })
 
 export const mutations: MutationTree<RootState> = {
-	SET_SERVER (state: RootState, server: SERVER) {
+	SET_SERVER (state: RootState, server: SERVERS) {
 		state.server = server
 	},
 	SET_AVAILABLE_HEROES (state: RootState, heroes: Hero[]) {
@@ -90,6 +99,7 @@ type IQuery = NuxtStrapiQueryParams & {
 	vip_eq?: number|null
 	favorite?: number
 	inactive?: number
+	'alliance_members.alliance'?: any
 	player_heroes_null?: number
 	heroes_gte?: number
 }
@@ -108,13 +118,14 @@ export const actions: ActionTree<RootState, RootState> = {
 			if (state.players_inactive) { query.inactive = 1 }
 			if (state.players_scout) { query.player_heroes_null = 0 }
 			if (state.min_heroes) { query.heroes_gte = state.min_heroes }
+			if (state.alliance) { query['alliance_members.alliance'] = state.alliance.id }
 			commit('SET_PLAYERS', await this.$strapi.find('players', query))
 			commit('SET_LOADING', false)
 		} catch (e) { console.log(e) }
 	},
-	async FETCH_ALLIANCES ({ commit }) {
+	async FETCH_ALLIANCES ({ commit, state }) {
 		try {
-			commit('SET_ALLIANCES', await this.$strapi.find('alliances', { _sort: 'power:desc', server: 699 }))
+			commit('SET_ALLIANCES', await this.$strapi.find('alliances', { _sort: 'power:desc', server: state.server }))
 		} catch (e) { console.log(e) }
 	},
 	async FETCH_ALLIANCE ({ commit }, id) {
@@ -155,12 +166,17 @@ export const actions: ActionTree<RootState, RootState> = {
 		commit('SET_FAVORITE', favorite)
 		await dispatch('FETCH_PLAYERS')
 	},
+	async SET_ALLIANCE ({ dispatch, commit }, alliance: Alliance) {
+		commit('SET_ALLIANCE', alliance)
+		await dispatch('FETCH_PLAYERS')
+	},
 	async SET_INACTIVE ({ dispatch, commit }, inactive: boolean) {
 		commit('SET_INACTIVE', inactive)
 		await dispatch('FETCH_PLAYERS')
 	},
 	async SET_SERVER ({ dispatch, commit }, server: number) {
 		commit('SET_SERVER', server)
+		await dispatch('FETCH_ALLIANCES')
 		await dispatch('FETCH_PLAYERS')
 	},
 	async SET_MIN_HEROES ({ dispatch, commit }, heroes: number) {

@@ -8,6 +8,7 @@
 			<th>Power</th>
 			<th>Reputation</th>
 			<th>Level</th>
+			<th>Server</th>
 		</tr>
 		</thead>
 		<tbody>

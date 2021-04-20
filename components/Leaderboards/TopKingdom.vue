@@ -62,7 +62,7 @@ export default Vue.extend({
 	methods: {
 		async getKingdomLadder () {
 			this.loading = true
-			this.players = await this.$strapi.find('players', { _limit: 10, _sort: 'power:desc', server: this.server })
+			this.players = await this.$strapi.find('players', { _limit: 10, _sort: 'power:desc', server: 699 })
 			this.loading = false
 		},
 	},
