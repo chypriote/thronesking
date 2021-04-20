@@ -1,5 +1,4 @@
 import { ActionTree, MutationTree } from 'vuex'
-import { NuxtStrapiQueryParams } from '@nuxtjs/strapi/types/types'
 import { Alliance, Hero, Player } from '~/types'
 
 export const servs = [699, 701, 775, 691, 692, 693, 694, 695, 696, 697, 698]
@@ -93,7 +92,7 @@ export const mutations: MutationTree<RootState> = {
 	},
 }
 
-type IQuery = NuxtStrapiQueryParams & {
+type IQuery = any & {
 	_limit: number
 	_sort: string
 	vip_eq?: number|null

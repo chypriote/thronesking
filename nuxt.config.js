@@ -28,6 +28,9 @@ export default {
 	buildModules: ['@nuxt/typescript-build', '@nuxtjs/stylelint-module'],
 	modules: ['@nuxtjs/axios', '@nuxtjs/pwa', '@nuxtjs/strapi'],
 
+	router: {
+		middleware: ['load'],
+	},
 	pwa: {
 		manifest: {
 			lang: 'en',
