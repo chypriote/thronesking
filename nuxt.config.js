@@ -1,9 +1,6 @@
 export default {
-	target: 'static',
-	ssr: false,
-	generate: {
-		fallback: true,
-	},
+	target: 'server',
+	ssr: true,
 	head: {
 		titleTemplate: template => `${template} - thronesking` || 'thronesking',
 		meta: [
@@ -28,9 +25,6 @@ export default {
 	buildModules: ['@nuxt/typescript-build', '@nuxtjs/stylelint-module'],
 	modules: ['@nuxtjs/axios', '@nuxtjs/pwa', '@nuxtjs/strapi'],
 
-	router: {
-		middleware: ['load'],
-	},
 	pwa: {
 		manifest: {
 			lang: 'en',
