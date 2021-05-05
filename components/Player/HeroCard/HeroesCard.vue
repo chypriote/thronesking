@@ -29,7 +29,7 @@ export default Vue.extend({
 	name: 'HeroesCard',
 	components: { AddHeroCard, HeroCard },
 	computed: {
-		roster (): Hero[] { return orderBy(this.$store.state.player.roster, 'quality', 'desc') },
+		roster (): Hero[] { return orderBy(this.$store.state.player.roster, ['touched', 'quality'], ['asc', 'desc']) },
 		player (): Player { return this.$store.state.player.player },
 	},
 })

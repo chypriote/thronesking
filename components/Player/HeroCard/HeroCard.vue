@@ -1,5 +1,5 @@
 <template>
-	<div class="card bordered" :class="{'touched': touched, 'editing': editing}">
+	<div class="card bordered" :class="{'touched': hero.touched, 'editing': editing}">
 		<div class="hero" @click="toggleTouched">
 			<img v-if="hero.picture" class="image" :src="hero.picture.formats.thumbnail.url" :alt="hero.name" />
 			<span class="name">{{ hero.name }}</span>
@@ -45,20 +45,20 @@ export default Vue.extend({
 			required: true,
 		},
 	},
-	data: () => ({ editing: false, loading: false, quality: 0, touched: false }),
+	data: () => ({ editing: false, loading: false, quality: 0 }),
 	computed: {
 		boost (): number { return this.hero.quality - this.hero.base },
 	},
 	methods: {
 		toggleTouched () {
 			if (this.editing) { return }
-			this.touched = !this.touched
+			this.$store.commit('player/TOGGLE_HERO_TOUCHED', this.hero)
 		},
 		toggleEdit () {
 			this.editing = !this.editing
 			this.loading = false
 			this.quality = clone(this.hero.quality)
-			this.touched = false
+			this.$store.commit('player/TOGGLE_HERO_TOUCHED', this.hero)
 			setTimeout(() => { document.getElementById(`${this.hero.id}-quality`)?.focus() }, 200)
 		},
 		async updateHero () {
@@ -67,7 +67,7 @@ export default Vue.extend({
 			await this.$store.dispatch('player/UPDATE_HERO', { hero: this.hero, quality: this.quality })
 			this.editing = false
 			this.loading = false
-			this.touched = true
+			this.$store.commit('player/TOGGLE_HERO_TOUCHED', this.hero)
 		},
 	},
 })

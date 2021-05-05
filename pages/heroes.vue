@@ -1,12 +1,7 @@
 <template>
-	<div class="columns">
-		<div class="column is-one-third">
-			<div class="card bordered">
-				<div class="card-content"></div>
-			</div>
-		</div>
-		<div class="column is-two-thirds">
-			<hero-card v-for="hero of heroes" :key="hero.id" :hero="hero" />
+	<div class="columns is-multiline">
+		<div v-for="hero of heroes" :key="hero.id" class="column is-one-third">
+			<hero-card :hero="hero" />
 		</div>
 	</div>
 </template>
@@ -25,7 +20,7 @@ export default Vue.extend({
 	name: 'Heroes',
 	components: { HeroCard },
 	async asyncData ({ $strapi }) {
-		const heroes = await $strapi.find('heroes', { _sort: 'quality:desc' })
+		const heroes = await $strapi.find('heroes', { _sort: 'stars:desc,name:asc' })
 
 		return { heroes }
 	},
