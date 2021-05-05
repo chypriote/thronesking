@@ -41,7 +41,7 @@ export default Vue.extend({
 	name: 'HeroCard',
 	props: {
 		hero: {
-			type: Object as () => Hero,
+			type: Object as () => Hero & { touched: boolean },
 			required: true,
 		},
 	},
@@ -58,7 +58,9 @@ export default Vue.extend({
 			this.editing = !this.editing
 			this.loading = false
 			this.quality = clone(this.hero.quality)
-			this.$store.commit('player/TOGGLE_HERO_TOUCHED', this.hero)
+			if (this.hero.touched) {
+				this.$store.commit('player/TOGGLE_HERO_TOUCHED', this.hero)
+			}
 			setTimeout(() => { document.getElementById(`${this.hero.id}-quality`)?.focus() }, 200)
 		},
 		async updateHero () {
