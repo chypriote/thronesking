@@ -71,8 +71,10 @@ export default Vue.extend({
 			set (hero): void { this.$store.commit('calculator/SET_HERO', hero) },
 		},
 		heroes (): Hero[] { return this.$store.state.available_heroes },
-		skills (): QualitySkill[] { return this.hero.quality_skills.map(qs => qs.quality_skill) },
-		paragons (): Paragon[] { return this.hero.paragons },
+		// @ts-ignore
+		skills (): QualitySkill[] { return this.hero?.quality_skills.map((qs: any) => qs.quality_skill) || [] },
+		// @ts-ignore
+		paragons (): Paragon[] { return this.hero?.paragons.map((p: any) => p.paragon) || [] },
 	},
 })
 </script>
