@@ -6,6 +6,7 @@
 		:options="players"
 		required
 		label="name"
+		:filter="sortPlayer"
 		:reduce="player => player.id"
 		@search="debounceInput"
 		@input="goToPlayer"
@@ -58,6 +59,11 @@ export default Vue.extend({
 		goToPlayer (id: number|null) {
 			if (!id) { return }
 			this.$router.push({ name: 'players-id', params: { id: id.toString() } })
+		},
+		sortPlayer (options: Player[], search: string) {
+			return options.filter((option: Player) => {
+				return (option.name || '').toLowerCase().includes(search.toLowerCase())
+			}).sort((a: Player, b: Player) => a.name.indexOf(search) - b.name.indexOf(search))
 		},
 	},
 })

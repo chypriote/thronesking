@@ -9,6 +9,8 @@
 				:options="heroes"
 				aria-label="hero"
 				required
+				filterable
+				:filter="heroFilter"
 				label="name"
 				:reduce="hero => hero.id"
 				:disabled="loading"
@@ -107,6 +109,11 @@ export default Vue.extend({
 			if (!hero) { return (this.quality = 0) }
 			await setTimeout(() => {}, 500)
 			document.getElementById('hero-quality')?.focus()
+		},
+		heroFilter (options: Hero[], search: string) {
+			return options.filter((option: Hero) => {
+				return (option.name || '').toLowerCase().includes(search.toLowerCase())
+			}).sort((a: Hero, b: Hero) => a.name.indexOf(search) - b.name.indexOf(search))
 		},
 	},
 })

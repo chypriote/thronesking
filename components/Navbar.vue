@@ -38,41 +38,11 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { debounce } from 'lodash-es'
-import { Player } from '~/types'
 import PlayerSelect from '~/components/Global/PlayerSelect.vue'
-
-interface IData {
-	players: Player[]
-	player: Player|null
-	loading: boolean
-}
 
 export default Vue.extend({
 	name: 'Navbar',
 	components: { PlayerSelect },
-	data: (): IData => ({
-		players: [],
-		player: null,
-		loading: false,
-	}),
-	methods: {
-		debounceInput: debounce(function (value): any {
-			// @ts-ignore
-			this.searchPlayers(value)
-		}, 400),
-		async searchPlayers (value: string|null) {
-			if (!value) { return }
-			this.loading = true
-			this.players = []
-			this.players = await this.$strapi.find('players', { name_contains: value })
-			this.loading = false
-		},
-		goToPlayer (id: number|null) {
-			if (!id) { return }
-			this.$router.push({ name: 'players-id', params: { id: id.toString() } })
-		},
-	},
 })
 </script>
 
