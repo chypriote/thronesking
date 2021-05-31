@@ -1,5 +1,6 @@
 import { ActionTree, MutationTree } from 'vuex'
-import { Alliance, Hero, Player } from '~/types'
+import { Alliance, Player } from '~/types'
+import { Hero } from '~/types/Hero'
 
 interface IState {
 	loading: Boolean
@@ -16,57 +17,57 @@ export const state = (): IState => ({
 })
 
 export const mutations: MutationTree<IState> = {
-	SET_LOADING(state: IState, loading: Boolean) {
+	SET_LOADING (state: IState, loading: Boolean) {
 		state.loading = loading
 	},
-	SET_PLAYER(state: IState, player: Player | null) {
+	SET_PLAYER (state: IState, player: Player | null) {
 		state.player = player
 	},
-	ADD_HERO_TO_ROSTER(state: IState, hero: Hero) {
+	ADD_HERO_TO_ROSTER (state: IState, hero: Hero) {
 		state.roster.push({ ...hero, touched: true })
 	},
-	TOGGLE_HERO_TOUCHED(state: IState, updated: Hero) {
-		const hero = state.roster.find((h) => h.id === updated.id)
+	TOGGLE_HERO_TOUCHED (state: IState, updated: Hero) {
+		const hero = state.roster.find(h => h.id === updated.id)
 		if (!hero) {
 			return
 		}
 		hero.touched = !hero.touched
 	},
-	UPDATE_HERO(state: IState, updated: Hero) {
-		const hero = state.roster.find((h) => h.id === updated.id)
+	UPDATE_HERO (state: IState, updated: Hero) {
+		const hero = state.roster.find(h => h.id === updated.id)
 		if (!hero) {
 			return
 		}
 		hero.quality = updated.quality
 	},
-	SET_ROSTER(state: IState, roster: Hero[]) {
-		state.roster = roster.map((h) => ({ ...h, touched: false }))
+	SET_ROSTER (state: IState, roster: Hero[]) {
+		state.roster = roster.map(h => ({ ...h, touched: false }))
 	},
-	SET_NOTES(state: IState, notes: string) {
+	SET_NOTES (state: IState, notes: string) {
 		if (!state.player) {
 			return
 		}
 		state.player.notes = notes
 	},
-	SET_PLAYER_FAVORITE(state: IState, favorite: boolean) {
+	SET_PLAYER_FAVORITE (state: IState, favorite: boolean) {
 		if (!state.player) {
 			return
 		}
 		state.player.favorite = favorite
 	},
-	SET_ALLIANCE(state: IState, alliance: Alliance | null) {
+	SET_ALLIANCE (state: IState, alliance: Alliance | null) {
 		state.alliance = alliance
 	},
 }
 
 export const actions: ActionTree<IState, IState> = {
-	RESET({ commit }) {
+	RESET ({ commit }) {
 		commit('SET_ALLIANCE', null)
 		commit('SET_ROSTER', [])
 	},
-	async FETCH_PLAYER({ commit }, id) {
+	async FETCH_PLAYER ({ commit }, id) {
 		try {
-			const player: Player = await this.$strapi.$http.get(`players/${id}/details`).then((response) => response.json())
+			const player: Player = await this.$strapi.$http.get(`players/${id}/details`).then(response => response.json())
 			commit('SET_PLAYER', player)
 			commit('SET_ROSTER', player.roster)
 			commit('SET_ALLIANCE', player.alliance)
@@ -74,7 +75,7 @@ export const actions: ActionTree<IState, IState> = {
 			console.log(e)
 		}
 	},
-	async SAVE_NOTES({ commit, state }, notes: string) {
+	async SAVE_NOTES ({ commit, state }, notes: string) {
 		try {
 			if (!state.player) {
 				return
@@ -85,7 +86,7 @@ export const actions: ActionTree<IState, IState> = {
 			console.log(e)
 		}
 	},
-	async TOGGLE_FAVORITE({ commit, state }, id) {
+	async TOGGLE_FAVORITE ({ commit, state }, id) {
 		try {
 			if (!state.player) {
 				return
@@ -97,18 +98,18 @@ export const actions: ActionTree<IState, IState> = {
 		}
 	},
 
-	async FETCH_ROSTER({ commit, state }) {
+	async FETCH_ROSTER ({ commit, state }) {
 		try {
 			if (!state.player) {
 				return
 			}
-			commit('SET_ROSTER', await this.$strapi.$http.get(`players/${state.player.id}/roster`).then((response) => response.json()))
+			commit('SET_ROSTER', await this.$strapi.$http.get(`players/${state.player.id}/roster`).then(response => response.json()))
 		} catch (e) {
 			console.log(e)
 		}
 	},
 
-	async UPDATE_HERO({ state, commit }, { hero, quality }) {
+	async UPDATE_HERO ({ state, commit }, { hero, quality }) {
 		try {
 			if (!state.player) {
 				return

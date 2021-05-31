@@ -1,13 +1,5 @@
 /* eslint-disable no-use-before-define */
-import { AccountHero, AccountMaiden } from '~/types/account'
-
-export enum Attribute {
-	MILITARY = 'military',
-	FORTUNE = 'fortune',
-	PROVISIONS = 'provisions',
-	INSPIRATION = 'inspiration',
-	BALANCED = 'balanced',
-}
+import { Hero } from './Hero'
 
 export interface Ranking {
 	id: number
@@ -43,43 +35,6 @@ export type Player = {
 	roster?: PlayerHero[]
 }
 
-export type Hero = {
-	id: number
-	hid: number
-	name: string
-	quality: number
-	base: number
-	stars: number
-	focus: Attribute
-	second_focus: Attribute
-	hero: number
-
-	maiden: Maiden
-	quality_skills: { id: number; quality_skill: QualitySkill }[]
-	paragons: { id: number; paragon: Paragon }[]
-
-	player_heroes: PlayerHero[]
-	account_heroes: AccountHero[]
-	hero_groups: HeroGroup[]
-}
-
-export type HeroGroup = {
-	name: string
-	heroes: Hero[]
-	attribute: Attribute
-}
-
-export type Maiden = {
-	id?: number
-	mid: number
-	name: string
-	naughty: number
-
-	hero: Hero
-
-	account_maidens: AccountMaiden
-}
-
 export type Alliance = {
 	id: number
 	aid: number
@@ -107,19 +62,4 @@ export type PlayerHero = {
 	hero: Hero
 	quality: number
 	base: number
-}
-
-export type QualitySkill = {
-	id?: number
-	sid?: number
-	name: string
-	attribute: Attribute
-	stars: number
-}
-
-export type Paragon = {
-	id?: number
-	pid?: number
-	name: string
-	description: string
 }

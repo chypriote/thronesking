@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Hero } from '~/types'
+import { Hero } from '~/types/Hero'
 
 export default Vue.extend({
 	name: 'HeroCard',

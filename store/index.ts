@@ -1,5 +1,6 @@
 import { ActionTree, MutationTree } from 'vuex'
-import { Alliance, Hero, Player } from '~/types'
+import { Alliance, Player } from '~/types'
+import { Hero } from '~/types/Hero'
 
 export const servs = [699, 701, 775, 691, 692, 693, 694, 695, 696, 697, 698]
 export enum SERVERS {
