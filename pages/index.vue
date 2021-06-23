@@ -16,8 +16,25 @@
 <!--						<server-select id="server" :servers="servers" @select="setServers" />-->
 						<select id="server" v-model="server">
 							<option value="699" selected>699</option>
-							<option value="775">775</option>
+							<option value="532">532</option>
+							<option value="619">619</option>
+							<option value="637">637</option>
+							<option value="653">653</option>
+							<option value="676">676</option>
+							<option value="690">690</option>
+							<option value="691">691</option>
+							<option value="693">693</option>
+							<option value="694">694</option>
+							<option value="695">695</option>
+							<option value="698">698</option>
+							<option value="692">692</option>
+							<option value="696">696</option>
+							<option value="697">697</option>
 							<option value="701">701</option>
+							<option value="707">707</option>
+							<option value="709">709</option>
+							<option value="736">736</option>
+
 						</select>
 					</div>
 				</fieldset>
