@@ -2,19 +2,27 @@ import { ActionTree, MutationTree } from 'vuex'
 import { Alliance, Player } from '~/types'
 import { Hero } from '~/types/Hero'
 
-export const servs = [699, 701, 775, 691, 692, 693, 694, 695, 696, 697, 698]
+export const servs = [699, 532, 619, 637, 653, 676, 690, 691, 693, 694, 695, 698, 692, 696, 697, 701, 707, 709, 736]
 export enum SERVERS {
 	S699= 699,
-	S701= 701,
-	S775= 775,
+	S532= 532,
+	S619= 619,
+	S637= 637,
+	S653= 653,
+	S676= 676,
+	S690= 690,
 	S691= 691,
-	S692= 692,
 	S693= 693,
 	S694= 694,
 	S695= 695,
+	S698= 698,
+	S692= 692,
 	S696= 696,
 	S697= 697,
-	S698= 698
+	S701= 701,
+	S707= 707,
+	S709= 709,
+	S736= 736,
 }
 
 export interface RootState {
