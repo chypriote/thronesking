@@ -21,7 +21,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import { orderBy } from 'lodash-es'
-import { Hero, Player } from '~/types'
+import { Player } from '~/types'
+import { Hero } from '~/types/Hero'
 import HeroCard from '~/components/Player/HeroCard/HeroCard.vue'
 import AddHeroCard from '~/components/Player/AddHeroCard.vue'
 

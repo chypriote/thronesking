@@ -34,7 +34,7 @@ export default Vue.extend({
 			get (): Hero|null { return this.$store.state.calculator.hero },
 			set (hero): void { this.$store.commit('calculator/SET_HERO', hero) },
 		},
-		skills (): QualitySkill[] { return this.$store.state.calculator.skills },
+		skills (): LeveledQualitySkill[] { return this.$store.state.calculator.skills },
 		orderedSkills (): LeveledQualitySkill[] {
 			const attributes = Object.values(Attribute)
 			return orderBy(this.skills,
@@ -42,6 +42,7 @@ export default Vue.extend({
 				['desc', 'asc', 'desc']
 			)
 		},
+		// @ts-ignore
 		paragons (): Paragon[] { return this.hero?.paragons || [] },
 	},
 })

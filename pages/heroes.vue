@@ -9,7 +9,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { MetaInfo } from 'vue-meta'
-import { Hero } from '~/types'
+import { Hero } from '~/types/Hero'
 import HeroCard from '~/components/Heroes/HeroCard.vue'
 
 interface IData {

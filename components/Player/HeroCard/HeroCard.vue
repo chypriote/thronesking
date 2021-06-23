@@ -35,7 +35,7 @@
 <script lang="ts">
 import { clone } from 'lodash-es'
 import Vue from 'vue'
-import { Hero } from '~/types'
+import { Hero } from '~/types/Hero'
 
 export default Vue.extend({
 	name: 'HeroCard',

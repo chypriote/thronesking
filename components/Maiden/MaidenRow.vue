@@ -23,7 +23,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { AccountMaiden } from '~/types/account'
-import { Hero, Maiden } from '~/types'
+import { Hero, Maiden } from '~/types/Hero'
 
 export default Vue.extend({
 	name: 'MaidenRow',
