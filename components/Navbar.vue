@@ -22,11 +22,20 @@
 						</div>
 					</div>
 					<div class="item dropdown is-hoverable">
+						<div class="dropdown-trigger">Game</div>
+						<div class="dropdown-menu">
+							<div class="dropdown-content" role="menu">
+								<nuxt-link class="dropdown-item" to="/heroes">Heroes</nuxt-link>
+								<nuxt-link class="dropdown-item" to="/maidens">Maiden</nuxt-link>
+							</div>
+						</div>
+					</div>
+					<div class="item dropdown is-hoverable">
 						<div class="dropdown-trigger">Account</div>
 						<div class="dropdown-menu">
 							<div class="dropdown-content" role="menu">
-								<nuxt-link class="dropdown-item" to="/roster">Roster</nuxt-link>
-								<nuxt-link class="dropdown-item" to="/maiden">Maiden</nuxt-link>
+								<nuxt-link class="dropdown-item" to="/account/roster">Roster</nuxt-link>
+								<nuxt-link class="dropdown-item" to="/account/maiden">Maiden</nuxt-link>
 							</div>
 						</div>
 					</div>

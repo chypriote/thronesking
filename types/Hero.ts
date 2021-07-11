@@ -18,12 +18,14 @@ export type Hero = {
 	id: number
 	hid: number
 	name: string
+	slug: string
 	quality: number
 	base: number
 	stars: number
 	focus: Attribute
 	second_focus: Attribute
 	hero: number
+	picture: any
 
 	hero_groups: HeroGroup[]
 	maiden: Maiden
@@ -45,7 +47,10 @@ export type Maiden = {
 	id?: number
 	mid: number
 	name: string
+	slug: string
 	naughty: number
+	picture: any
+	naughty_picture: any
 
 	hero: Hero
 }
@@ -78,7 +83,8 @@ export type Skin = {
 	id: number
 	name: string
 	rarity: Rarity
-	picture: string
+	picture: any
+	naughty_picture: any
 
 	quality_skill: QualitySkill | number | null
 	hero: Hero | number | null
