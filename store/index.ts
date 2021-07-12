@@ -5,7 +5,7 @@ import { Hero } from '~/types/Hero'
 export const servs = [
 	699, 532, 619, 637, 638, 639, 653, 676, 690, 691,
 	692, 693, 694, 695, 696, 697, 698, 701, 702, 703,
-	704, 705, 707, 709, 736, 741, 760, 809,
+	704, 705, 707, 709, 736, 741, 760, 809, 228,
 ]
 export enum SERVERS {
 	S699= 699,
@@ -36,6 +36,7 @@ export enum SERVERS {
 	S741= 741,
 	S760= 760,
 	S809= 809,
+	S228= 228,
 }
 
 export interface RootState {
@@ -131,10 +132,11 @@ export const actions: ActionTree<RootState, RootState> = {
 			const query: IQuery = {
 				_sort: state.players_sort,
 				_limit: state.players_limit,
-				server: state.server,
 				...params,
 			}
 			if (state.players_vip) { query.vip_eq = 0 }
+			if (state.server !== 228) { query.server = state.server }
+			if (state.server === 228) { query.mserver = state.server }
 			if (state.players_favorite) { query.favorite = 1 }
 			if (state.players_inactive) { query.inactive = 1 }
 			if (state.players_scout) { query.player_heroes_null = 0 }

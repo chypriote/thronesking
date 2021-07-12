@@ -53,16 +53,13 @@ interface IData {
 export default Vue.extend({
 	name: 'Kingdom',
 	data: (): IData => ({ players: [], loading: false }),
-	computed: {
-		server (): number { return this.$store.state.server },
-	},
 	async mounted () {
 		await this.getKingdomLadder()
 	},
 	methods: {
 		async getKingdomLadder () {
 			this.loading = true
-			this.players = await this.$strapi.find('players', { _limit: 10, _sort: 'power:desc', server: 699 })
+			this.players = await this.$strapi.find('players', { _limit: 10, _sort: 'power:desc', mserver: 228 })
 			this.loading = false
 		},
 	},
