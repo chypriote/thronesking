@@ -41,6 +41,7 @@ export type HeroGroup = {
 	name: string
 	heroes: Hero[]
 	attribute: Attribute
+	paragons: Paragon[]
 }
 
 export type Maiden = {
@@ -68,6 +69,7 @@ export type Paragon = {
 	id?: number
 	pid?: number
 	name: string
+	description: string
 
 	cost: number
 	item: string

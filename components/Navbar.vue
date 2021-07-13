@@ -10,8 +10,6 @@
 			<div class="navbar-menu">
 				<div class="navbar-end">
 					<nuxt-link class="item" to="/players">Players</nuxt-link>
-					<nuxt-link class="item" to="/calculator">Calculator</nuxt-link>
-<!--					<nuxt-link class="item" to="/cross">Cross Server</nuxt-link>-->
 					<div class="item dropdown is-hoverable">
 						<div class="dropdown-trigger">Ladders</div>
 						<div class="dropdown-menu">

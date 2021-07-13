@@ -9,9 +9,11 @@
 			<div class="control">
 				<button class="button" type="button" :disabled="(skill.level - 1) < 1" @click.prevent="lowerLevel">-</button>
 			</div>
-			<div class="current-level">{{ `Level ${skill.level}` }}</div>
+			<div class="current-level">Level
+        <input class="skill-level-input" type="number" autocomplete="off" :value="skill.level" @change="setSkillLevel" />
+      </div>
 			<div class="control">
-				<button class="button" type="button" @click.prevent="raiseLevel">+</button>
+				<button class="button" type="button" :disabled="skill.level > 349" @click.prevent="raiseLevel">+</button>
 			</div>
 		</div>
 	</div>
@@ -19,7 +21,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { LeveledQualitySkill } from '~/store/calculator'
+import { LeveledQualitySkill } from '~/store/game/heroes'
 
 export default Vue.extend({
 	name: 'HeroSkill',
@@ -30,11 +32,13 @@ export default Vue.extend({
 		},
 	},
 	methods: {
-		raiseLevel () { this.$store.commit('calculator/RAISE_SKILL_LEVEL', this.skill) },
-		lowerLevel () { this.$store.commit('calculator/LOWER_SKILL_LEVEL', this.skill) },
+		raiseLevel () { this.$store.commit('game/heroes/RAISE_SKILL_LEVEL', this.skill) },
+		lowerLevel () { this.$store.commit('game/heroes/LOWER_SKILL_LEVEL', this.skill) },
+		// @ts-ignore
+		setSkillLevel ($event: Event) { this.$store.commit('game/heroes/SET_SKILL_LEVEL', { ...this.skill, level: $event.target.value }) },
 		unlockSkill () {
 			if (!this.skill.unlockable) { return }
-			this.$store.commit('calculator/UNLOCK_SKILL', this.skill)
+			this.$store.commit('game/heroes/UNLOCK_SKILL', this.skill)
 		},
 	},
 })
@@ -80,7 +84,22 @@ export default Vue.extend({
 	display: flex;
 	width: 100%;
 	margin-top: 1rem;
-	.current-level {flex-grow: 1;text-align: center;}
+	.current-level {
+		flex-grow: 1;
+		text-align: center;
+		display: flex;
+		justify-content: center;
+		input {
+			display: inline-block;
+			margin-left: .5rem;
+			height: 1.5rem;
+			padding: .25rem;
+			max-width: 3rem;
+		}
+	}
 	button {padding: .25rem;line-height: 1;}
+	.skill-level-input {-moz-appearance: textfield;}
+	.skill-level-input::-webkit-outer-spin-button,
+	.skill-level-input::-webkit-inner-spin-button {-webkit-appearance: none;margin: 0;}
 }
 </style>
