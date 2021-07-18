@@ -3,7 +3,10 @@
 		<td class="stat gid">{{ player.gid }}</td>
 		<td class="player">
 			<nuxt-link :key="player.id" :to="{name: 'players-id', params: {id: player.id}}" class="is-flex is-align-items-center">
-				<span v-if="player.player_heroes.length">🔍</span>
+				<template v-if="player.player_heroes.length">
+					<span v-if="player.player_heroes.length === player.heroes">🕵️</span>
+					<span v-else>🔍</span>
+				</template>
 				<span v-if="player.favorite">⭐</span>
 				<span v-if="player.inactive === true">⏱</span>
 				<span class="name">{{ player.name }}</span>
