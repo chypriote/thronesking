@@ -136,7 +136,7 @@ export const actions: ActionTree<RootState, RootState> = {
 			}
 			if (state.players_vip) { query.vip_eq = 0 }
 			if (state.server !== 228) { query.server = state.server }
-			if (state.server === 228) { query.mserver = state.server }
+			if (state.server === 228) { query['server.merger'] = state.server }
 			if (state.players_favorite) { query.favorite = 1 }
 			if (state.players_inactive) { query.inactive = 1 }
 			if (state.players_scout) { query.player_heroes_null = 0 }
