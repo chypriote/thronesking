@@ -1,5 +1,5 @@
 <template>
-	<div :id="group.id" class="columns is-multiline">
+	<div :id="slugify(group.name.toLowerCase())" class="columns is-multiline">
 		<template v-if="heroes.length">
 			<div class="column is-full">
 				<div class="title is-3 has-text-white">{{ group.name }}</div>
@@ -13,6 +13,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import slugify from 'slugify'
 import { filter, orderBy } from 'lodash-es'
 import { Attribute, Hero, HeroGroup } from '~/types/Hero'
 import HeroCard from '~/components/Heroes/HeroCard.vue'
@@ -36,6 +37,7 @@ export default Vue.extend({
 			default: null,
 		},
 	},
+	data: () => ({ slugify }),
 	computed: {
 		heroes (): Hero[] {
 			return orderBy(

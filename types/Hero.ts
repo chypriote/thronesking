@@ -13,7 +13,20 @@ export enum Rarity {
 	RARE = 'rare',
 	LEGENDARY = 'legendary',
 }
-
+interface Item {
+	id: number
+	name: string
+	picture: any
+}
+interface HeroFrame {
+	summon: number
+	bronze: number
+	silver: number
+	gold: number
+	emerald: number
+	diamond: number
+	item: Item
+}
 export type Hero = {
 	id: number
 	hid: number
@@ -27,11 +40,12 @@ export type Hero = {
 	hero: number
 	picture: any
 
-	hero_groups: HeroGroup[]
+	hero_group: HeroGroup
 	maiden: Maiden
 	quality_skills: QualitySkill[]
 	paragons: Paragon[]
 	skins: Skin[]
+	frame: HeroFrame
 
 	player_heroes: PlayerHero[]
 	account_heroes: AccountHero[]

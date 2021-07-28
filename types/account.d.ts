@@ -1,5 +1,5 @@
 /* eslint-disable no-use-before-define */
-import { Hero, Maiden } from '~/types/index'
+import { Hero, Maiden } from './Hero'
 
 export type Account = {
 	id: number

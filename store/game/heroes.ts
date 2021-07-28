@@ -91,15 +91,13 @@ export const mutations: MutationTree<IState> = {
 
 export const actions: ActionTree<IState, RootState> = {
 	async LOAD_HERO ({ commit }, slug: string) {
-		const hero = (await this.$strapi.find('heroes', { slug }))[0]
+		const hero = await this.$strapi.findOne('heroes', slug)
 		commit('SET_HERO', hero)
 		commit('SET_HERO_LEVEL', 1)
 		commit('SET_SKILLS', hero.quality_skills)
 
 		const paragons = cloneDeep(hero.paragons)
-		hero.hero_groups.forEach((hg: HeroGroup) => {
-			hg.paragons.forEach((p: Paragon) => paragons.push(p))
-		})
+		hero.hero_group.paragons.forEach((p: Paragon) => paragons.push(p))
 		commit('SET_PARAGONS', paragons)
 	},
 	RESET_ALL_SKILLS ({ commit }) {

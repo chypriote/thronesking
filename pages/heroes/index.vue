@@ -1,6 +1,6 @@
 <template>
 	<div class="columns">
-		<div class="column is-three-quarters">
+		<div class="column is-three-quarters-desktop">
 			<hero-group
 				v-for="group of groups"
 				:key="group.id"
@@ -9,11 +9,11 @@
 				:stars="stars"
 			/>
 		</div>
-		<div class="column is-one-quarter">
+		<div class="column is-one-quarter-desktop">
 			<div class="sticky">
 				<div class="card bordered">
 					<div class="card-content menu">
-						<a v-for="group of groups" :key="group.id" :href="`#${group.id}`">{{ group.name }}</a>
+						<a v-for="group of groups" :key="group.id" :href="`#${slugify(group.name.toLowerCase())}`">{{ group.name }}</a>
 					</div>
 				</div>
 				<div class="card bordered">
@@ -50,6 +50,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import slugify from 'slugify'
 import { MetaInfo } from 'vue-meta'
 import HeroGroup from '~/components/Heroes/HeroGroup.vue'
 
@@ -58,6 +59,7 @@ interface IData {
 	focus: {value: string, label: string}|null
 	starsList: {value: number, label: string}[]
 	stars: {value: string, label: string}|null
+	slugify: (string: string, options?: any) => string
 }
 
 export default Vue.extend({
@@ -69,6 +71,7 @@ export default Vue.extend({
 		return { groups }
 	},
 	data: (): IData => ({
+		slugify,
 		focuses: [
 			{ value: 'balanced', label: 'Balanced' },
 			{ value: 'military', label: 'Military' },

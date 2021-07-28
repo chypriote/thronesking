@@ -10,7 +10,8 @@
     "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
     "lint:style": "stylelint \"**/*.{vue,css}\" --ignore-path .gitignore",
     "lint:fix": "yarn lint:js --fix && yarn lint:style --fix",
-    "lint": "yarn lint:js && yarn lint:style"
+    "lint": "yarn lint:js && yarn lint:style",
+    "prepare": "husky install"
   },
   "lint-staged": {
     "*.{js,vue}": "eslint --ext .js,.vue --ignore-path .gitignore . --fix",
@@ -34,6 +35,7 @@
     "postcss-custom-properties": "^9.1",
     "postcss-import": "^14.0",
     "postcss-nested": "^4.2",
+    "slugify": "^1.6.0",
     "vue-chartjs": "^3.5",
     "vue-select": "^3.12"
   },
