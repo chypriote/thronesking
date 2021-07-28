@@ -23,7 +23,7 @@
     "@nuxtjs/strapi": "^0.3",
     "bulma": "^0.9",
     "chart.js": "^2.9",
-    "chartjs-plugin-datalabels": "^0.7",
+    "chartjs-plugin-datalabels": "^1.0",
     "core-js": "^3.15",
     "date-fns": "^2.23",
     "hint.css": "^2.6",
